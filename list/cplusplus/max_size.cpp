@@ -1,11 +1,11 @@
 // list::max_size
 #include <iostream>
-#include <list>
+#include "list.h"
 
 int main ()
 {
   unsigned int i;
-  std::list<int> mylist;
+  list<int> mylist;
 
   std::cout << "Enter number of elements: ";
   std::cin >> i;

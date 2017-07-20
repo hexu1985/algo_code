@@ -1,11 +1,11 @@
 // list::assign
 #include <iostream>
-#include <list>
+#include "list.h"
 
 int main ()
 {
-  std::list<int> first;
-  std::list<int> second;
+  list<int> first;
+  list<int> second;
 
   first.assign (7,100);                      // 7 ints with value 100
 

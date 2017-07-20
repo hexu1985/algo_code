@@ -1,10 +1,10 @@
 // list::size
 #include <iostream>
-#include <list>
+#include "list.h"
 
 int main ()
 {
-  std::list<int> myints;
+  list<int> myints;
   std::cout << "0. size: " << myints.size() << '\n';
 
   for (int i=0; i<10; i++) myints.push_back(i);

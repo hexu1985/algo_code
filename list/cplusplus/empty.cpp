@@ -1,10 +1,10 @@
 // list::empty
 #include <iostream>
-#include <list>
+#include "list.h"
 
 int main ()
 {
-  std::list<int> mylist;
+  list<int> mylist;
   int sum (0);
 
   for (int i=1;i<=10;++i) mylist.push_back(i);

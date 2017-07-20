@@ -1,10 +1,10 @@
 // list::pop_front
 #include <iostream>
-#include <list>
+#include "list.h"
 
 int main ()
 {
-  std::list<int> mylist;
+  list<int> mylist;
   mylist.push_back (100);
   mylist.push_back (200);
   mylist.push_back (300);
