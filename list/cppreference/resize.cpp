@@ -1,8 +1,8 @@
 #include <iostream>
-#include <list>
+#include "list.h"
 int main()
 {
-    std::list<int> c = {1, 2, 3};
+    list<int> c = {1, 2, 3};
     std::cout << "The list holds: ";
     for(auto& el: c) std::cout << el << ' ';
     std::cout << '\n';

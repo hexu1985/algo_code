@@ -1,8 +1,8 @@
 #include <iostream>
-#include <list>
+#include "list.h"
  
 int main()
 {
-    std::list<char> s;
+    list<char> s;
     std::cout << "Maximum size of a 'list' is " << s.max_size() << "\n";
 }

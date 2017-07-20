@@ -1,8 +1,8 @@
 #include <iostream>
 #include <functional>
-#include <list>
+#include "list.h"
  
-std::ostream& operator<<(std::ostream& ostr, const std::list<int>& list)
+std::ostream& operator<<(std::ostream& ostr, const list<int>& list)
 {
     for (auto &i : list) {
         ostr << " " << i;
@@ -12,7 +12,7 @@ std::ostream& operator<<(std::ostream& ostr, const std::list<int>& list)
  
 int main()
 {
-    std::list<int> list = { 8,7,5,9,0,1,3,2,6,4 };
+    list<int> list = { 8,7,5,9,0,1,3,2,6,4 };
  
     std::cout << "before:     " << list << "\n";
     list.sort();

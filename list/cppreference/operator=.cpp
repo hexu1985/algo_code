@@ -1,9 +1,9 @@
-#include <list>
+#include "list.h"
 #include <iostream>
  
-void display_sizes(const std::list<int>& nums1,
-                   const std::list<int>& nums2,
-                   const std::list<int>& nums3)
+void display_sizes(const list<int>& nums1,
+                   const list<int>& nums2,
+                   const list<int>& nums3)
 {
     std::cout << "nums1: " << nums1.size() 
               << " nums2: " << nums2.size()
@@ -12,9 +12,9 @@ void display_sizes(const std::list<int>& nums1,
  
 int main()
 {
-    std::list<int> nums1 {3, 1, 4, 6, 5, 9};
-    std::list<int> nums2; 
-    std::list<int> nums3;
+    list<int> nums1 {3, 1, 4, 6, 5, 9};
+    list<int> nums2; 
+    list<int> nums3;
  
     std::cout << "Initially:\n";
     display_sizes(nums1, nums2, nums3);
