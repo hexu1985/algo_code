@@ -36,7 +36,6 @@ void list_nil_init(DCList_link nil)
 	nil->prev = nil->next = nil;
 }
 
-
 /**
  * 在链表的x节点前插入t节点
  *            ___                ___

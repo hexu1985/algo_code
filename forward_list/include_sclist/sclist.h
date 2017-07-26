@@ -12,7 +12,6 @@ template <typename T>
 struct SCList : public SCList_base {
 };
 
-
 // 遍历list所有结点, Function处理data
 template <typename T, typename Function>
 void list_for_each(SCList<T> *list, Function fn)
