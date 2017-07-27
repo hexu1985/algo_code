@@ -18,10 +18,6 @@ typedef struct DCList_node_base *DCList_link;
 struct DCList_node_base {
 	DCList_link next;
 	DCList_link prev;
-
-    DCList_node_base()
-    {
-    }
 };
 
 /**
