@@ -52,7 +52,7 @@ struct SCList_iterator {
         return !(*this == other);
     }
 
-    SCList_link get_node()
+    SCList_node<T> *get_node()
     {
         return node;
     }

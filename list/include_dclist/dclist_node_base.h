@@ -18,6 +18,10 @@ typedef struct DCList_node_base *DCList_link;
 struct DCList_node_base {
 	DCList_link next;
 	DCList_link prev;
+
+    DCList_node_base()
+    {
+    }
 };
 
 /**
@@ -69,6 +73,7 @@ inline
 void list_insert(DCList_link x, DCList_link t)
 {
     assert(x != NULL && t != NULL);
+
 	t->prev = x->prev;      // (1)
 	t->next = x;            // (2)
 	t->prev->next = t;      // (3)
@@ -108,6 +113,7 @@ inline
 void list_insert(DCList_link x, DCList_link a, DCList_link b)
 {
     assert(x != NULL && a != NULL && b != NULL);
+
 	a->prev = x->prev;      // (1)
 	b->next = x;            // (2)
 	a->prev->next = a;      // (3)
@@ -134,6 +140,7 @@ inline
 void list_delete(DCList_link x)
 {
     assert(x != NULL);
+
 	x->prev->next = x->next;    // (1)
 	x->next->prev = x->prev;    // (2)
 }
@@ -158,6 +165,7 @@ inline
 void list_delete(DCList_link a, DCList_link b)
 {
     assert(a != NULL && b != NULL);
+
 	a->prev->next = b->next;    // (1)
 	b->next->prev = a->prev;    // (2)
 }

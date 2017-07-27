@@ -1,71 +1,68 @@
-#ifndef __forward_list_h
-#define __forward_list_h
+#ifndef __list_h
+#define __list_h
 
 #include <cstddef>
 #include <type_traits>
 #include <initializer_list>
 #include <limits>
 
-#include "sclist.h"
-#include "sclist_iterator.h"
+#include "dclist.h"
+#include "dclist_iterator.h"
 
 template <typename T> 
-using forward_list_iterator = SCList_iterator<T>;
+using list_iterator = DCList_iterator<T>;
 
 template <typename T>
-class forward_list: private SCList<T> {
+class list: private DCList<T> {
 public:
     typedef T value_type;
     typedef T &reference;
     typedef T *pointer;
     typedef ptrdiff_t difference_type;
     typedef size_t size_type;
-    typedef forward_list_iterator<T> iterator;
+    typedef list_iterator<T> iterator;
 
-    forward_list()
+    list()
     {
         list_init(this);
     }
 
-    forward_list(std::initializer_list<value_type> il)
+    list(std::initializer_list<value_type> il)
     {
         list_init(this);
-        auto x = list_dummy_head(this);
         for (auto &e : il) {
-            x = list_insert_next(x, new SCList_node<T>(e));
+            list_insert_tail(this, new DCList_node<T>(e));
         }
     }
 
-    explicit forward_list(size_type n, const value_type &val = value_type())
+    explicit list(size_type n, const value_type &val = value_type())
     {
         list_init(this);
-        auto x = list_dummy_head(this);
         for (size_type i = 0; i < n; i++) {
-            x = list_insert_next(x, new SCList_node<T>(val));
+            list_insert_tail(this, new DCList_node<T>(val));
         }
     }
 
     template <typename InputIterator, typename = typename
         std::enable_if<!std::is_integral<InputIterator>::value>::type>
-    forward_list(InputIterator first, InputIterator last)
+    list(InputIterator first, InputIterator last)
     {
         list_init(this);
-        auto x = list_dummy_head(this);
         while (first != last) {
-            x = list_insert_next(x, new SCList_node<T>(*first++));
+            list_insert_tail(this, new DCList_node<T>(*first++));
         }
     }
 
-    forward_list(const forward_list &fwdlst)
+    list(const list &lst)
     {
         list_init(this);
         auto x = list_dummy_head(this);
-        for (auto &e : fwdlst) {
-            x = list_insert_next(x, new SCList_node<T>(e));
+        for (auto &e : lst) {
+            x = list_insert_next(x, new DCList_node<T>(e));
         }
     }
 
-    ~forward_list()
+    ~list()
     {
         list_destroy(this);
     }
@@ -74,30 +71,30 @@ public:
         std::enable_if<!std::is_integral<InputIterator>::value>::type>
     void assign(InputIterator first, InputIterator last)
     {
-        forward_list tmp(first, last);
+        list tmp(first, last);
         this->swap(tmp);
     }
 
     void assign(size_type n, const value_type &val)
     {
-        forward_list tmp(n, val);
+        list tmp(n, val);
         this->swap(tmp);
     }
 
     void assign(std::initializer_list<value_type> il)
     {
-        forward_list tmp(il);
+        list tmp(il);
         this->swap(tmp);
     }
 
     bool empty() const
     {
-        return list_is_empty(const_cast<forward_list *>(this));
+        return list_is_empty(const_cast<list *>(this));
     }
 
     void push_front(const value_type &val)
     {
-        list_insert_head(this, new SCList_node<T>(val));
+        list_insert_head(this, new DCList_node<T>(val));
     }
 
     void pop_front()
@@ -105,72 +102,96 @@ public:
         delete list_node<T>(list_delete_head(this));
     }
 
-    iterator before_begin() const
+    void push_back(const value_type &val)
     {
-        return list_before_begin(const_cast<forward_list *>(this));
+        list_insert_tail(this, new DCList_node<T>(val));
+    }
+
+    void pop_back()
+    {
+        delete list_node<T>(list_delete_tail(this));
     }
 
     iterator begin() const
     {
-        return list_begin(const_cast<forward_list *>(this)); 
+        return list_begin(const_cast<list *>(this)); 
     }
 
     iterator end() const
     {
-        return list_end(const_cast<forward_list *>(this)); 
+        return list_end(const_cast<list *>(this));
     }
 
-    iterator insert_after(iterator pos, const value_type &val)
+    iterator insert(iterator pos, const value_type &val)
     {
-        auto x = list_insert_next(pos.get_node(), new SCList_node<T>(val));
+        auto x = new DCList_node<T>(val);
+        list_insert(pos.get_node(), x);
+
         return iterator(x);
     }
 
-    iterator insert_after(iterator pos, size_type n, const value_type &val)
+    iterator insert(iterator pos, size_type n, const value_type &val)
     {
-        auto x = pos.get_node();
-        for (size_type i = 0; i < n; i++) {
-            x = list_insert_next(x, new SCList_node<T>(val));
+        if (n == 0)
+            return pos;
+
+        auto x = new DCList_node<T>(val);
+        list_insert(pos.get_node(), x);
+
+        for (size_type i = 1; i < n; i++) {
+            list_insert(pos.get_node(), new DCList_node<T>(val));
         }
+
         return iterator(x);
     }
 
     template <typename InputIterator, typename = typename
         std::enable_if<!std::is_integral<InputIterator>::value>::type>
-    iterator insert_after(iterator pos, InputIterator first, InputIterator last)
+    iterator insert(iterator pos, InputIterator first, InputIterator last)
     {
-        auto x = pos.get_node();
+        if (first == last)
+            return pos;
+
+        auto x = new DCList_node<T>(*first++);
+        list_insert(pos.get_node(), x);
+
         while (first != last) {
-            x = list_insert_next(x, new SCList_node<T>(*first++));
+            list_insert(pos.get_node(), new DCList_node<T>(*first++));
         }
+
         return iterator(x);
     }
 
-    iterator insert_after(iterator pos, std::initializer_list<value_type> il)
+    iterator insert(iterator pos, std::initializer_list<value_type> il)
     {
-        auto x = pos.get_node();
-        for (auto &e : il) {
-            x = list_insert_next(x, new SCList_node<T>(e));
-        }
-        return iterator(x);
+        return insert(pos, il.begin(), il.end());
     }
 
-    iterator erase_after(iterator pos)
-    {
-        delete list_node<T>(list_delete_next(pos.get_node()));
-        return ++pos;
-    }
-
-    iterator erase_after(iterator pos, iterator last)
+    iterator erase(iterator pos)
     {
         auto x = pos.get_node();
-        auto y = last.get_node();
-        while (x->next != y) {
-            delete list_node<T>(list_delete_next(x));
+        ++pos;
+
+        list_delete(x);
+        delete x;
+
+        return pos;
+    }
+
+    iterator erase(iterator first, iterator last)
+    {
+        while (first != last) {
+            auto x = first.get_node();
+            ++first;
+
+            list_delete(x);
+            delete x;
         }
+
         return last;
     }
 
+#if 0
     void remove(const value_type &val)
     {
         list_remove(this, val);
@@ -198,24 +219,24 @@ public:
         list_selection(this, comp);
     }
 
-    void splice_after(iterator pos, forward_list &fwdlst)
+    void splice_after(iterator pos, list &lst)
     {
-        list_transfer_next(pos.get_node(), &fwdlst);
+        list_transfer_next(pos.get_node(), &lst);
     }
 
-    void splice_after(iterator pos, forward_list &fwdlst, iterator i)
+    void splice_after(iterator pos, list &lst, iterator i)
     {
         list_transfer_next(pos.get_node(), i.get_node());
     }
 
-    void splice_after(iterator pos, forward_list &fwdlst, iterator first, iterator last)
+    void splice_after(iterator pos, list &lst, iterator first, iterator last)
     {
         list_transfer_next(pos.get_node(), first.get_node(), last.get_node());
     }
 
-    void swap(forward_list &fwdlst)
+    void swap(list &lst)
     {
-        list_swap(this, &fwdlst);
+        list_swap(this, &lst);
     }
 
     void clear()
@@ -244,7 +265,7 @@ public:
 
         if (x->next == NULL) {
             for ( ; i < n; i++) {
-                x = list_insert_next(x, new SCList_node<T>(val));
+                x = list_insert_next(x, new DCList_node<T>(val));
             }
         } else {
             while (x->next != NULL) {
@@ -253,15 +274,15 @@ public:
         }
     }
 
-    void merge(forward_list &fwdlst)
+    void merge(list &lst)
     {
-        list_merge(this, &fwdlst);
+        list_merge(this, &lst);
     }
 
     template <typename Compare>
-    void merge(forward_list &fwdlst, Compare comp)
+    void merge(list &lst, Compare comp)
     {
-        list_merge(this, &fwdlst, comp);
+        list_merge(this, &lst, comp);
     }
 
     void unique()
@@ -274,6 +295,7 @@ public:
     {
         list_unique(this, p);
     }
+#endif
 };
 
 #endif
