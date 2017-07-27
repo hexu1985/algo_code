@@ -28,7 +28,7 @@ void list_init(DCList<T> *list, std::initializer_list<T> il)
 {
     list_init(static_cast<DCList_base *>(list));
     for (auto &e : il) {
-        list_insert_tail(x, new DCList_node<T>(e));
+        list_insert_tail(list, new DCList_node<T>(e));
     }
 }
 
@@ -37,7 +37,7 @@ void list_init(DCList<T> *list, size_t n, const T &val = T())
 {
     list_init(static_cast<DCList_base *>(list));
     for (size_t i = 0; i < n; i++) {
-        x = list_insert_tail(x, new DCList_node<T>(val));
+        list_insert_tail(list, new DCList_node<T>(val));
     }
 }
 
@@ -47,7 +47,7 @@ void list_init(DCList<T> *list, InputIterator first, InputIterator last)
 {
     list_init(static_cast<DCList_base *>(list));
     while (first != last) {
-        x = list_insert_tail(x, new DCList_node<T>(*first++));
+        list_insert_tail(list, new DCList_node<T>(*first++));
     }
 }
 

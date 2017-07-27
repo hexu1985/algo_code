@@ -66,7 +66,7 @@ void list_nil_init(DCList_link nil)
  *                   ^-t
  */
 inline
-void list_insert(DCList_link x, DCList_link y)
+void list_insert(DCList_link x, DCList_link t)
 {
     assert(x != NULL && t != NULL);
 	t->prev = x->prev;      // (1)
@@ -199,7 +199,7 @@ void list_transfer(DCList_link x, DCList_link t)
  *                      ^-x      ^-y
  */
 inline
-void list_transfer_next(SCList_link x, SCList_link a, SCList_link b)
+void list_transfer(DCList_link x, DCList_link a, DCList_link b)
 {
     assert(x != NULL && a != NULL && b != NULL);
 

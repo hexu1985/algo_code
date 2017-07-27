@@ -59,7 +59,7 @@ void list_remove_if(DCList<T> *list, Predicate pred, Deleter del = Deleter())
         list_delete(x);
         del(x);
 
-        x = list_search(y, nil, val);
+        x = list_search_if(y, nil, pred);
     }
 }
 
