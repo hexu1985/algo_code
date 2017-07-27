@@ -1,5 +1,5 @@
-#ifndef __sclist_init_h
-#define __sclist_init_h
+#ifndef __sclist_util_h
+#define __sclist_util_h
 
 #include <iostream>
 #include "sclist.h"
