@@ -65,7 +65,7 @@ struct DCList_iterator {
         return !(*this == other);
     }
 
-    DCList_link get_node()
+    DCList_node<T> *get_node()
     {
         return node;
     }

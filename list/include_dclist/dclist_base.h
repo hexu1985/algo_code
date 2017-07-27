@@ -90,6 +90,20 @@ DCList_link list_delete_tail(DCList_base *list)
     return x;
 }
 
+// 返回链表中元素个数
+inline
+int list_size(DCList_base *list)
+{
+    int n = 0;
+    auto x = list_head(list);
+    auto nil = list_nil(list);
+    while (x != nil) {
+        x = x->next;
+        n++;
+    }
+    return n;
+}
+
 /**
  * 交换两个链表的所有节点(除了nil节点)
  */

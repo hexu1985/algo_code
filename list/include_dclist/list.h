@@ -56,9 +56,8 @@ public:
     list(const list &lst)
     {
         list_init(this);
-        auto x = list_dummy_head(this);
         for (auto &e : lst) {
-            x = list_insert_next(x, new DCList_node<T>(e));
+            list_insert_tail(this, new DCList_node<T>(e));
         }
     }
 
@@ -191,7 +190,6 @@ public:
         return last;
     }
 
-#if 0
     void remove(const value_type &val)
     {
         list_remove(this, val);
@@ -203,6 +201,7 @@ public:
         list_remove_if(this, pred);
     }
 
+#if 0
     void reverse()
     {
         list_reverse(this);
@@ -233,6 +232,7 @@ public:
     {
         list_transfer_next(pos.get_node(), first.get_node(), last.get_node());
     }
+#endif
 
     void swap(list &lst)
     {
@@ -249,11 +249,22 @@ public:
         return *list_data(list_node<T>(list_head(this)));
     }
 
+    reference back()
+    {
+        return *list_data(list_node<T>(list_tail(this)));
+    }
+
     size_type max_size() const
     {
 		return std::numeric_limits<size_type>::max();
     }
 
+    size_type size() const
+    {
+        return list_size(const_cast<list *>(this));
+    }
+
+#if 0
     void resize(size_type n, const value_type &val = value_type())
     {
         auto x = list_dummy_head(this);
