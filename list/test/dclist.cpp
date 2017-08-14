@@ -30,5 +30,11 @@ int main ()
 
   std::cout << '\n';
 
+  list_destroy(&fifth);
+  list_destroy(&fourth);
+  list_destroy(&third);
+  list_destroy(&second);
+  list_destroy(&first);
+
   return 0;
 }
