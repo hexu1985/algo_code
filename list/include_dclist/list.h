@@ -264,27 +264,18 @@ public:
         return list_size(const_cast<list *>(this));
     }
 
-#if 0
     void resize(size_type n, const value_type &val = value_type())
     {
-        auto x = list_dummy_head(this);
-        size_type i = 0;
-        while (x->next != NULL && i < n) {
-            x = x->next;
-            ++i;
+        for (int i = n-size(); i > 0; i--) {
+            push_back(val);
         }
 
-        if (x->next == NULL) {
-            for ( ; i < n; i++) {
-                x = list_insert_next(x, new DCList_node<T>(val));
-            }
-        } else {
-            while (x->next != NULL) {
-                delete list_node<T>(list_delete_next(x));
-            }
+        for (int i = size()-n; i > 0; i--) {
+            pop_back();
         }
     }
 
+#if 0
     void merge(list &lst)
     {
         list_merge(this, &lst);
