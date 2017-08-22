@@ -114,11 +114,11 @@ void list_swap(DCList_base *list1, DCList_base *list2)
     list_init(&temp);
 
     if (!list_is_empty(list1)) // temp = list1
-        list_transfer(&temp.nil, list1->nil.next, list1->nil.prev);
+        list_transfer(list_nil(&temp), list_head(list1), list_tail(list1));
     if (!list_is_empty(list2)) // list1 = list2
-        list_transfer(&list1->nil, list2->nil.next, list2->nil.prev);
+        list_transfer(list_nil(list1), list_head(list2), list_tail(list2));
     if (!list_is_empty(&temp))  // list2 = temp
-        list_transfer(&list2->nil, temp.nil.next, temp.nil.prev);
+        list_transfer(list_nil(list2), list_head(&temp), list_tail(&temp));
 }
 
 #endif

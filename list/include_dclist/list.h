@@ -217,22 +217,28 @@ public:
     {
         list_selection(this, comp);
     }
-
-    void splice_after(iterator pos, list &lst)
-    {
-        list_transfer_next(pos.get_node(), &lst);
-    }
-
-    void splice_after(iterator pos, list &lst, iterator i)
-    {
-        list_transfer_next(pos.get_node(), i.get_node());
-    }
-
-    void splice_after(iterator pos, list &lst, iterator first, iterator last)
-    {
-        list_transfer_next(pos.get_node(), first.get_node(), last.get_node());
-    }
 #endif
+
+    void splice(iterator pos, list &lst)
+    {
+		if (lst.empty())
+            return;
+
+        list_transfer(pos.get_node(), list_head(&lst), list_tail(&lst));
+    }
+
+    void splice(iterator pos, list &lst, iterator i)
+    {
+        list_transfer(pos.get_node(), i.get_node());
+    }
+
+    void splice(iterator pos, list &lst, iterator first, iterator last)
+    {
+        if (first == last)
+            return;
+
+        list_transfer(pos.get_node(), first.get_node(), list_prev(last.get_node()));
+    }
 
     void swap(list &lst)
     {
