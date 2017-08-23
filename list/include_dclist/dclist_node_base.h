@@ -1,9 +1,6 @@
 #ifndef __dclist_node_base_h
 #define __dclist_node_base_h
 
-#include <stddef.h>
-#include <assert.h>
-
 // Double Chain List
 // 双向循环链表节点, 不包含数据
 typedef struct DCList_node_base *DCList_link;
@@ -68,8 +65,6 @@ void list_nil_init(DCList_link nil)
 inline
 void list_insert(DCList_link x, DCList_link t)
 {
-    assert(x != NULL && t != NULL);
-
 	t->prev = x->prev;      // (1)
 	t->next = x;            // (2)
 	t->prev->next = t;      // (3)
@@ -108,8 +103,6 @@ void list_insert(DCList_link x, DCList_link t)
 inline
 void list_insert(DCList_link x, DCList_link a, DCList_link b)
 {
-    assert(x != NULL && a != NULL && b != NULL);
-
 	a->prev = x->prev;      // (1)
 	b->next = x;            // (2)
 	a->prev->next = a;      // (3)
@@ -135,8 +128,6 @@ void list_insert(DCList_link x, DCList_link a, DCList_link b)
 inline
 void list_delete(DCList_link x)
 {
-    assert(x != NULL);
-
 	x->prev->next = x->next;    // (1)
 	x->next->prev = x->prev;    // (2)
 }
@@ -160,8 +151,6 @@ void list_delete(DCList_link x)
 inline
 void list_delete(DCList_link a, DCList_link b)
 {
-    assert(a != NULL && b != NULL);
-
 	a->prev->next = b->next;    // (1)
 	b->next->prev = a->prev;    // (2)
 }
@@ -179,8 +168,6 @@ void list_delete(DCList_link a, DCList_link b)
 inline
 void list_transfer(DCList_link x, DCList_link t)
 {
-    assert(x != NULL && t != NULL);
-
     list_delete(t);            // 移除结点t
     list_insert(x, t);         // 将t结点插入到x结点前
 }
@@ -205,8 +192,6 @@ void list_transfer(DCList_link x, DCList_link t)
 inline
 void list_transfer(DCList_link x, DCList_link a, DCList_link b)
 {
-    assert(x != NULL && a != NULL && b != NULL);
-
     list_delete(a, b);
     list_insert(x, a, b);
 }
@@ -215,31 +200,31 @@ void list_transfer(DCList_link x, DCList_link a, DCList_link b)
  * 将链表上[x, nil)之间的所有结点反序排列
  *
  * [head] <=> [N1] <=> [N2] <=> [N3] <=> [N4] <=> [NIL]
- *              ^-x                        ^-y
- *                  ||  list_transfer(x, y)
- *                  \/
+ *    ^-y       ^-x       
+ *                ||  list_transfer(y->next, x->next)
+ *                \/
  *
- * [head] <=> [N4] <=> [N1] <=> [N2] <=> [N3] <=> [NIL]
- *                      ^-x                ^-y
- *                  ||  list_transfer(x, y)
- *                  \/
+ * [head] <=> [N2] <=> [N1] <=> [N3] <=> [N4] <=> [NIL]
+ *    ^-y                ^-x
+ *                ||  list_transfer(y->next, x->next)
+ *                \/
  *
- * [head] <=> [N4] <=> [N3] <=> [N1] <=> [N2] <=> [NIL]
- *                                ^-x     ^-y
- *                  ||  list_transfer(x, y)
- *                  \/
+ * [head] <=> [N3] <=> [N2] <=> [N1] <=> [N4] <=> [NIL]
+ *    ^-y                         ^-x
+ *                ||  list_transfer(y->next, x->next)
+ *                \/
  *
  * [head] <=> [N4] <=> [N3] <=> [N2] <=> [N1] <=> [NIL]
- *                                         ^-x      ^-y
+ *    ^-y                                  ^-x
  */
 inline
 void list_reverse(DCList_link x, DCList_link nil)
 {
-    assert(x != NULL && nil != NULL);
+    if (x == nil) return;
 
+    DCList_link y = x->prev;
     while (x->next != nil) {
-        auto y = nil->prev;
-        list_transfer(x, y);
+        list_transfer(y->next, x->next);
     }
 }
 

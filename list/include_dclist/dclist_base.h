@@ -1,6 +1,7 @@
 #ifndef __dclist_base_h
 #define __dclist_base_h
 
+#include <cassert>
 #include "dclist_node_base.h"
 
 /**
