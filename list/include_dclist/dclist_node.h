@@ -39,32 +39,82 @@ T *list_data(DCList_node<T> *x)
     return &(x->data);
 }
 
-// 遍历list的[x, y)区间所有结点, Function处理data
+// 遍历list的[x, nil)区间所有结点, Function处理data
 template <typename T, typename Function>
-void list_for_each(DCList_node<T> *x, DCList_node<T> *y, Function fn)
+void list_for_each(DCList_node<T> *x, DCList_node<T> *nil, Function fn)
 {
-    for ( ; x != y; x = list_next(x)) {
+    for ( ; x != nil; x = list_next(x)) {
         fn(*list_data(x));
     }
 }
 
-// 查找list的[x, y)区间中data等于指定值的结点
+// 查找list的[x, nil)区间中data等于指定值的结点
 template <typename T>
-DCList_node<T> *list_search(DCList_node<T> *x, DCList_node<T> *y, const T &val)
+DCList_node<T> *list_search(DCList_node<T> *x, DCList_node<T> *nil, const T &val)
 {
-    while (x != y && *list_data(x) != val) {
+    while (x != nil && *list_data(x) != val) {
         x = list_next(x);
     }
     return x;
 }
 
 template <typename T, typename Predicate>
-DCList_node<T> *list_search_if(DCList_node<T> *x, DCList_node<T> *y, Predicate pred)
+DCList_node<T> *list_search_if(DCList_node<T> *x, DCList_node<T> *nil, Predicate pred)
 {
-    while (x != y && !pred(*list_data(x))) {
+    while (x != nil && !pred(*list_data(x))) {
         x = list_next(x);
     }
     return x;
+}
+
+// 查找[x, nil)之间值最大的结点, 
+// 并返回该结点的指针,
+template <typename T, typename Compare = std::less<T>>
+DCList_node<T> *list_find_max(DCList_node<T> *x, DCList_node<T> *nil, Compare comp = Compare())
+{
+    if (x == nil) return x;
+
+    DCList_node<T> *max = x;
+    x = list_next(x);
+
+    while (x != nil) {
+        // max->next->data < x->next->data
+        if (comp(*list_data(max), *list_data(x))) {
+            max = x;
+        }
+        x = list_next(x);
+    }
+
+    return max;
+}
+
+// 对[x, nil)之间的链表进行选择排序
+//
+// [113] <=> [515] <=> [101] <=>
+//   ^-x       ^-t
+//
+// [] <=> [627] <=> [758] <=> [838] <=>
+//  ^-out
+//          ||
+//          \/
+//
+// [113] <=> [101] <=>
+//   ^-x
+//
+// [] <=> [515] <=> [627] <=> [758] <=> [838] <=>
+//  ^-out
+//
+template <typename T, typename Compare = std::less<T>>
+void list_selection(DCList_node<T> *x, DCList_node<T> *nil, Compare comp = Compare())
+{
+    DCList_link out = x->prev;
+    while (x != nil) {
+        auto t = list_find_max(x, nil, comp);   // t为[x, nil)之间最大元素结点
+        if (x == t)
+            x = list_next(t);
+        if (out->next != t)
+            list_transfer(out->next, t);        // 将t插入out的后头
+    }
 }
 
 #endif

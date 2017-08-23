@@ -206,7 +206,6 @@ public:
         list_reverse(this);
     }
 
-#if 0
     void sort()
     {
         list_selection(this);
@@ -217,7 +216,6 @@ public:
     {
         list_selection(this, comp);
     }
-#endif
 
     void splice(iterator pos, list &lst)
     {

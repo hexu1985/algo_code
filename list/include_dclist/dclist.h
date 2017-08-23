@@ -16,7 +16,7 @@ struct DCList : public DCList_base {
 template <typename T, typename Function>
 void list_for_each(DCList<T> *list, Function fn)
 {
-    list_for_each(list_node<T>(list_head(list)), fn);
+    list_for_each(list_node<T>(list_head(list)), list_node<T>(list_nil(list)), fn);
 }
 
 // 查找list中data等于指定值的结点
@@ -78,6 +78,19 @@ void list_clear(DCList<T> *list, Deleter del = Deleter())
 {
     list_destroy(list, del);
     list_init(list);
+}
+
+// 选择排序list
+template <typename T, typename Compare = std::less<T>>
+void list_selection(DCList<T> *list, Compare comp = Compare())
+{
+    list_selection(list_node<T>(list_head(list)), list_node<T>(list_nil(list)), comp);
+}
+
+template <typename T, typename Compare = std::less<T>>
+void list_sort(DCList<T> *list, Compare comp = Compare())
+{
+    list_selection(list, comp);
 }
 
 #endif
