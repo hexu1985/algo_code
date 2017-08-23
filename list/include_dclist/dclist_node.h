@@ -110,10 +110,41 @@ void list_selection(DCList_node<T> *x, DCList_node<T> *nil, Compare comp = Compa
     DCList_link out = x->prev;
     while (x != nil) {
         auto t = list_find_max(x, nil, comp);   // t为[x, nil)之间最大元素结点
-        if (x == t)
+        if (t == x)
             x = list_next(t);
-        if (out->next != t)
-            list_transfer(out->next, t);        // 将t插入out的后头
+        list_delete(t);
+        list_insert(out->next, t);              // 将t插入out的后头
+    }
+}
+
+// 查找x结点和y结点中值小的结点, 
+// 并把该结点从链表中摘除, 并返回该结点的指针,
+template <typename T, typename Compare = std::less<T>>
+DCList_node<T> *list_min(DCList_node<T> *x, DCList_node<T> *y, Compare comp = Compare())
+{
+    DCList_link min = x;
+    if (comp(*list_data(y), *list_data(x))) {   // y->data < x->data
+        min = y;
+    } 
+    return list_node<T>(min);
+}
+
+// 合并[x, x_nil)和[y, y_nil)之间的结点, 根据Compare指定的偏序关系, 结果存到[x, x_nil)区间
+template <typename T, typename Compare = std::less<T>>
+void list_merge(DCList_node<T> *x, DCList_node<T> *x_nil, DCList_node<T> *y, DCList_node<T> *y_nil, Compare comp = Compare())
+{
+    while (x != x_nil && y != y_nil) {
+        auto t = list_min(x, y, comp);  // t为x和y后最小元素结点
+        if (t == x) {
+            x = list_next(t);
+        } else {
+            y = list_next(t);
+            list_transfer(x, t);        // 将t插入x的前头
+        }
+    }
+
+    if (y != y_nil) {
+        list_transfer(x_nil, y, y_nil->prev);
     }
 }
 

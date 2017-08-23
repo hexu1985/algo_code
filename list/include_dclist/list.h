@@ -279,7 +279,6 @@ public:
         }
     }
 
-#if 0
     void merge(list &lst)
     {
         list_merge(this, &lst);
@@ -291,6 +290,7 @@ public:
         list_merge(this, &lst, comp);
     }
 
+#if 0
     void unique()
     {
         list_unique(this);

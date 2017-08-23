@@ -93,4 +93,12 @@ void list_sort(DCList<T> *list, Compare comp = Compare())
     list_selection(list, comp);
 }
 
+// 合并list1和list2, 并且将结果放到list1中
+template <typename T, typename Compare = std::less<T>>
+void list_merge(DCList<T> *list1, DCList<T> *list2, Compare comp = Compare())
+{
+    list_merge(list_node<T>(list_head(list1)), list_node<T>(list_nil(list1)), 
+            list_node<T>(list_head(list2)), list_node<T>(list_nil(list2)), comp);
+}
+
 #endif
