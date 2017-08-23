@@ -101,4 +101,11 @@ void list_merge(DCList<T> *list1, DCList<T> *list2, Compare comp = Compare())
             list_node<T>(list_head(list2)), list_node<T>(list_nil(list2)), comp);
 }
 
+// 去除链表中的重复元素
+template <typename T, typename Compare = std::equal_to<T>, typename Deleter = std::default_delete<DCList_node<T>>>
+void list_unique(DCList<T> *list, Compare comp = Compare(), Deleter del = Deleter())
+{
+    list_unique(list_node<T>(list_head(list)), list_node<T>(list_nil(list)), comp, del);
+}
+
 #endif

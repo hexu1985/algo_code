@@ -148,5 +148,23 @@ void list_merge(DCList_node<T> *x, DCList_node<T> *x_nil, DCList_node<T> *y, DCL
     }
 }
 
+// 去除链表中[x, nil)之间的重复元素, 根据Compare指定的等价关系
+template <typename T, typename Compare = std::equal_to<T>, typename Deleter = std::default_delete<DCList_node<T>>>
+void list_unique(DCList_node<T> *x, DCList_node<T> *nil, Compare comp = Compare(), Deleter del = Deleter())
+{
+    if (x == nil)
+        return;
+
+    while (x != nil) {
+        if (comp(*list_data(x), *list_data(list_next(x)))) {    // x->data == x->next->data
+            auto y = list_next(x);
+            list_delete(y);
+            del(y);
+        } else {
+            x = list_next(x);
+        }
+    }
+}
+
 #endif
 

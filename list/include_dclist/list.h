@@ -290,7 +290,6 @@ public:
         list_merge(this, &lst, comp);
     }
 
-#if 0
     void unique()
     {
         list_unique(this);
@@ -301,7 +300,6 @@ public:
     {
         list_unique(this, p);
     }
-#endif
 };
 
 #endif
