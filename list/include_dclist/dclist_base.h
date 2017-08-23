@@ -121,5 +121,12 @@ void list_swap(DCList_base *list1, DCList_base *list2)
         list_transfer(list_nil(list2), list_head(&temp), list_tail(&temp));
 }
 
+// 将链表结点逆序排列
+inline
+void list_reverse(DCList_base *list)
+{
+    list_reverse(list_head(list), list_nil(list));
+}
+
 #endif
 

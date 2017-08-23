@@ -201,12 +201,12 @@ public:
         list_remove_if(this, pred);
     }
 
-#if 0
     void reverse()
     {
         list_reverse(this);
     }
 
+#if 0
     void sort()
     {
         list_selection(this);

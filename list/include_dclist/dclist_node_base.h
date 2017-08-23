@@ -211,4 +211,36 @@ void list_transfer(DCList_link x, DCList_link a, DCList_link b)
     list_insert(x, a, b);
 }
 
+/**
+ * 将链表上[x, nil)之间的所有结点反序排列
+ *
+ * [head] <=> [N1] <=> [N2] <=> [N3] <=> [N4] <=> [NIL]
+ *              ^-x                        ^-y
+ *                  ||  list_transfer(x, y)
+ *                  \/
+ *
+ * [head] <=> [N4] <=> [N1] <=> [N2] <=> [N3] <=> [NIL]
+ *                      ^-x                ^-y
+ *                  ||  list_transfer(x, y)
+ *                  \/
+ *
+ * [head] <=> [N4] <=> [N3] <=> [N1] <=> [N2] <=> [NIL]
+ *                                ^-x     ^-y
+ *                  ||  list_transfer(x, y)
+ *                  \/
+ *
+ * [head] <=> [N4] <=> [N3] <=> [N2] <=> [N1] <=> [NIL]
+ *                                         ^-x      ^-y
+ */
+inline
+void list_reverse(DCList_link x, DCList_link nil)
+{
+    assert(x != NULL && nil != NULL);
+
+    while (x->next != nil) {
+        auto y = nil->prev;
+        list_transfer(x, y);
+    }
+}
+
 #endif
