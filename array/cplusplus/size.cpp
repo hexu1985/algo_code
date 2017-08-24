@@ -1,10 +1,10 @@
 // array::size
 #include <iostream>
-#include <array>
+#include "array.h"
 
 int main ()
 {
-  std::array<int,5> myints;
+  array<int,5> myints;
   std::cout << "size of myints: " << myints.size() << std::endl;
   std::cout << "sizeof(myints): " << sizeof(myints) << std::endl;
 

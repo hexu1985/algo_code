@@ -1,11 +1,11 @@
 // swap arrays
 #include <iostream>
-#include <array>
+#include "array.h"
 
 int main ()
 {
-  std::array<int,5> first = {10, 20, 30, 40, 50};
-  std::array<int,5> second = {11, 22, 33, 44, 55};
+  array<int,5> first = {10, 20, 30, 40, 50};
+  array<int,5> second = {11, 22, 33, 44, 55};
 
   first.swap (second);
 

@@ -1,10 +1,10 @@
 // array::front
 #include <iostream>
-#include <array>
+#include "array.h"
 
 int main ()
 {
-  std::array<int,3> myarray = {2, 16, 77};
+  array<int,3> myarray = {2, 16, 77};
 
   std::cout << "front is: " << myarray.front() << std::endl;   // 2
   std::cout << "back is: " << myarray.back() << std::endl;     // 77

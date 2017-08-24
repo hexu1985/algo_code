@@ -1,12 +1,12 @@
 // array::data
 #include <iostream>
 #include <cstring>
-#include <array>
+#include "array.h"
 
 int main ()
 {
   const char* cstr = "Test string";
-  std::array<char,12> charray;
+  array<char,12> charray;
 
   std::memcpy (charray.data(),cstr,12);
 

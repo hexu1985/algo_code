@@ -1,9 +1,9 @@
 // array::fill example
 #include <iostream>
-#include <array>
+#include "array.h"
 
 int main () {
-  std::array<int,6> myarray;
+  array<int,6> myarray;
 
   myarray.fill(5);
 

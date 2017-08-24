@@ -1,10 +1,10 @@
 // array::at
 #include <iostream>
-#include <array>
+#include "array.h"
 
 int main ()
 {
-  std::array<int,10> myarray;
+  array<int,10> myarray;
 
   // assign some values:
   for (int i=0; i<10; i++) myarray.at(i) = i+1;

@@ -1,10 +1,10 @@
 // array::operator[]
 #include <iostream>
-#include <array>
+#include "array.h"
 
 int main ()
 {
-  std::array<int,10> myarray;
+  array<int,10> myarray;
   unsigned int i;
 
   // assign some values:
