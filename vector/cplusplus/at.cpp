@@ -1,10 +1,10 @@
 // vector::at
 #include <iostream>
-#include <vector>
+#include "vector.h"
 
 int main ()
 {
-  std::vector<int> myvector (10);   // 10 zero-initialized ints
+  vector<int> myvector (10);   // 10 zero-initialized ints
 
   // assign some values:
   for (unsigned i=0; i<myvector.size(); i++)

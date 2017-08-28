@@ -1,10 +1,10 @@
 // resizing vector
 #include <iostream>
-#include <vector>
+#include "vector.h"
 
 int main ()
 {
-  std::vector<int> myvector;
+  vector<int> myvector;
 
   // set some initial content:
   for (int i=1;i<10;i++) myvector.push_back(i);

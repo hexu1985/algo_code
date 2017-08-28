@@ -1,10 +1,10 @@
 // comparing size, capacity and max_size
 #include <iostream>
-#include <vector>
+#include "vector.h"
 
 int main ()
 {
-  std::vector<int> myvector;
+  vector<int> myvector;
 
   // set some content in the vector:
   for (int i=0; i<100; i++) myvector.push_back(i);

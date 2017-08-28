@@ -2,7 +2,7 @@
 RM = rm -rf
 CXX = g++
 CXXFLAGS = -Wall -g -std=c++14
-INCLUDES = -I../include
+INCLUDES = -I../include_std
 LDFLAGS = 
 LDPATH =
 

@@ -1,10 +1,10 @@
 // vector::data
 #include <iostream>
-#include <vector>
+#include "vector.h"
 
 int main ()
 {
-  std::vector<int> myvector (5);
+  vector<int> myvector (5);
 
   int* p = myvector.data();
 

@@ -1,11 +1,11 @@
 // inserting into a vector
 #include <iostream>
-#include <vector>
+#include "vector.h"
 
 int main ()
 {
-  std::vector<int> myvector (3,100);
-  std::vector<int>::iterator it;
+  vector<int> myvector (3,100);
+  vector<int>::iterator it;
 
   it = myvector.begin();
   it = myvector.insert ( it , 200 );
@@ -15,7 +15,7 @@ int main ()
   // "it" no longer valid, get a new one:
   it = myvector.begin();
 
-  std::vector<int> anothervector (2,400);
+  vector<int> anothervector (2,400);
   myvector.insert (it+2,anothervector.begin(),anothervector.end());
 
   int myarray [] = { 501,502,503 };

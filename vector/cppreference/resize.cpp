@@ -1,8 +1,8 @@
 #include <iostream>
-#include <vector>
+#include "vector.h"
 int main()
 {
-    std::vector<int> c = {1, 2, 3};
+    vector<int> c = {1, 2, 3};
     std::cout << "The vector holds: ";
     for(auto& el: c) std::cout << el << ' ';
     std::cout << '\n';

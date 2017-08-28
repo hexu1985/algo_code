@@ -1,10 +1,10 @@
 // vector::push_back
 #include <iostream>
-#include <vector>
+#include "vector.h"
 
 int main ()
 {
-  std::vector<int> myvector;
+  vector<int> myvector;
   int myint;
 
   std::cout << "Please enter some integers (enter 0 to end):\n";

@@ -1,10 +1,10 @@
 // vector::shrink_to_fit
 #include <iostream>
-#include <vector>
+#include "vector.h"
 
 int main ()
 {
-  std::vector<int> myvector (100);
+  vector<int> myvector (100);
   std::cout << "1. capacity of myvector: " << myvector.capacity() << '\n';
 
   myvector.resize(10);

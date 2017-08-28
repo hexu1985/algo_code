@@ -1,10 +1,10 @@
 // vector::size
 #include <iostream>
-#include <vector>
+#include "vector.h"
 
 int main ()
 {
-  std::vector<int> myints;
+  vector<int> myints;
   std::cout << "0. size: " << myints.size() << '\n';
 
   for (int i=0; i<10; i++) myints.push_back(i);

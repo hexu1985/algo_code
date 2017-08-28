@@ -1,12 +1,12 @@
 // vector::reserve
 #include <iostream>
-#include <vector>
+#include "vector.h"
 
 int main ()
 {
-  std::vector<int>::size_type sz;
+  vector<int>::size_type sz;
 
-  std::vector<int> foo;
+  vector<int> foo;
   sz = foo.capacity();
   std::cout << "making foo grow:\n";
   for (int i=0; i<100; ++i) {
@@ -17,7 +17,7 @@ int main ()
     }
   }
 
-  std::vector<int> bar;
+  vector<int> bar;
   sz = bar.capacity();
   bar.reserve(100);   // this is the only difference with foo above
   std::cout << "making bar grow:\n";

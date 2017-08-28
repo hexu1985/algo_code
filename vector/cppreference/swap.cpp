@@ -1,7 +1,7 @@
-#include <vector>
+#include "vector.h"
 #include <iostream>
  
-void printVector(std::vector<int>& vec)
+void printVector(vector<int>& vec)
 {
     for (int a : vec)
     {
@@ -11,8 +11,8 @@ void printVector(std::vector<int>& vec)
  
 int main()
 {
-    std::vector<int> v1{1, 2, 3};
-    std::vector<int> v2{7, 8, 9};
+    vector<int> v1{1, 2, 3};
+    vector<int> v2{7, 8, 9};
  
     std::cout << "v1: ";
     printVector(v1);

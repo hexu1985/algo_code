@@ -1,9 +1,9 @@
-#include <vector>
+#include "vector.h"
 #include <iostream>
  
-void display_sizes(const std::vector<int>& nums1,
-                   const std::vector<int>& nums2,
-                   const std::vector<int>& nums3)
+void display_sizes(const vector<int>& nums1,
+                   const vector<int>& nums2,
+                   const vector<int>& nums3)
 {
     std::cout << "nums1: " << nums1.size() 
               << " nums2: " << nums2.size()
@@ -12,9 +12,9 @@ void display_sizes(const std::vector<int>& nums1,
  
 int main()
 {
-    std::vector<int> nums1 {3, 1, 4, 6, 5, 9};
-    std::vector<int> nums2; 
-    std::vector<int> nums3;
+    vector<int> nums1 {3, 1, 4, 6, 5, 9};
+    vector<int> nums2; 
+    vector<int> nums3;
  
     std::cout << "Initially:\n";
     display_sizes(nums1, nums2, nums3);

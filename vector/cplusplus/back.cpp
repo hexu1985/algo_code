@@ -1,10 +1,10 @@
 // vector::back
 #include <iostream>
-#include <vector>
+#include "vector.h"
 
 int main ()
 {
-  std::vector<int> myvector;
+  vector<int> myvector;
 
   myvector.push_back(10);
 

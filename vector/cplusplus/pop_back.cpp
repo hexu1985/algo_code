@@ -1,10 +1,10 @@
 // vector::pop_back
 #include <iostream>
-#include <vector>
+#include "vector.h"
 
 int main ()
 {
-  std::vector<int> myvector;
+  vector<int> myvector;
   int sum (0);
   myvector.push_back (100);
   myvector.push_back (200);
