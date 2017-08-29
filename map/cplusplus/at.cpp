@@ -1,11 +1,11 @@
 // map::at
 #include <iostream>
 #include <string>
-#include <map>
+#include "map.h"
 
 int main ()
 {
-  std::map<std::string,int> mymap = {
+  map<std::string,int> mymap = {
                 { "alpha", 0 },
                 { "beta", 0 },
                 { "gamma", 0 } };

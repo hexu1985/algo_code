@@ -1,10 +1,10 @@
-#include <map>
+#include "map.h"
 #include <iostream>
 #include <utility>
  
 int main()
 {
-    std::map<int,int> numbers;
+    map<int,int> numbers;
     std::cout << "Initially, numbers.empty(): " << numbers.empty() << '\n';
  
     numbers.emplace(42, 13);

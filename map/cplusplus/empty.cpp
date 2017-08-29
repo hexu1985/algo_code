@@ -1,10 +1,10 @@
 // map::empty
 #include <iostream>
-#include <map>
+#include "map.h"
 
 int main ()
 {
-  std::map<char,int> mymap;
+  map<char,int> mymap;
 
   mymap['a']=10;
   mymap['b']=20;

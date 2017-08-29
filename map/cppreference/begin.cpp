@@ -1,8 +1,8 @@
 #include <iostream>
-#include <map>
+#include "map.h"
  
 int main() {
-  std::map<int, float> num_map;
+  map<int, float> num_map;
   num_map[4] = 4.13;
   num_map[9] = 9.24;
   num_map[1] = 1.09;

@@ -1,11 +1,11 @@
 // map::find
 #include <iostream>
-#include <map>
+#include "map.h"
 
 int main ()
 {
-  std::map<char,int> mymap;
-  std::map<char,int>::iterator it;
+  map<char,int> mymap;
+  map<char,int>::iterator it;
 
   mymap['a']=50;
   mymap['b']=100;

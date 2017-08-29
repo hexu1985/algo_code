@@ -1,11 +1,11 @@
 // map::max_size
 #include <iostream>
-#include <map>
+#include "map.h"
 
 int main ()
 {
   int i;
-  std::map<int,int> mymap;
+  map<int,int> mymap;
 
   if (mymap.max_size()>1000)
   {

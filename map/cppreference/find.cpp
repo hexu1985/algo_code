@@ -1,9 +1,9 @@
 #include <iostream>
-#include <map>
+#include "map.h"
  
 int main()
 {  
-    std::map<int,char> example = {{1,'a'},{2,'b'}};
+    map<int,char> example = {{1,'a'},{2,'b'}};
  
     auto search = example.find(2);
     if(search != example.end()) {

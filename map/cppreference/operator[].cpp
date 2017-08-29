@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <map>
+#include "map.h"
  
 int main()
 {
-    std::map<char, int> letter_counts {{'a', 27}, {'b', 3}, {'c', 1}};
+    map<char, int> letter_counts {{'a', 27}, {'b', 3}, {'c', 1}};
  
     std::cout << "initially:\n";
     for (const auto &pair : letter_counts) {
@@ -22,7 +22,7 @@ int main()
  
     // count the number of occurrences of each word
     // (the first call to operator[] initialized the counter with zero)
-    std::map<std::string, size_t>  word_map;
+    map<std::string, size_t>  word_map;
     for (const auto &w : { "this", "sentence", "is", "not", "a", "sentence",
                            "this", "sentence", "is", "a", "hoax"}) {
         ++word_map[w];

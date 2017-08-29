@@ -1,10 +1,10 @@
 // map::size
 #include <iostream>
-#include <map>
+#include "map.h"
 
 int main ()
 {
-  std::map<char,int> mymap;
+  map<char,int> mymap;
   mymap['a']=101;
   mymap['b']=202;
   mymap['c']=302;

@@ -1,16 +1,16 @@
 // map::equal_range
 #include <iostream>
-#include <map>
+#include "map.h"
 
 int main ()
 {
-  std::map<char,int> mymap;
+  map<char,int> mymap;
 
   mymap['a']=10;
   mymap['b']=20;
   mymap['c']=30;
 
-  std::pair<std::map<char,int>::iterator,std::map<char,int>::iterator> ret;
+  std::pair<map<char,int>::iterator,map<char,int>::iterator> ret;
   ret = mymap.equal_range('b');
 
   std::cout << "lower bound points to: ";

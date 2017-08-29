@@ -1,8 +1,8 @@
-#include <map>
+#include "map.h"
 #include <iostream>
 int main()
 {
-    std::map<int, std::string> c = {{1, "one"}, {2, "two"}, {3, "three"},
+    map<int, std::string> c = {{1, "one"}, {2, "two"}, {3, "three"},
                                     {4, "four"}, {5, "five"}, {6, "six"}};
     // erase all odd numbers from c
     for(auto it = c.begin(); it != c.end(); )
