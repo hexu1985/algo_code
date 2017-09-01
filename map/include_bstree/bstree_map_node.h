@@ -1,0 +1,112 @@
+#ifndef __bstree_node_h
+#define __bstree_node_h
+
+#include <utility>
+#include "bstree_node_base.h"
+
+// 二叉查找树结点
+// key为索引
+// value为数据
+template <typename K, typename V>
+struct BSTree_map_node : public BSTree_node_base {
+	std::pair<K,V> data;
+
+    BSTree_map_node() { } 
+
+    BSTree_map_node(const K &k, const V &v) 
+    {
+        this->data = std::maik_pair(k, v);
+    } 
+
+	BSTree_map_node(const std::pair<K,V> &data)
+	{
+        this->data = data;
+	}
+};
+
+// 将BSTree_link强转成BSTree_map_node<K, V> *
+template <typename K, typename V>
+BSTree_map_node<K,V> *tree_map_node(BSTree_link x)
+{
+    return static_cast<BSTree_map_node<K,V> *>(x);
+}
+
+template <typename K, typename V>
+BSTree_map_node<K,V> *tree_left(BSTree_map_node<K,V> *x)
+{
+    return tree_node<K,V>(x->left);
+}
+
+template <typename K, typename V>
+BSTree_map_node<K,V> *tree_right(BSTree_map_node<K,V> *x)
+{
+    return tree_node<K,V>(x->right);
+}
+
+template <typename K, typename V>
+BSTree_map_node<K,V> *tree_parent(BSTree_map_node<K,V> *x)
+{
+    return tree_node<K,V>(x->parent);
+}
+
+// 获取data数据成员
+template <typename K, typename V>
+std::pair<K,V> *tree_data(BSTree_map_node<K,V> *x)
+{
+    return &(x->data);
+}
+
+// 获取key数据成员
+template <typename K, typename V>
+K *tree_key(BSTree_map_node<K,V> *x)
+{
+    return &(x->data.first);
+}
+
+// 获取value数据成员
+template <typename K, typename V>
+V *tree_value(BSTree_map_node<K,V> *x)
+{
+    return &(x->data.second);
+}
+
+/**
+ * 从二叉搜索树中从x为根结点的子树向下查找等于特定值的结点
+ * 如果未找到, 返回NIL
+ * 递归实现
+ */
+template <typename K, typename V, typename Compare = std::less<K>>
+BSTree_map_node<K,V> *tree_search(BSTree_map_node<K,V> *x, const K &k, Compare comp = Compare())
+{
+    if (x == NULL)
+        return x;
+
+    if (comp(k, *tree_key(x)))      // k < x.key
+        return tree_search(tree_left(x), v);
+    else if (comp(*tree_key(x), k)) // x.key < k
+        return tree_search(tree_right(x), v);
+    else                            // x.key == k
+        return x;
+}
+
+/**
+ * 从二叉搜索树中从x为根结点的子树向下查找等于特定值的结点
+ * 如果未找到, 返回NULL
+ * 迭代实现
+ */
+template <typename K, typename V, typename Compare = std::less<K>>
+BSTree_map_node<K,V> *tree_iterative_search(BSTree_map_node<K,V> *x, const K &k, Compare comp = Compare())
+{
+	while (x != NULL) {
+        if (comp(k, *tree_key(k))) {        // k < x.key
+            x = tree_left(x);
+        } else if (comp(*tree_key(x), k)) { // x.key < k
+            x = tree_right(x);
+        } else {                            // x.key == k
+            break;
+        }
+	}
+	return x;
+}
+
+#endif
