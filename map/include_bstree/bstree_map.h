@@ -24,7 +24,6 @@ BSTree_map_node<K,V> *tree_iterative_search(BSTree_map<K,V> *tree, const K &k, C
 }
 
 // 向二叉搜索树里插入一个结点z(假设z的value属性已被事先赋值), 
-// 并且z->left和z->right指向NIL
 template <typename K, typename V, typename Compare = std::less<K>>
 void tree_insert(BSTree_map<K,V> *tree, BSTree_map_node<K,V> *z, Compare comp = Compare()) 
 {
@@ -52,16 +51,12 @@ void tree_insert(BSTree_map<K,V> *tree, BSTree_map_node<K,V> *z, Compare comp = 
 template <typename K, typename V>
 BSTree_map_node<K,V> *tree_minimum(BSTree_map<K,V> *tree)
 {
-    if (tree->root->left == NULL)
-        return tree->root;
     return tree_map_node<K,V>(tree_minimum(tree->root));
 }
 
 template <typename K, typename V>
 BSTree_map_node<K,V> *tree_maximum(BSTree_map<K,V> *tree)
 {
-    if (tree->root->right == NULL)
-        return tree->root;
     return tree_map_node<K,V>(tree_maximum(tree->root));
 }
 

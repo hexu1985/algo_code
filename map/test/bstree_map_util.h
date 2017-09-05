@@ -52,4 +52,15 @@ void tree_init(BSTree_map<K,V> *tree, InputIterator first, InputIterator last)
     }
 }
 
+template <typename K, typename V, typename Compare = std::less<K>>
+void tree_insert_or_assign(BSTree_map<K,V> *tree, const K &k, const V &v, Compare comp = Compare()) 
+{
+    auto x = tree_iterative_search(tree, k, comp);
+    if (x != NULL) {
+        *tree_value(x) = v;
+    } else {
+        tree_insert(tree, new BSTree_map_node<K,V>(k, v));
+    }
+}
+
 #endif

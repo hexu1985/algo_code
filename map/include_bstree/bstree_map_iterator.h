@@ -53,7 +53,7 @@ struct BSTree_map_iterator {
     this_type &operator --()
     {
         if (node)
-            node = tree_map_node<K,V>tree_predecessor(tree_(node));
+            node = tree_map_node<K,V>(predecessor(node));
         else
             node = tree_map_node<K,V>(tree_maximum(tree));
         return *this;
@@ -63,7 +63,7 @@ struct BSTree_map_iterator {
     {
         this_type tmp(*this);
         if (node)
-            node = tree_map_node<K,V>tree_predecessor(tree_(node));
+            node = tree_map_node<K,V>(predecessor(node));
         else
             node = tree_map_node<K,V>(tree_maximum(tree));
         return tmp;
@@ -84,5 +84,22 @@ struct BSTree_map_iterator {
         return node;
     }
 };
+
+template <typename K, typename V>
+BSTree_map_iterator<K,V> tree_begin(BSTree_map<K,V> *tree)
+{
+    assert(tree != NULL);
+    if (tree_is_empty(tree))
+        return BSTree_map_iterator<K,V>(NULL);
+
+    return BSTree_map_iterator<K,V>(tree_minimum(tree));
+}
+
+template <typename K, typename V>
+BSTree_map_iterator<K,V> tree_end(BSTree_map<K,V> *tree)
+{
+    assert(tree != NULL);
+    return BSTree_map_iterator<K,V>(NULL);
+}
 
 #endif
