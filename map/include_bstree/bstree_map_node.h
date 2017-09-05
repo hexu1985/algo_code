@@ -15,7 +15,7 @@ struct BSTree_map_node : public BSTree_node_base {
 
     BSTree_map_node(const K &k, const V &v) 
     {
-        this->data = std::maik_pair(k, v);
+        this->data = std::make_pair(k, v);
     } 
 
 	BSTree_map_node(const std::pair<K,V> &data)
@@ -34,33 +34,33 @@ BSTree_map_node<K,V> *tree_map_node(BSTree_link x)
 template <typename K, typename V>
 BSTree_map_node<K,V> *tree_left(BSTree_map_node<K,V> *x)
 {
-    return tree_node<K,V>(x->left);
+    return tree_map_node<K,V>(x->left);
 }
 
 template <typename K, typename V>
 BSTree_map_node<K,V> *tree_right(BSTree_map_node<K,V> *x)
 {
-    return tree_node<K,V>(x->right);
+    return tree_map_node<K,V>(x->right);
 }
 
 template <typename K, typename V>
 BSTree_map_node<K,V> *tree_parent(BSTree_map_node<K,V> *x)
 {
-    return tree_node<K,V>(x->parent);
+    return tree_map_node<K,V>(x->parent);
 }
 
 // 返回以结点x的后继结点
 template <typename K, typename V>
 BSTree_map_node<K,V> *tree_successor(BSTree_map_node<K,V> *x)
 {
-    return tree_node<K,V>(tree_successor((BSTree_link)x));
+    return tree_map_node<K,V>(tree_successor((BSTree_link)x));
 }
 
 // 返回以结点x的前驱结点
 template <typename K, typename V>
 BSTree_map_node<K,V> *tree_predecessor(BSTree_map_node<K,V> *x)
 {
-    return tree_node<K,V>(tree_predecessor((BSTree_link)x));
+    return tree_map_node<K,V>(tree_predecessor((BSTree_link)x));
 }
 
 // 获取data数据成员
@@ -96,9 +96,9 @@ BSTree_map_node<K,V> *tree_search(BSTree_map_node<K,V> *x, const K &k, Compare c
         return x;
 
     if (comp(k, *tree_key(x)))      // k < x.key
-        return tree_search(tree_left(x), v);
+        return tree_search(tree_left(x), k);
     else if (comp(*tree_key(x), k)) // x.key < k
-        return tree_search(tree_right(x), v);
+        return tree_search(tree_right(x), k);
     else                            // x.key == k
         return x;
 }
@@ -112,7 +112,7 @@ template <typename K, typename V, typename Compare = std::less<K>>
 BSTree_map_node<K,V> *tree_iterative_search(BSTree_map_node<K,V> *x, const K &k, Compare comp = Compare())
 {
 	while (x != NULL) {
-        if (comp(k, *tree_key(k))) {        // k < x.key
+        if (comp(k, *tree_key(x))) {        // k < x.key
             x = tree_left(x);
         } else if (comp(*tree_key(x), k)) { // x.key < k
             x = tree_right(x);
