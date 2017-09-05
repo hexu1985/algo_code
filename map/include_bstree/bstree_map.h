@@ -46,6 +46,22 @@ void tree_insert(BSTree_map<K,V> *tree, BSTree_map_node<K,V> *z, Compare comp = 
         y->right =z;
 }
 
+template <typename K, typename V>
+BSTree_map_node<K,V> *tree_minimum(BSTree_map<K,V> *tree)
+{
+    if (tree->root->left == NULL)
+        return tree->root;
+    return tree_map_node<K,V>(tree_minimum(tree->root));
+}
+
+template <typename K, typename V>
+BSTree_map_node<K,V> *tree_maximum(BSTree_map<K,V> *tree)
+{
+    if (tree->root->right == NULL)
+        return tree->root;
+    return tree_map_node<K,V>(tree_maximum(tree->root));
+}
+
 template <typename K, typename V, typename Function>
 void tree_for_each(BSTree_map<K,V> *tree, Function fn)
 {
@@ -54,6 +70,11 @@ void tree_for_each(BSTree_map<K,V> *tree, Function fn)
     }
 
     BSTree_map_node<K,V> *x = tree_minimum(tree);
+    BSTree_map_node<K,V> *y = tree_maximum(tree);
+    while (x != y) {
+        fn(*tree_data(x));
+    }
+    fn(*tree_data(y));
 }
 
 #endif

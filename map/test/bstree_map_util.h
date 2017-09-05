@@ -13,41 +13,41 @@ std::ostream& operator<<(std::ostream& s, const BSTree_map<K,V>& v) {
         comma[0] = ',';
     };
 
-    list_for_each(const_cast<BSTree_map<K,V> *>(&v), print_data);
+    tree_for_each(const_cast<BSTree_map<K,V> *>(&v), print_data);
     return s << ']';
 }
 
 template <typename K, typename V>
-void list_init(BSTree_map<K,V> *list)
+void tree_init(BSTree_map<K,V> *tree)
 {
-    list_init(static_cast<BSTree_map_base *>(list));
+    tree_init(static_cast<BSTree_map_base *>(tree));
 }
 
 template <typename K, typename V>
-void list_init(BSTree_map<K,V> *list, std::initializer_list<K,V> il)
+void tree_init(BSTree_map<K,V> *tree, std::initializer_tree<std::pair<K,V>> il)
 {
-    list_init(static_cast<BSTree_map_base *>(list));
+    tree_init(static_cast<BSTree_map_base *>(tree));
     for (auto &e : il) {
-        list_insert_tail(list, new BSTree_map_node<K,V>(e));
+        tree_insert(tree, new BSTree_map_node<K,V>(e));
     }
 }
 
 template <typename K, typename V>
-void list_init(BSTree_map<K,V> *list, size_t n, const K,V &val = K,V())
+void tree_init(BSTree_map<K,V> *tree, size_t n, const std::pair<K,V> &val = std::pair<K,V>())
 {
-    list_init(static_cast<BSTree_map_base *>(list));
+    tree_init(static_cast<BSTree_map_base *>(tree));
     for (size_t i = 0; i < n; i++) {
-        list_insert_tail(list, new BSTree_map_node<K,V>(val));
+        tree_insert(tree, new BSTree_map_node<K,V>(val));
     }
 }
 
 template <typename K, typename V, typename InputIterator, 
     typename = typename std::enable_if<!std::is_integral<InputIterator>::value>::type>
-void list_init(BSTree_map<K,V> *list, InputIterator first, InputIterator last)
+void tree_init(BSTree_map<K,V> *tree, InputIterator first, InputIterator last)
 {
-    list_init(static_cast<BSTree_map_base *>(list));
+    tree_init(static_cast<BSTree_map_base *>(tree));
     while (first != last) {
-        list_insert_tail(list, new BSTree_map_node<K,V>(*first++));
+        tree_insert(tree, new BSTree_map_node<K,V>(*first++));
     }
 }
 
