@@ -49,6 +49,20 @@ BSTree_map_node<K,V> *tree_parent(BSTree_map_node<K,V> *x)
     return tree_node<K,V>(x->parent);
 }
 
+// 返回以结点x的后继结点
+template <typename K, typename V>
+BSTree_map_node<K,V> *tree_successor(BSTree_map_node<K,V> *x)
+{
+    return tree_node<K,V>(tree_successor((BSTree_link)x));
+}
+
+// 返回以结点x的前驱结点
+template <typename K, typename V>
+BSTree_map_node<K,V> *tree_predecessor(BSTree_map_node<K,V> *x)
+{
+    return tree_node<K,V>(tree_predecessor((BSTree_link)x));
+}
+
 // 获取data数据成员
 template <typename K, typename V>
 std::pair<K,V> *tree_data(BSTree_map_node<K,V> *x)

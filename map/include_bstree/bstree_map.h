@@ -46,4 +46,14 @@ void tree_insert(BSTree_map<K,V> *tree, BSTree_map_node<K,V> *z, Compare comp = 
         y->right =z;
 }
 
+template <typename K, typename V, typename Function>
+void tree_for_each(BSTree_map<K,V> *tree, Function fn)
+{
+    if (tree_is_empty(tree)) {
+        return;
+    }
+
+    BSTree_map_node<K,V> *x = tree_minimum(tree);
+}
+
 #endif

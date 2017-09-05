@@ -10,16 +10,16 @@ struct BSTree_base {
 
 // 初始化二叉搜索树
 inline
-void tree_init(BSTree_base &tree)
+void tree_init(BSTree_base *tree)
 {
-	tree.root = NULL;
+	tree->root = NULL;
 }
 
 // 判断二叉搜索树是否为空,
 inline
-bool tree_is_empty(const BSTree_base &tree)
+bool tree_is_empty(const BSTree_base *tree)
 {
-	return (tree.root == NULL);
+	return (tree->root == NULL);
 }
 
 /**
