@@ -123,4 +123,17 @@ BSTree_map_node<K,V> *tree_iterative_search(BSTree_map_node<K,V> *x, const K &k,
 	return x;
 }
 
+// 销毁x结点指向的子树
+template <typename K, typename V, typename Deleter = std::default_delete<BSTree_map_node<K,V>>>
+void tree_destroy(BSTree_map_node<K,V> *x, Deleter del = Deleter())
+{
+    if (x == NULL) {
+        return;
+    }
+
+    tree_destroy(tree_left(x), del);
+    tree_destroy(tree_right(x), del);
+    del(x);
+}
+
 #endif
