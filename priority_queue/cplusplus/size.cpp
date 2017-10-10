@@ -1,10 +1,10 @@
 // priority_queue::size
 #include <iostream>       // std::cout
-#include <queue>          // std::priority_queue
+#include "priority_queue.h"          // priority_queue
 
 int main ()
 {
-  std::priority_queue<int> myints;
+  priority_queue<int> myints;
   std::cout << "0. size: " << myints.size() << '\n';
 
   for (int i=0; i<5; i++) myints.push(i);
