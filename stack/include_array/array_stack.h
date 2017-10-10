@@ -4,23 +4,20 @@
 #include <assert.h>
 
 // 数组实现的栈
-// index: [0][1][2]...[length-1]
-// array: [x][x][x]...[   x    ]
+// index: [0][1][2]...[n]
+// array: [x][x][x]...[x]
 //               ^top
 template <typename T>
 struct Stack {
 	int top;	// 栈顶下标
-	int length;	// 栈大小
 	T  *array;	// 栈实际空间
 };
 
 // 初始化栈
 template <typename T>
-void stack_init(Stack<T> &stack, T *array, int length, int num_elem = 0)
+void stack_init(Stack<T> &stack, T *array, int n = 0)
 {
-    assert(length > 0 && num_elem <= length);
-    stack.top = num_elem-1;
-    stack.length = length;
+    stack.top = n-1;
     stack.array = array;
 }
 
@@ -38,13 +35,6 @@ int stack_size(const Stack<T> &stack)
     return stack.top+1;
 }
 
-// 返回栈中最大存放元素个数
-template <typename T>
-int stack_max_size(const Stack<T> &stack)
-{
-	return stack.length;
-}
-
 // 判断栈是否为空
 template <typename T>
 bool stack_is_empty(const Stack<T> &stack)
@@ -52,19 +42,10 @@ bool stack_is_empty(const Stack<T> &stack)
     return stack.top == -1;
 }
 
-// 判断栈是否已满
-template <typename T>
-bool stack_is_full(const Stack<T> &stack)
-{
-	return stack.top == stack.length-1;
-}
-
 // 入栈
 template <typename T>
 void stack_push(Stack<T> &stack, const T &x)
 {
-    assert(!stack_is_full(stack) && "overflow");
-
 	stack.top += 1;
 	stack.array[stack.top] = x;
 }
