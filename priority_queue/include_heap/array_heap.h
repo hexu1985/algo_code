@@ -23,7 +23,7 @@
  */
 template <typename T>
 struct Heap {
-	int size;	// 堆大小
+	int size;	// 堆中元素个数
 	T  *array;	// 堆实际空间
 };
 
@@ -70,10 +70,10 @@ void heap_heapify(Heap<T> &heap, int i, Compare comp = Compare())
 
 // 创建最大堆
 template <typename T, typename Compare = std::less<T>>
-void heap_init(Heap<T> &heap, T *array, int n, Compare comp = Compare())
+void heap_init(Heap<T> &heap, T *array, int n = 0, Compare comp = Compare())
 {
-    heap.size = n-1;
-    for (int i = heap.size/2; i > 0; --i) {
+    heap.size = n;
+    for (int i = heap.size/2; i >= 1; --i) {
         heap_heapify(heap, i, comp);
     }
 }
@@ -89,7 +89,7 @@ T heap_top(const Heap<T> &heap)
 template <typename T>
 bool heap_is_empty(const Heap<T> &heap)
 {
-    return heap.size < 1;
+    return heap.size == 0;
 }
 
 // 返回堆中元素个数

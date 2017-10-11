@@ -4,32 +4,36 @@
 template <typename T, typename C = void, typename Compare = std::less<T>>    // typename C 是为了适配std::priority_queue接口
 class priority_queue {
 private:
-    Heap<T> heap;
+    Heap<T> self;
     int capacity;
+    Compare comp;
 
 protected:
     enum { DEFAULT_SIZE = 64, EXTAND_FACTOR = 2 };
 
     T *data()
     {
-        return heap_data(heap);
+        return heap_data(self);
     }
 
     bool full()
     {
-        return heap_size(heap)+1 == capacity;
+        return heap_size(self)+1 == capacity;
     }
 
     void extend()
     {
         capacity *= EXTAND_FACTOR;
-        auto n = heap_size(heap)+1;
         T *array = new T[capacity];
-        for (int i = 1; i < n; i++) {    // copy
-            array[i] = heap_data(heap)[i];
+
+        // 将内容复制到新的数组
+        auto n = heap_size(self);
+        for (int i = 1; i <= n; i++) {
+            array[i] = heap_data(self)[i];
         }
         delete [] data();
-        heap_init(heap, array, n);
+
+        heap_init(self, array, n, comp);
     }
 
 public:
@@ -43,21 +47,25 @@ public:
 	template <typename Container>
     explicit priority_queue(const Container &cont)
     {
-        auto n = cont.size()+1;
-        capacity = n * EXTAND_FACTOR;
+        // 分配空间
+        capacity = (cont.size()+1) * EXTAND_FACTOR;
         T *array = new T[capacity];
+
+        // 复制元素
         int i = 1;
         for (auto &item :cont) {
             array[i++] = item;
         }
-        heap_init(heap, array, n);
+
+        // 初始化堆
+        heap_init(self, array, cont.size(), comp);
     }
 
     // 构造一个空的priority_queue对象
     priority_queue(int n = DEFAULT_SIZE)
     {
         capacity = n;
-        heap_init(heap, new T[n], 0);
+        heap_init(self, new T[capacity], 0, comp);
     }
 
     // 复制priority_queue
@@ -67,9 +75,9 @@ public:
         auto length = n * EXTAND_FACTOR;
         T *array = new T[length];
         for (int i = 1; i < n; i++) {
-            array[i+1] = x.data()[i];
+            array[i] = x.data()[i];
         }
-        heap_init(heap, array, n);
+        heap_init(self, array, n);
     }
 
     // 销毁priority_queue对象
