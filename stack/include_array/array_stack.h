@@ -4,7 +4,7 @@
 #include <assert.h>
 
 // 数组实现的栈
-// index: [0][1][2]...[n]
+// index: [1][2][3]...[n]
 // array: [x][x][x]...[x]
 //               ^top
 template <typename T>
@@ -17,7 +17,7 @@ struct Stack {
 template <typename T>
 void stack_init(Stack<T> &stack, T *array, int n = 0)
 {
-    stack.top = n-1;
+    stack.top = n;
     stack.array = array;
 }
 
@@ -32,14 +32,14 @@ T *stack_data(Stack<T> &stack)
 template <typename T>
 int stack_size(const Stack<T> &stack)
 {
-    return stack.top+1;
+    return stack.top;
 }
 
 // 判断栈是否为空
 template <typename T>
 bool stack_is_empty(const Stack<T> &stack)
 {
-    return stack.top == -1;
+    return stack.top == 0;
 }
 
 // 入栈

@@ -22,7 +22,7 @@ protected:
 
     bool full()
     {
-        return stack_size(self) == capacity;
+        return stack_size(self)+1 == capacity;
     }
 
     void extend()
@@ -32,7 +32,7 @@ protected:
 
         // 将内容复制到新的数组
         auto n = stack_size(self);
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i <= n; i++) {
             array[i] = stack_data(self)[i];
         }
         delete [] data();
@@ -52,11 +52,11 @@ public:
     explicit stack(const Container &cont)
     {
         // 分配空间
-        capacity = cont.size() * EXTAND_FACTOR;
+        capacity = (cont.size()+1) * EXTAND_FACTOR;
         T *array = new T[capacity];
 
         // 复制元素
-        int i = 0;
+        int i = 1;
         for (auto &item :cont) {
             array[i++] = item;
         }
@@ -78,7 +78,7 @@ public:
         capacity = x.size() * EXTAND_FACTOR;
         T *array = new T[array];
 
-        for (int i = 0; i < x.size(); i++) {
+        for (int i = 1; i <= x.size(); i++) {
             array[i] = x.data()[i];
         }
         stack_init(self, array, x.size());
