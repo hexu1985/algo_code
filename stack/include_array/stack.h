@@ -28,12 +28,15 @@ protected:
     void extend()
     {
         capacity *= EXTAND_FACTOR;
-        auto n = stack_size(self);
         T *array = new T[capacity];
-        for (int i = 0; i < n; i++) {    // copy
+
+        // 将内容复制到新的数组
+        auto n = stack_size(self);
+        for (int i = 0; i < n; i++) {
             array[i] = stack_data(self)[i];
         }
         delete [] data();
+
         stack_init(self, array, n);
     }
 
@@ -48,33 +51,37 @@ public:
 	template <typename Container>
     explicit stack(const Container &cont)
     {
-        auto n = cont.size();
-        capacity = n * EXTAND_FACTOR;
+        // 分配空间
+        capacity = cont.size() * EXTAND_FACTOR;
         T *array = new T[capacity];
+
+        // 复制元素
         int i = 0;
         for (auto &item :cont) {
             array[i++] = item;
         }
-        stack_init(self, array, n);
+
+        // 初始化栈
+        stack_init(self, array, cont.size());
     }
 
     // 构造一个空的stack对象
     stack(int n = DEFAULT_SIZE)
     {
         capacity = n;
-        stack_init(self, new T[n]);
+        stack_init(self, new T[capacity]);
     }
 
     // 复制stack
     stack(const stack &x)
     {
-        auto n = x.size();
-        auto length = n * EXTAND_FACTOR;
-        T *array = new T[length];
-        for (int i = 0; i < n; i++) {
+        capacity = x.size() * EXTAND_FACTOR;
+        T *array = new T[array];
+
+        for (int i = 0; i < x.size(); i++) {
             array[i] = x.data()[i];
         }
-        stack_init(self, array, n);
+        stack_init(self, array, x.size());
     }
 
     // 销毁stack对象
