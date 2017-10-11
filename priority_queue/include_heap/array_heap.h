@@ -1,6 +1,9 @@
 #ifndef __array_heap_h
 #define __array_heap_h
 
+#include <assert.h>
+#include <utility>
+
 /** 
  * 数组实现的最大二叉堆
  *
@@ -87,6 +90,20 @@ template <typename T>
 bool heap_is_empty(const Heap<T> &heap)
 {
     return heap.size < 1;
+}
+
+// 返回堆中元素个数
+template <typename T>
+int heap_size(const Heap<T> &heap)
+{
+    return heap.size;
+}
+
+// 返回堆中数据实际存储空间
+template <typename T>
+T *heap_data(Heap<T> &heap)
+{
+    return heap.array;
 }
 
 // 返回并删除堆中最大元素
