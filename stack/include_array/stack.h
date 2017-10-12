@@ -66,9 +66,9 @@ public:
     }
 
     // 构造一个空的stack对象
-    stack(int n = DEFAULT_SIZE)
+    stack()
     {
-        capacity = n;
+        capacity = DEFAULT_SIZE;
         stack_init(self, new T[capacity]);
     }
 
