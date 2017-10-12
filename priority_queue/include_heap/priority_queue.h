@@ -62,28 +62,74 @@ public:
     }
 
     // 构造一个空的priority_queue对象
-    priority_queue(int n = DEFAULT_SIZE)
+    priority_queue()
     {
-        capacity = n;
-        heap_init(self, new T[capacity], 0, comp);
+        capacity = DEFAULT_SIZE;
+        heap_init(self, new T[DEFAULT_SIZE], 0, comp);
     }
 
     // 复制priority_queue
     priority_queue(const priority_queue &x)
     {
-        auto n = x.size()+1;
-        auto length = n * EXTAND_FACTOR;
-        T *array = new T[length];
-        for (int i = 1; i < n; i++) {
+        capacity = (x.size()+1) * EXTAND_FACTOR;
+        T *array = new T[array];
+
+        for (int i = 1; i <= x.size(); i++) {
             array[i] = x.data()[i];
         }
-        heap_init(self, array, n);
+        heap_init(self, array, x.size());
     }
 
     // 销毁priority_queue对象
     ~priority_queue()
     {
         delete [] data();
+    }
+
+    // 返回heap中元素个数
+    size_type size() const 
+    {
+        return heap_size(self);
+    }
+
+    // 返回heap是否为空
+    bool empty() const 
+    {
+        return heap_is_empty(self);
+    }
+
+    // 往heap中push一个元素
+    void push(const T& elem) 
+    {
+        if (full()) {
+            extend();
+        }
+
+        heap_push(self, elem);
+    }
+
+    // 从heap中pop一个元素
+    void pop() 
+    {
+        assert(!empty());
+
+        heap_pop(self);
+    }
+
+    // 返回heap顶部元素的引用
+    T& top() 
+    {
+        assert(!empty());
+
+        return heap_peek(self);
+    }
+
+    // 交换两个heap的所有元素
+    void swap(heap &x)
+    {
+        using std::swap;
+        heap_swap(self, x.self);
+        swap(capacity, x.capacity);
     }
 }
 

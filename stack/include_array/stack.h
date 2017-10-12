@@ -75,7 +75,7 @@ public:
     // 复制stack
     stack(const stack &x)
     {
-        capacity = x.size() * EXTAND_FACTOR;
+        capacity = (x.size()+1) * EXTAND_FACTOR;
         T *array = new T[array];
 
         for (int i = 1; i <= x.size(); i++) {

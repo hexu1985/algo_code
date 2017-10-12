@@ -13,7 +13,7 @@ struct Stack {
 	T  *array;	// 栈实际空间
 };
 
-// 初始化栈
+// 初始化栈, n为栈内元素个数
 template <typename T>
 void stack_init(Stack<T> &stack, T *array, int n = 0)
 {

@@ -72,10 +72,38 @@ void heap_heapify(Heap<T> &heap, int i, Compare comp = Compare())
 template <typename T, typename Compare = std::less<T>>
 void heap_init(Heap<T> &heap, T *array, int n = 0, Compare comp = Compare())
 {
+    heap.array = array;
     heap.size = n;
     for (int i = heap.size/2; i >= 1; --i) {
         heap_heapify(heap, i, comp);
     }
+}
+
+// 判断是否为堆
+template <typename T, typename Compare = std::less<T>>
+bool is_heap(T *array, int n, Compare comp = Compare())
+{
+    for (int i = n/2; i >= 1; --i) {
+        auto l = heap_left(i);
+        if (l <= n && comp(array[i], array[l])) { // i < l
+            return false;
+        }
+        auto r = heap_right(i);
+        if (r <= n && comp(array[i], array[r])) { // i < r
+            return false;
+        }
+    }
+    return true;
+}
+
+// 将一个已堆化的内存赋值给当前堆
+template <typename T, typename Compare = std::less<T>>
+void heap_assign(Heap<T> &heap, T *array, int n, Compare comp = Compare())
+{
+    assert(is_heap(array, n, comp));
+
+    heap.array = array;
+    heap.size = n;
 }
 
 // 返回堆中最大元素
