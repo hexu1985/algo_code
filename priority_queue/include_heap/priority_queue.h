@@ -1,6 +1,9 @@
 #ifndef __priority_queue_h
 #define __priority_queue_h
 
+#include "heap.h"
+#include <algorithm>
+
 template <typename T, typename C = void, typename Compare = std::less<T>>    // typename C 是为了适配std::priority_queue接口
 class priority_queue {
 private:
@@ -45,7 +48,8 @@ public:
 
     // 适配std::priority_queue的从容器构造函数
 	template <typename Container>
-    explicit priority_queue(const Container &cont)
+    explicit priority_queue(const Compare &comp, const Container &cont)
+        : comp(comp)
     {
         // 分配空间
         capacity = (cont.size()+1) * EXTAND_FACTOR;
@@ -58,14 +62,37 @@ public:
         }
 
         // 初始化堆
-        heap_assign(self, array, cont.size(), comp);
+        heap_init(self, array, cont.size(), comp);
     }
 
     // 构造一个空的priority_queue对象
-    priority_queue()
+    priority_queue(const Compare &comp = Compare())
+        : comp(comp)
     {
         capacity = DEFAULT_SIZE;
         heap_init(self, new T[DEFAULT_SIZE], 0, comp);
+    }
+
+    // 适配std::priority_queue的从容器构造函数
+	template <typename InputIterator>
+    explicit priority_queue(InputIterator first, InputIterator last,
+            const Compare &comp = Compare())
+        : comp(comp)
+    {
+        int n = std::distance(first, last);
+
+        // 分配空间
+        capacity = (n+1) * EXTAND_FACTOR;
+        T *array = new T[capacity];
+
+        // 复制元素
+        int i = 1;
+        while (first != last) {
+            array[i++] = *first++;
+        }
+
+        // 初始化堆
+        heap_init(self, array, n, comp);
     }
 
     // 复制priority_queue
@@ -77,7 +104,7 @@ public:
         for (int i = 1; i <= x.size(); i++) {
             array[i] = x.data()[i];
         }
-        heap_init(self, array, x.size());
+        heap_assign(self, array, x.size());
     }
 
     // 销毁priority_queue对象
@@ -117,7 +144,7 @@ public:
     }
 
     // 返回heap顶部元素的引用
-    T& top() 
+    const T &top() 
     {
         assert(!empty());
 
@@ -125,12 +152,12 @@ public:
     }
 
     // 交换两个heap的所有元素
-    void swap(heap &x)
+    void swap(priority_queue &x)
     {
         using std::swap;
-        heap_swap(self, x.self);
+        swap(self, x.self);
         swap(capacity, x.capacity);
     }
-}
+};
 
 #endif

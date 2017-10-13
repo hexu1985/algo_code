@@ -67,12 +67,4 @@ T stack_pop(Stack<T> &stack)
 	return stack.array[stack.top+1];
 }
 
-template <typename T>
-void stack_swap(Stack<T> &stack1, Stack<T> &stack2)
-{
-    Stack<T> tmp = stack1;
-    stack1 = stack2;
-    stack2 = tmp;
-}
-
 #endif	// __stack_h

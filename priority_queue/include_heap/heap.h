@@ -1,5 +1,5 @@
-#ifndef __array_heap_h
-#define __array_heap_h
+#ifndef __heap_h
+#define __heap_h
 
 #include <assert.h>
 #include <utility>
@@ -50,7 +50,7 @@ int heap_right(int i)
 
 // 维护最大堆性质
 template <typename T, typename Compare = std::less<T>>
-void heap_heapify(Heap<T> &heap, int i, Compare comp = Compare())
+void heap_heapify(Heap<T> &heap, int i, const Compare &comp = Compare())
 {
     using std::swap;
     auto l = heap_left(i);
@@ -70,7 +70,7 @@ void heap_heapify(Heap<T> &heap, int i, Compare comp = Compare())
 
 // 创建最大堆
 template <typename T, typename Compare = std::less<T>>
-void heap_init(Heap<T> &heap, T *array, int n = 0, Compare comp = Compare())
+void heap_init(Heap<T> &heap, T *array, int n = 0, const Compare &comp = Compare())
 {
     heap.array = array;
     heap.size = n;
@@ -81,7 +81,7 @@ void heap_init(Heap<T> &heap, T *array, int n = 0, Compare comp = Compare())
 
 // 判断是否为堆
 template <typename T, typename Compare = std::less<T>>
-bool is_heap(T *array, int n, Compare comp = Compare())
+bool is_heap(T *array, int n, const Compare &comp = Compare())
 {
     for (int i = n/2; i >= 1; --i) {
         auto l = heap_left(i);
@@ -98,7 +98,7 @@ bool is_heap(T *array, int n, Compare comp = Compare())
 
 // 将一个已堆化的内存赋值给当前堆
 template <typename T, typename Compare = std::less<T>>
-void heap_assign(Heap<T> &heap, T *array, int n, Compare comp = Compare())
+void heap_assign(Heap<T> &heap, T *array, int n, const Compare &comp = Compare())
 {
     assert(is_heap(array, n, comp));
 
@@ -108,7 +108,7 @@ void heap_assign(Heap<T> &heap, T *array, int n, Compare comp = Compare())
 
 // 返回堆中最大元素
 template <typename T>
-T heap_top(const Heap<T> &heap)
+const T &heap_top(const Heap<T> &heap)
 {
     return heap.array[1];
 }
@@ -136,7 +136,7 @@ T *heap_data(Heap<T> &heap)
 
 // 返回并删除堆中最大元素
 template <typename T, typename Compare = std::less<T>>
-T heap_extract(Heap<T> &heap, Compare comp = Compare())
+T heap_extract(Heap<T> &heap, const Compare &comp = Compare())
 {
     assert(!heap_is_empty(heap) && "heap underflow");
     auto max = heap.array[1];
@@ -148,14 +148,13 @@ T heap_extract(Heap<T> &heap, Compare comp = Compare())
 
 // 向堆中插入一个元素
 template <typename T, typename Compare = std::less<T>>
-void heap_insert(Heap<T> &heap, const T &key, Compare comp = Compare())
+void heap_insert(Heap<T> &heap, const T &key, const Compare &comp = Compare())
 {
     using std::swap;
 
     heap.size += 1;
     heap.array[heap.size] = key;
 
-    auto i = heap.size;
     for (int i = heap.size; i > 1 && comp(heap.array[heap_parent(i)], heap.array[i]); ) {
         swap(heap.array[i], heap.array[heap_parent(i)]);
         i = heap_parent(i);

@@ -121,7 +121,7 @@ public:
     }
 
     // 返回stack顶部元素的引用
-    T& top() 
+    T &top() 
     {
         assert(!empty());
 
@@ -132,7 +132,7 @@ public:
     void swap(stack &x)
     {
         using std::swap;
-        stack_swap(self, x.self);
+        swap(self, x.self);
         swap(capacity, x.capacity);
     }
 };
