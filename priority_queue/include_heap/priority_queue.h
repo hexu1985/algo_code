@@ -33,7 +33,7 @@ protected:
         }
         delete [] data();
 
-        heap_init(self, array, n, comp);
+        heap_assign(self, array, n, comp);
     }
 
 public:
@@ -58,7 +58,7 @@ public:
         }
 
         // 初始化堆
-        heap_init(self, array, cont.size(), comp);
+        heap_assign(self, array, cont.size(), comp);
     }
 
     // 构造一个空的priority_queue对象
@@ -105,7 +105,7 @@ public:
             extend();
         }
 
-        heap_push(self, elem);
+        heap_insert(self, elem, comp);
     }
 
     // 从heap中pop一个元素
@@ -113,7 +113,7 @@ public:
     {
         assert(!empty());
 
-        heap_pop(self);
+        heap_extract(self, comp);
     }
 
     // 返回heap顶部元素的引用
@@ -121,7 +121,7 @@ public:
     {
         assert(!empty());
 
-        return heap_peek(self);
+        return heap_top(self);
     }
 
     // 交换两个heap的所有元素
@@ -132,6 +132,5 @@ public:
         swap(capacity, x.capacity);
     }
 }
-
 
 #endif
