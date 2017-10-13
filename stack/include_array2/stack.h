@@ -48,9 +48,7 @@ public:
     }
 
     // 构造一个空的stack对象
-    stack(int n = DEFAULT_SIZE): base(new T[n], n)
-    {
-    }
+    stack(): base(new T[DEFAULT_SIZE], DEFAULT_SIZE) {}
 
     // 复制stack
     stack(const stack &x)

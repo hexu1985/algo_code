@@ -22,18 +22,21 @@ protected:
 
     bool full()
     {
-        return stack_size(self) == capacity;
+        return stack_size(self)+1 == capacity;
     }
 
     void extend()
     {
         capacity *= EXTAND_FACTOR;
-        auto n = stack_size(self);
         T *array = new T[capacity];
-        for (int i = 0; i < n; i++) {    // copy
+
+        // 将内容复制到新的数组
+        auto n = stack_size(self);
+        for (int i = 1; i <= n; i++) {
             array[i] = stack_data(self)[i];
         }
         delete [] data();
+
         stack_init(self, array, n);
     }
 
@@ -48,33 +51,37 @@ public:
 	template <typename Container>
     explicit stack(const Container &cont)
     {
-        auto n = cont.size();
-        capacity = n * EXTAND_FACTOR;
+        // 分配空间
+        capacity = (cont.size()+1) * EXTAND_FACTOR;
         T *array = new T[capacity];
-        int i = 0;
+
+        // 复制元素
+        int i = 1;
         for (auto &item :cont) {
             array[i++] = item;
         }
-        stack_init(self, array, n);
+
+        // 初始化栈
+        stack_init(self, array, cont.size());
     }
 
     // 构造一个空的stack对象
-    stack(int n = DEFAULT_SIZE)
+    stack()
     {
-        capacity = n;
-        stack_init(self, new T[n]);
+        capacity = DEFAULT_SIZE;
+        stack_init(self, new T[capacity]);
     }
 
     // 复制stack
     stack(const stack &x)
     {
-        auto n = x.size();
-        auto length = n * EXTAND_FACTOR;
-        T *array = new T[length];
-        for (int i = 0; i < n; i++) {
+        capacity = (x.size()+1) * EXTAND_FACTOR;
+        T *array = new T[array];
+
+        for (int i = 1; i <= x.size(); i++) {
             array[i] = x.data()[i];
         }
-        stack_init(self, array, n);
+        stack_init(self, array, x.size());
     }
 
     // 销毁stack对象
@@ -114,7 +121,7 @@ public:
     }
 
     // 返回stack顶部元素的引用
-    T& top() 
+    T &top() 
     {
         assert(!empty());
 
@@ -125,7 +132,7 @@ public:
     void swap(stack &x)
     {
         using std::swap;
-        stack_swap(self, x.self);
+        swap(self, x.self);
         swap(capacity, x.capacity);
     }
 };

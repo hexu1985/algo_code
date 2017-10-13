@@ -4,7 +4,7 @@
 #include <assert.h>
 
 // 数组实现的栈
-// index: [0][1][2]...[n]
+// index: [1][2][3]...[n]
 // array: [x][x][x]...[x]
 //               ^top
 template <typename T>
@@ -13,11 +13,11 @@ struct Stack {
 	T  *array;	// 栈实际空间
 };
 
-// 初始化栈
+// 初始化栈, n为栈内元素个数
 template <typename T>
 void stack_init(Stack<T> &stack, T *array, int n = 0)
 {
-    stack.top = n-1;
+    stack.top = n;
     stack.array = array;
 }
 
@@ -32,14 +32,14 @@ T *stack_data(Stack<T> &stack)
 template <typename T>
 int stack_size(const Stack<T> &stack)
 {
-    return stack.top+1;
+    return stack.top;
 }
 
 // 判断栈是否为空
 template <typename T>
 bool stack_is_empty(const Stack<T> &stack)
 {
-    return stack.top == -1;
+    return stack.top == 0;
 }
 
 // 入栈
@@ -65,14 +65,6 @@ T stack_pop(Stack<T> &stack)
     assert(!stack_is_empty(stack) && "underflow");
 	stack.top -= 1;
 	return stack.array[stack.top+1];
-}
-
-template <typename T>
-void stack_swap(Stack<T> &stack1, Stack<T> &stack2)
-{
-    Stack<T> tmp = stack1;
-    stack1 = stack2;
-    stack2 = tmp;
 }
 
 #endif	// __stack_h

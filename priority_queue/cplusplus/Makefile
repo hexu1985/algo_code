@@ -2,8 +2,8 @@
 RM = rm -rf
 CXX = g++
 CXXFLAGS = -Wall -g -std=c++11
-INCLUDES = -I../include_array
-LDFLAGS =
+INCLUDES = -I../include_heap
+LDFLAGS = 
 LDPATH =
 
 SOURCES = $(shell ls *.cpp)
