@@ -1,7 +1,7 @@
 #ifndef __priority_queue_h
 #define __priority_queue_h
 
-#include "heap.h"
+#include "max_heap.h"
 #include <algorithm>
 
 template <typename T, typename C = void, typename Compare = std::less<T>>    // typename C 是为了适配std::priority_queue接口

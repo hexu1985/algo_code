@@ -1,5 +1,5 @@
-#ifndef __heap_h
-#define __heap_h
+#ifndef __max_heap_h
+#define __max_heap_h
 
 #include <assert.h>
 #include <utility>
@@ -146,6 +146,20 @@ T heap_extract(Heap<T> &heap, const Compare &comp = Compare())
     return max;
 }
 
+template <typename T, typename Compare = std::less<T>>
+void heap_increase_key(Heap<T> &heap, int i, const T &key, const Compare &comp = Compare())
+{
+    using std::swap;
+
+    assert(!comp(key, heap.array[i]) && "new key is smaller than current key"); // key >= array[i] <=> !(key < array[i])
+
+    heap.array[i] = key;
+    while (i > 1 && comp(heap.array[heap_parent(i)], heap.array[i])) {
+        swap(heap.array[i], heap.array[heap_parent(i)]);
+        i = heap_parent(i);
+    }
+}
+
 // 向堆中插入一个元素
 template <typename T, typename Compare = std::less<T>>
 void heap_insert(Heap<T> &heap, const T &key, const Compare &comp = Compare())
@@ -155,10 +169,7 @@ void heap_insert(Heap<T> &heap, const T &key, const Compare &comp = Compare())
     heap.size += 1;
     heap.array[heap.size] = key;
 
-    for (int i = heap.size; i > 1 && comp(heap.array[heap_parent(i)], heap.array[i]); ) {
-        swap(heap.array[i], heap.array[heap_parent(i)]);
-        i = heap_parent(i);
-    }
+    heap_increase_key(heap, heap.size, key, comp);
 }
 
 #endif
