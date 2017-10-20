@@ -9,5 +9,7 @@ namespace hex {
 #define for_each hex::for_each
 
 #include "find.h"
+#include "min_element.h"
+#include "max_element.h"
 #include "remove.h"
 #include "remove_copy.h"
