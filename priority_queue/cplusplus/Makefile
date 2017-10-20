@@ -2,7 +2,7 @@
 RM = rm -rf
 CXX = g++
 CXXFLAGS = -Wall -g -std=c++11
-INCLUDES = -I../include_heap
+INCLUDES = -I../include_min_heap
 LDFLAGS = 
 LDPATH =
 
