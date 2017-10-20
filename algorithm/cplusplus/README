@@ -1,0 +1,2 @@
+1) 查看模板生成的中间文件
+g++ -E for_each.cpp > for_each.i
