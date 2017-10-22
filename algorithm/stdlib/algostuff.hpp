@@ -18,9 +18,9 @@
 #include <set>
 #include <map>
 #include <string>
-#include "algorithm.h"
 #include <iterator>
 #include <functional>
+#include "algorithm.h"
 #include "numeric.h"
 
 /* PRINT_ELEMENTS()
