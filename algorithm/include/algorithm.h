@@ -30,3 +30,4 @@ namespace hex {
 #include "remove_copy.h"
 #include "search_n.h"
 #include "search_n_if.h"
+#include "search.h"
