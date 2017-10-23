@@ -25,5 +25,6 @@ namespace hex {
 
 #include "find_if.h"
 #include "find_if_not.h"
+#include "minmax_element.h"
 #include "remove.h"
 #include "remove_copy.h"
