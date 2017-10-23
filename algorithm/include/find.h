@@ -2,9 +2,9 @@
 #define __find_h
 
 template <typename InputIterator, typename T>
-InputIterator find(InputIterator first, InputIterator last, const T &value)
+InputIterator find(InputIterator first, InputIterator last, const T &val)
 {
-    while (first != last && *first != value) {
+    while (first != last && *first != val) {
         ++first;
     }
 

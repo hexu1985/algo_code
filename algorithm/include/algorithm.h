@@ -28,3 +28,5 @@ namespace hex {
 #include "minmax_element.h"
 #include "remove.h"
 #include "remove_copy.h"
+#include "search_n.h"
+#include "search_n_if.h"
