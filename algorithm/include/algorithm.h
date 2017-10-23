@@ -31,3 +31,4 @@ namespace hex {
 #include "search_n.h"
 #include "search_n_if.h"
 #include "search.h"
+#include "find_end.h"
