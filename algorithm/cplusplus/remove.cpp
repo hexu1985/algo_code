@@ -1,6 +1,6 @@
 // remove algorithm example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // std::remove
+#include "algorithm.h"  // remove
 
 int main () {
   int myints[] = {10,20,30,30,20,10,10,20};      // 10 20 30 30 20 10 10 20

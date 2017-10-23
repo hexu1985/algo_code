@@ -1,7 +1,7 @@
 // accumulate example
 #include <iostream>     // std::cout
 #include <functional>   // std::minus
-#include "numeric.h"      // accumulate
+#include "numeric.h"    // accumulate
 
 int myfunction (int x, int y) {return x+2*y;}
 struct myclass {

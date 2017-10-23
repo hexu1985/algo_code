@@ -2,7 +2,7 @@
 #define __remove_copy_h
 
 template <typename ForwardIterator, typename OutputIterator, typename T>
-ForwardIterator remove_copy(ForwardIterator first, ForwardIterator last, 
+OutputIterator remove_copy(ForwardIterator first, ForwardIterator last, 
         OutputIterator result, const T &value)
 {
     for ( ; first != last; ++first) {

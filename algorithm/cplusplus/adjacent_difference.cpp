@@ -1,7 +1,7 @@
 // adjacent_difference example
 #include <iostream>     // std::cout
 #include <functional>   // std::multiplies
-#include "numeric.h"      // adjacent_difference
+#include "numeric.h"    // adjacent_difference
 
 int myop (int x, int y) {return x+y;}
 
