@@ -32,3 +32,5 @@ namespace hex {
 #include "search_n_if.h"
 #include "search.h"
 #include "find_end.h"
+#include "find_first_of.h"
+#include "adjacent_find.h"
