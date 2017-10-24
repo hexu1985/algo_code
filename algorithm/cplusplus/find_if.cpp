@@ -1,7 +1,7 @@
 // find_if example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // find_if
 #include <vector>       // std::vector
+#include "algorithm.h"  // find_if
 
 bool IsOdd (int i) {
   return ((i%2)==1);

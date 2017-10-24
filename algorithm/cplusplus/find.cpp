@@ -1,7 +1,7 @@
 // find example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // find
 #include <vector>       // std::vector
+#include "algorithm.h"  // find
 
 int main () {
   // using find with array and pointer:

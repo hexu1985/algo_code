@@ -1,8 +1,6 @@
 #ifndef __minmax_element_h
 #define __minmax_element_h
 
-#include <utility>
-
 template <typename ForwardIterator>
 std::pair<ForwardIterator, ForwardIterator> minmax_element(ForwardIterator first, ForwardIterator last)
 {

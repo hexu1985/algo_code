@@ -1,7 +1,7 @@
 // find_if_not example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // find_if_not
 #include <array>        // std::array
+#include "algorithm.h"  // find_if_not
 
 int main () {
   std::array<int,5> foo = {1,2,3,4,5};

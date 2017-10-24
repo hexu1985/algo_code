@@ -1,7 +1,7 @@
 // search_n example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // search_n
 #include <vector>       // std::vector
+#include "algorithm.h"  // search_n
 
 bool mypredicate (int i, int j) {
   return (i==j);

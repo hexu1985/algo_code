@@ -1,8 +1,8 @@
 // find_first_of example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // find_first_of
 #include <vector>       // std::vector
 #include <cctype>       // std::tolower
+#include "algorithm.h"  // find_first_of
 
 bool comp_case_insensitive (char c1, char c2) {
   return (std::tolower(c1)==std::tolower(c2));

@@ -1,7 +1,7 @@
 // adjacent_find example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // adjacent_find
 #include <vector>       // std::vector
+#include "algorithm.h"  // adjacent_find
 
 bool myfunction (int i, int j) {
   return (i==j);

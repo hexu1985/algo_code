@@ -1,7 +1,7 @@
 // search algorithm example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // search
 #include <vector>       // std::vector
+#include "algorithm.h"  // search
 
 bool mypredicate (int i, int j) {
   return (i==j);

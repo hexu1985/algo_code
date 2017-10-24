@@ -1,7 +1,7 @@
 // count_if example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // count_if
 #include <vector>       // std::vector
+#include "algorithm.h"  // count_if
 
 bool IsOdd (int i) { return ((i%2)==1); }
 

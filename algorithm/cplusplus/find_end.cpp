@@ -1,7 +1,7 @@
 // find_end example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // find_end
 #include <vector>       // std::vector
+#include "algorithm.h"  // find_end
 
 bool myfunction (int i, int j) {
   return (i==j);

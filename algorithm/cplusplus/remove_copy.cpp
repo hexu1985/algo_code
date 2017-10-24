@@ -1,7 +1,7 @@
 // remove_copy example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // remove_copy
 #include <vector>       // std::vector
+#include "algorithm.h"  // remove_copy
 
 int main () {
   int myints[] = {10,20,30,30,20,10,10,20};               // 10 20 30 30 20 10 10 20

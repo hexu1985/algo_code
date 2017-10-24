@@ -1,7 +1,7 @@
 // count algorithm example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // count
 #include <vector>       // std::vector
+#include "algorithm.h"  // count
 
 int main () {
   // counting elements in array:

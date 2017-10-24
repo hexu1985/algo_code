@@ -1,7 +1,7 @@
 #ifndef __find_end_h
 #define __find_end_h
 
-#include <iterator>
+#include "search.h"
 
 template <typename ForwardIterator1, typename ForwardIterator2>
 ForwardIterator1 __find_end(ForwardIterator1 first1, ForwardIterator1 last1, 

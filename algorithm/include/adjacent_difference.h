@@ -1,8 +1,6 @@
 #ifndef __adjacent_difference_h
 #define __adjacent_difference_h
 
-#include <iterator>
-
 template <typename InputIterator, typename OutputIterator>
 OutputIterator adjacent_difference(InputIterator first, InputIterator last, 
         OutputIterator result)

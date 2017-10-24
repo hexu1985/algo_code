@@ -1,7 +1,7 @@
 // for_each example
 #include <iostream>     // std::cout
-#include "algorithm.h"  // for_each
 #include <vector>       // std::vector
+#include "algorithm.h"  // for_each
 
 void myfunction (int i) {  // function:
   std::cout << ' ' << i;
