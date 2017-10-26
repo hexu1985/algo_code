@@ -1,3 +1,21 @@
 #include <algorithm>
 
+using std::adjacent_find;
+using std::count;
+using std::count_if;
+using std::equal;
+using std::find;
+using std::find_end;
+using std::find_first_of;
+using std::find_if;
+using std::find_if_not;
+using std::for_each;
+using std::is_permutation;
+using std::lexicographical_compare;
+using std::max_element;
+using std::min_element;
+using std::minmax_element;
 using std::remove;
+using std::remove_copy;
+using std::search;
+using std::search_n;

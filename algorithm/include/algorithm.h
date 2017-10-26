@@ -15,7 +15,9 @@ namespace hex {
 #include "find_if.h"
 #include "find_if_not.h"
 #include "for_each.h"
+#include "insertion_sort.h"
 #include "is_permutation.h"
+#include "lexicographical_compare.h"
 #include "max_element.h"
 #include "min_element.h"
 #include "minmax_element.h"
@@ -37,7 +39,9 @@ namespace hex {
 #define find_if hex::find_if
 #define find_if_not hex::find_if_not
 #define for_each hex::for_each
+#define insertion_sort hex::insertion_sort 
 #define is_permutation hex::is_permutation
+#define lexicographical_compare hex::lexicographical_compare
 #define max_element hex::max_element
 #define min_element hex::min_element
 #define minmax_element hex::minmax_element

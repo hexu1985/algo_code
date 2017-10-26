@@ -5,10 +5,12 @@
 #include "find.h"
 #include "count.h"
 
+#define mismatch hex::mismatch
+
 template <typename InputIterator1, typename InputIterator2>
 bool is_permutation(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
 {
-    std::tie(first1, first2) = hex::mismatch(first1, last1, first2);
+    std::tie(first1, first2) = mismatch(first1, last1, first2);
     if (first1 == last1) 
         return true;
 
@@ -28,7 +30,7 @@ template <typename InputIterator1, typename InputIterator2, typename BinaryPredi
 bool is_permutation(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2,
         BinaryPredicate pred)
 {
-    std::tie(first1, first2) = hex::mismatch(first1, last1, first2, pred);
+    std::tie(first1, first2) = mismatch(first1, last1, first2, pred);
     if (first1 == last1) 
         return true;
 
@@ -43,5 +45,7 @@ bool is_permutation(InputIterator1 first1, InputIterator1 last1, InputIterator2 
     }
     return true;
 }
+
+#undef mismatch
 
 #endif
