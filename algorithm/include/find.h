@@ -11,4 +11,14 @@ InputIterator find(InputIterator first, InputIterator last, const T &val)
     return first;
 }
 
+template <typename InputIterator, typename T, typename BinaryPredicate>
+InputIterator find(InputIterator first, InputIterator last, const T &val, BinaryPredicate pred)
+{
+    while (first != last && !pred(*first, val)) {
+        ++first;
+    }
+
+    return first;
+}
+
 #endif

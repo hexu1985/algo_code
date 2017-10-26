@@ -1,4 +1,5 @@
 
+#include <tuple>
 #include <iterator>
 #include <utility>
 
@@ -14,6 +15,7 @@ namespace hex {
 #include "find_if.h"
 #include "find_if_not.h"
 #include "for_each.h"
+#include "is_permutation.h"
 #include "max_element.h"
 #include "min_element.h"
 #include "minmax_element.h"
@@ -35,6 +37,7 @@ namespace hex {
 #define find_if hex::find_if
 #define find_if_not hex::find_if_not
 #define for_each hex::for_each
+#define is_permutation hex::is_permutation
 #define max_element hex::max_element
 #define min_element hex::min_element
 #define minmax_element hex::minmax_element

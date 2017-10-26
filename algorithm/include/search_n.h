@@ -27,16 +27,6 @@ ForwardIterator search_n(ForwardIterator first, ForwardIterator last,
     return last;
 }
 
-template <typename InputIterator, typename T, typename BinaryPredicate>
-InputIterator find(InputIterator first, InputIterator last, const T &val, BinaryPredicate pred)
-{
-    while (first != last && !pred(*first, val)) {
-        ++first;
-    }
-
-    return first;
-}
-
 template <typename ForwardIterator, typename Integer, typename T, typename BinaryPredicate>
 ForwardIterator search_n(ForwardIterator first, ForwardIterator last, 
         Integer count, const T& val, BinaryPredicate pred)
