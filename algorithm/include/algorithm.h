@@ -27,6 +27,7 @@ namespace hex {
 #include "search.h"
 #include "search_n.h"
 #include "search_n_if.h"
+#include "sort.h"
 
 }   // namespace hex
 
@@ -52,4 +53,5 @@ namespace hex {
 #define search hex::search
 #define search_n hex::search_n
 #define search_n_if hex::search_n_if
+#define sort hex::sort 
 
