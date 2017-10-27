@@ -1,10 +1,8 @@
 #ifndef __quick_sort_h
 #define __quick_sort_h
 
-#define partition quick_sort_partition
-
 template <typename RandomAccessIterator>
-RandomAccessIterator partition(RandomAccessIterator first, RandomAccessIterator last)
+RandomAccessIterator _partition(RandomAccessIterator first, RandomAccessIterator last)
 {
     auto pivot = first;
     while (true) {
@@ -29,14 +27,14 @@ template <typename RandomAccessIterator>
 void quick_sort(RandomAccessIterator first, RandomAccessIterator last)
 {
     if (first < last - 1) {
-        auto iter = partition(first, last);
+        auto iter = _partition(first, last);
         quick_sort(first, iter);
         quick_sort(iter+1, last);
     }
 }
 
 template <typename RandomAccessIterator, typename Compare>
-RandomAccessIterator partition(RandomAccessIterator first, RandomAccessIterator last, Compare comp)
+RandomAccessIterator _partition(RandomAccessIterator first, RandomAccessIterator last, Compare comp)
 {
     auto pivot = first;
     while (true) {
@@ -61,12 +59,10 @@ template <typename RandomAccessIterator, typename Compare>
 void quick_sort(RandomAccessIterator first, RandomAccessIterator last, Compare comp)
 {
     if (first < last - 1) {
-        auto iter = partition(first, last, comp);
+        auto iter = _partition(first, last, comp);
         quick_sort(first, iter, comp);
         quick_sort(iter+1, last, comp);
     }
 }
-
-#undef quick_sort_partition
 
 #endif
