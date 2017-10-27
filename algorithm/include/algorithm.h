@@ -21,6 +21,7 @@ namespace hex {
 #include "max_element.h"
 #include "min_element.h"
 #include "minmax_element.h"
+#include "quick_sort.h"
 #include "remove.h"
 #include "remove_copy.h"
 #include "search.h"
@@ -45,6 +46,7 @@ namespace hex {
 #define max_element hex::max_element
 #define min_element hex::min_element
 #define minmax_element hex::minmax_element
+#define quick_sort hex::quick_sort 
 #define remove hex::remove
 #define remove_copy hex::remove_copy
 #define search hex::search
