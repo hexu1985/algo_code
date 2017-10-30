@@ -6,6 +6,8 @@
 namespace hex {
 
 #include "adjacent_find.h"
+#include "all_of.h"
+#include "any_of.h"
 #include "count.h"
 #include "count_if.h"
 #include "equal.h"
@@ -28,6 +30,7 @@ namespace hex {
 #include "min_element.h"
 #include "minmax_element.h"
 #include "next_permutation.h"
+#include "none_of.h"
 #include "partition.h"
 #include "partition_point.h"
 #include "pop_heap.h"
@@ -46,6 +49,8 @@ namespace hex {
 }   // namespace hex
 
 #define adjacent_find hex::adjacent_find
+#define all_of hex::all_of
+#define any_of hex::any_of
 #define count hex::count
 #define count_if hex::count_if
 #define equal hex::equal
@@ -68,6 +73,7 @@ namespace hex {
 #define min_element hex::min_element
 #define minmax_element hex::minmax_element
 #define next_permutation hex::next_permutation
+#define none_of hex::none_of
 #define partition hex::partition 
 #define partition_point hex::partition_point
 #define pop_heap hex::pop_heap
