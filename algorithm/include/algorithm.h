@@ -16,6 +16,7 @@ namespace hex {
 #include "find_if_not.h"
 #include "for_each.h"
 #include "insertion_sort.h"
+#include "is_partitioned.h"
 #include "is_permutation.h"
 #include "is_sorted.h"
 #include "is_sorted_until.h"
@@ -24,6 +25,8 @@ namespace hex {
 #include "min_element.h"
 #include "minmax_element.h"
 #include "next_permutation.h"
+#include "partition.h"
+#include "partition_point.h"
 #include "prev_permutation.h"
 #include "quick_sort.h"
 #include "remove.h"
@@ -47,6 +50,7 @@ namespace hex {
 #define find_if_not hex::find_if_not
 #define for_each hex::for_each
 #define insertion_sort hex::insertion_sort 
+#define is_partitioned hex::is_partitioned
 #define is_permutation hex::is_permutation
 #define is_sorted hex::is_sorted
 #define is_sorted_until hex::is_sorted_until
@@ -55,6 +59,8 @@ namespace hex {
 #define min_element hex::min_element
 #define minmax_element hex::minmax_element
 #define next_permutation hex::next_permutation
+#define partition hex::partition 
+#define partition_point hex::partition_point
 #define prev_permutation hex::prev_permutation
 #define quick_sort hex::quick_sort 
 #define remove hex::remove
