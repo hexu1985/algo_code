@@ -10,6 +10,7 @@ template <typename T, typename C = void>    // typename C 是为了适配std::st
 class stack {
 private:
     Stack<T> self;
+    int capacity;
 
 protected:
     enum { DEFAULT_SIZE = 64, EXTAND_FACTOR = 2 };
@@ -21,19 +22,22 @@ protected:
 
     bool full()
     {
-        return stack_is_full(self);
+        return stack_size(self)+1 == capacity;
     }
 
     void extend()
     {
-        auto length = stack_max_size(self) * EXTAND_FACTOR;
-        auto size = stack_size(self);
-        T *array = new T[length];
-        for (int i = 0; i < size; i++) {    // copy
+        capacity *= EXTAND_FACTOR;
+        T *array = new T[capacity];
+
+        // 将内容复制到新的数组
+        auto n = stack_size(self);
+        for (int i = 1; i <= n; i++) {
             array[i] = stack_data(self)[i];
         }
         delete [] data();
-        stack_init(self, array, length, size);
+
+        stack_init(self, array, n);
     }
 
 public:
@@ -47,32 +51,37 @@ public:
 	template <typename Container>
     explicit stack(const Container &cont)
     {
-        auto size = cont.size();
-        auto length = size * EXTAND_FACTOR;
-        T *array = new T[length];
-        int i = 0;
+        // 分配空间
+        capacity = (cont.size()+1) * EXTAND_FACTOR;
+        T *array = new T[capacity];
+
+        // 复制元素
+        int i = 1;
         for (auto &item :cont) {
             array[i++] = item;
         }
-        stack_init(self, array, length, size);
+
+        // 初始化栈
+        stack_init(self, array, cont.size());
     }
 
     // 构造一个空的stack对象
-    stack(int n = DEFAULT_SIZE)
+    stack()
     {
-        stack_init(self, new T[n], n);
+        capacity = DEFAULT_SIZE;
+        stack_init(self, new T[capacity]);
     }
 
     // 复制stack
     stack(const stack &x)
     {
-        auto size = x.size();
-        auto length = size * EXTAND_FACTOR;
-        T *array = new T[length];
-        for (int i = 0; i < size; i++) {
+        capacity = (x.size()+1) * EXTAND_FACTOR;
+        T *array = new T[array];
+
+        for (int i = 1; i <= x.size(); i++) {
             array[i] = x.data()[i];
         }
-        stack_init(self, array, length, size);
+        stack_init(self, array, x.size());
     }
 
     // 销毁stack对象
@@ -112,7 +121,7 @@ public:
     }
 
     // 返回stack顶部元素的引用
-    T& top() 
+    T &top() 
     {
         assert(!empty());
 
@@ -122,7 +131,9 @@ public:
     // 交换两个stack的所有元素
     void swap(stack &x)
     {
-        stack_swap(self, x.self);
+        using std::swap;
+        swap(self, x.self);
+        swap(capacity, x.capacity);
     }
 };
 
