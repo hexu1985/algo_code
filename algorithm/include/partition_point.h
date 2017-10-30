@@ -1,7 +1,7 @@
 #ifndef __partition_point_h
 #define __partition_point_h
 
-template <class ForwardIterator, class UnaryPredicate>
+template <typename ForwardIterator, typename UnaryPredicate>
 ForwardIterator partition_point(ForwardIterator first, ForwardIterator last,
         UnaryPredicate pred)
 {

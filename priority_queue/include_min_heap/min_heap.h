@@ -56,10 +56,10 @@ void heap_heapify(Heap<T> &heap, int i, const Compare &comp = Compare())
     auto l = heap_left(i);
     auto r = heap_right(i);
     auto least = i;
-    if (l <= heap.size && comp(heap.array[l], heap.array[i])) {
+    if (l <= heap.size && comp(heap.array[l], heap.array[least])) {
         least = l;
     }
-    if (r <= heap.size && comp(heap.array[r], heap.array[i])) {
+    if (r <= heap.size && comp(heap.array[r], heap.array[least])) {
         least = r;
     }
     if (least != i) {
