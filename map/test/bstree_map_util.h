@@ -24,31 +24,21 @@ void tree_init(BSTree_map<K,V> *tree)
     tree_init(static_cast<BSTree_base *>(tree));
 }
 
-template <typename K, typename V>
-void tree_init(BSTree_map<K,V> *tree, std::initializer_list<std::pair<K,V>> il)
+template <typename K, typename V, typename Compare = std::less<K>>
+void tree_init(BSTree_map<K,V> *tree, std::initializer_list<std::pair<K,V>> il, Compare comp = Compare())
 {
     tree_init(static_cast<BSTree_base *>(tree));
     for (auto &e : il) {
-        tree_insert(tree, new BSTree_map_node<K,V>(e));
+        tree_insert(tree, new BSTree_map_node<K,V>(e), comp);
     }
 }
 
-template <typename K, typename V>
-void tree_init(BSTree_map<K,V> *tree, size_t n, const std::pair<K,V> &val = std::pair<K,V>())
-{
-    tree_init(static_cast<BSTree_base *>(tree));
-    for (size_t i = 0; i < n; i++) {
-        tree_insert(tree, new BSTree_map_node<K,V>(val));
-    }
-}
-
-template <typename K, typename V, typename InputIterator, 
-    typename = typename std::enable_if<!std::is_integral<InputIterator>::value>::type>
-void tree_init(BSTree_map<K,V> *tree, InputIterator first, InputIterator last)
+template <typename K, typename V, typename InputIterator, typename Compare = std::less<K>>
+void tree_init(BSTree_map<K,V> *tree, InputIterator first, InputIterator last, Compare comp = Compare())
 {
     tree_init(static_cast<BSTree_base *>(tree));
     while (first != last) {
-        tree_insert(tree, new BSTree_map_node<K,V>(*first++));
+        tree_insert(tree, new BSTree_map_node<K,V>(*first++), comp);
     }
 }
 
@@ -59,7 +49,7 @@ void tree_insert_or_assign(BSTree_map<K,V> *tree, const K &k, const V &v, Compar
     if (x != NULL) {
         *tree_value(x) = v;
     } else {
-        tree_insert(tree, new BSTree_map_node<K,V>(k, v));
+        tree_insert(tree, new BSTree_map_node<K,V>(k, v), comp);
     }
 }
 

@@ -84,6 +84,7 @@ void tree_for_each(BSTree_map<K,V> *tree, Function fn)
     BSTree_map_node<K,V> *y = tree_maximum(tree);
     while (x != y) {
         fn(*tree_data(x));
+        x = tree_successor(x);
     }
     fn(*tree_data(y));
 }

@@ -13,4 +13,5 @@ int main() {
   for (auto it = tree_begin(&num_map); it != tree_end(&num_map); ++it) {
     std::cout << it->first << ", " << it->second << '\n';
   }
+  tree_destroy(&num_map);
 }
