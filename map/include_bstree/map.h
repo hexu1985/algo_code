@@ -2,7 +2,8 @@
 #define __map_h
 
 #include <cstddef>
-#include <type_traits>
+#include <functional>
+#include <stdexcept>
 #include <initializer_list>
 #include <limits>
 
@@ -13,6 +14,11 @@ template <typename Key, typename T, typename Compare = std::less<Key>>
 class map: public BSTree_map<Key, T> {
 private:
     Compare comp;
+
+    bool key_equals(const Key &k1, const Key &k2) const
+    {
+        return !comp(k1, k2) && !comp(k2, k1);
+    }
 
 public:
     typedef Key key_type;
@@ -59,14 +65,19 @@ public:
         }
     }
 
-    iterator begin()
+    iterator begin() const
     {
-        return tree_begin(this);
+        return tree_begin(const_cast<map *>(this));
     }
 
-    iterator end()
+    iterator end() const
     {
-        return tree_end(this);
+        return tree_end(const_cast<map *>(this));
+    }
+
+    bool empty() const
+    {
+        return tree_is_empty(this);
     }
 
     mapped_type &operator [](const key_type &k)
@@ -77,6 +88,42 @@ public:
             tree_insert(this, x, comp);
         }
         return *tree_value(x);
+    }
+
+    mapped_type &at(const key_type &k)
+    {
+        auto x = tree_iterative_search(this, k, comp);
+        if (x == NULL)
+            throw std::out_of_range(__func__);
+        return *tree_value(x);
+    }
+
+    void clear()
+    {
+        tree_clear(this);
+    }
+
+    iterator find(const key_type &k)
+    {
+        auto x = tree_iterative_search(this, k, comp);
+        if (x == NULL)
+            return end();
+        return iterator(x);
+    }
+
+    size_type count(const key_type &k) const
+    {
+        auto x = tree_iterative_search(const_cast<map *>(this), k, comp);
+        if (x == NULL)
+            return 0;
+        auto it = iterator(x);
+        ++it;
+        int i = 1;
+        while (it != end() && key_equals(it->first, k)) {
+            ++it;
+            ++i;
+        }
+        return i;
     }
 };
 
