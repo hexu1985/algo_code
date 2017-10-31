@@ -69,15 +69,15 @@ public:
         return tree_end(this);
     }
 
-	mapped_type &operator [](const key_type &k)
-	{
+    mapped_type &operator [](const key_type &k)
+    {
         auto x = tree_iterative_search(this, k, comp);
         if (x == NULL) {
             x = new BSTree_map_node<Key,T>(k, mapped_type());
             tree_insert(this, x, comp);
         }
         return *tree_value(x);
-	}
+    }
 };
 
 #endif

@@ -53,4 +53,17 @@ void tree_insert_or_assign(BSTree_map<K,V> *tree, const K &k, const V &v, Compar
     }
 }
 
+template <typename K, typename V, typename Compare = std::less<K>>
+std::pair<BSTree_map_node<K,V> *, bool> tree_insert_unique(BSTree_map<K,V> *tree, const K &k, const V &v, Compare comp = Compare()) 
+{
+    auto x = tree_iterative_search(tree, k, comp);
+    bool ret = false;
+    if (x == NULL) {
+        ret = true;
+        x = new BSTree_map_node<K,V>(k, v);
+        tree_insert(tree, x, comp);
+    }
+    return std::make_pair(x, ret);
+}
+
 #endif
