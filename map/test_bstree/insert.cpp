@@ -27,7 +27,7 @@ int main ()
 
   // third insert function version (range insertion):
   BSTree_map<char,int> anothermap;
-  tree_init(&anothermap, tree_begin(&mymap), BSTree_map_iterator<char,int>(tree_search(&mymap, 'c')));
+  tree_init(&anothermap, tree_begin(&mymap), BSTree_map_iterator<char,int>(&mymap, tree_search(&mymap, 'c')));
 
   // showing contents:
   std::cout << "mymap contains:\n";

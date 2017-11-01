@@ -14,7 +14,7 @@ int main ()
 
   std::cout << "mymap contains:\n";
 
-  char highest = mymap.rbegin()->first;     // key value of last element
+  char highest = (--mymap.end())->first;     // key value of last element
 
   map<char,int>::iterator it = mymap.begin();
   do {

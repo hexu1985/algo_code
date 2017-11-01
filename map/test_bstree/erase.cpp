@@ -25,8 +25,8 @@ int main ()
   tree_remove(&mymap, 'c');                 // erasing by key
 
   x=tree_search(&mymap, 'e');
-  it = BSTree_map_iterator<char,int>(x);
-  BSTree_map_iterator<char, int> end(NULL);
+  it = BSTree_map_iterator<char,int>(&mymap, x);
+  BSTree_map_iterator<char, int> end = tree_end(&mymap);
   while (it != end) {                       // erasing by range
       x = it.get_node();
       ++it;

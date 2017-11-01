@@ -128,4 +128,11 @@ void tree_delete(BSTree_base *tree, BSTree_link z)
 	}
 }
 
+// 获取二叉树结点个数
+inline
+int tree_size(const BSTree_base *tree)
+{
+    return tree_size(tree->root);
+}
+
 #endif

@@ -62,4 +62,14 @@ BSTree_link tree_predecessor(BSTree_link x)
 	return y;
 }
 
+// 返回以结点x为根结点的子树的结点个数
+inline
+int tree_size(BSTree_link x)
+{
+    if (x == NULL)
+        return 0;
+
+    return 1+tree_size(x->left)+tree_size(x->right);
+}
+
 #endif

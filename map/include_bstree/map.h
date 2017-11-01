@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <functional>
 #include <stdexcept>
+#include <utility>
 #include <initializer_list>
 #include <limits>
 
@@ -11,7 +12,7 @@
 #include "bstree_map_iterator.h"
 
 template <typename Key, typename T, typename Compare = std::less<Key>>
-class map: public BSTree_map<Key, T> {
+class map: public BSTree_map<Key,T> {
 private:
     Compare comp;
 
@@ -40,7 +41,7 @@ public:
     typedef value_type *pointer;
     typedef ptrdiff_t difference_type;
     typedef size_t size_type;
-    typedef BSTree_map_iterator<Key, T> iterator;
+    typedef BSTree_map_iterator<Key,T> iterator;
 
     map(const key_compare &comp = key_compare()): comp(comp)
     {
@@ -80,6 +81,16 @@ public:
         return tree_is_empty(this);
     }
 
+    size_type size() const
+    {
+        return tree_size(this);
+    }
+
+    size_type max_size() const
+    {
+		return std::numeric_limits<size_type>::max();
+    }
+
     mapped_type &operator [](const key_type &k)
     {
         auto x = tree_iterative_search(this, k, comp);
@@ -96,6 +107,34 @@ public:
         if (x == NULL)
             throw std::out_of_range(__func__);
         return *tree_value(x);
+    }
+
+    std::pair<iterator, bool> insert(const value_type &val)
+    {
+        const auto &k = val.first;
+        bool ret = false;
+        auto x = tree_iterative_search(this, k, comp);
+        if (x == NULL) {
+            ret = true;
+            x = new BSTree_map_node<Key,T>(val);
+            tree_insert(this, x, comp);
+        }
+        return std::make_pair(iterator(this, x), ret);
+    }
+
+    iterator insert(iterator pos, const value_type &val)
+    {
+        auto pair = insert(val);
+        return pair.first;
+    }
+
+    template <typename InputIterator>
+    void insert(InputIterator first, InputIterator last)
+    {
+        while (first != last) {
+            insert(*first);
+            ++first;
+        }
     }
 
     iterator erase(iterator pos)
@@ -126,12 +165,22 @@ public:
         tree_clear(this);
     }
 
+    key_compare key_comp() const
+    {
+        return key_compare();
+    }
+
+    value_compare value_comp() const
+    {
+        return value_compare();
+    }
+
     iterator find(const key_type &k)
     {
         auto x = tree_iterative_search(this, k, comp);
         if (x == NULL)
             return end();
-        return iterator(x);
+        return iterator(this, x);
     }
 
     size_type count(const key_type &k) const
@@ -139,7 +188,7 @@ public:
         auto x = tree_iterative_search(const_cast<map *>(this), k, comp);
         if (x == NULL)
             return 0;
-        auto it = iterator(x);
+        auto it = iterator(const_cast<map *>(this), x);
         ++it;
         int i = 1;
         while (it != end() && key_equals(it->first, k)) {
