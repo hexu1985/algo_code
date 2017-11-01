@@ -98,6 +98,29 @@ public:
         return *tree_value(x);
     }
 
+    iterator erase(iterator pos)
+    {
+        assert(pos != end());
+        auto x = pos.get_node();
+        ++pos;
+        tree_delete(this, x);
+        delete x;
+        return pos;
+    }
+
+    size_type erase(const key_type &k)
+    {
+        return tree_remove(this, k, comp);
+    }
+
+    iterator erase(iterator first, iterator last)
+    {
+        while (first != last) {
+            first = erase(first);
+        }
+        return last;
+    }
+
     void clear()
     {
         tree_clear(this);

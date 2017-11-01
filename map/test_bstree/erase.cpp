@@ -28,7 +28,7 @@ int main ()
   it = BSTree_map_iterator<char,int>(x);
   BSTree_map_iterator<char, int> end(NULL);
   while (it != end) {                       // erasing by range
-      x = it.node;
+      x = it.get_node();
       ++it;
       tree_delete(&mymap, x);
       delete x;

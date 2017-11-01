@@ -90,20 +90,21 @@ void tree_for_each(BSTree_map<K,V> *tree, Function fn)
 }
 
 // 删除tree中key为k的所有的结点, 返回被删除结点个数
-template <typename K, typename V, typename Deleter = std::default_delete<BSTree_map_node<K,V>>>
-int tree_remove(BSTree_map<K,V> *tree, const K &k, Deleter del = Deleter())
+template <typename K, typename V, typename Compare = std::less<K>, typename Deleter = std::default_delete<BSTree_map_node<K,V>>>
+int tree_remove(BSTree_map<K,V> *tree, const K &k, Compare comp = Compare(), Deleter del = Deleter())
 {
     int i = 0;
     BSTree_map_node<K,V> *x = NULL;
     while (true) {
-        x = tree_search(tree, k);
+        x = tree_search(tree, k, comp);
         if (x == NULL)
-            return i;
+            break;
 
         tree_delete(tree, x);
         del(x);
         ++i;
     }
+    return i;
 }
 
 // 销毁tree
