@@ -160,6 +160,11 @@ public:
         return last;
     }
 
+    void swap(map &x)
+    {
+        tree_swap(this, &x);
+    }
+
     void clear()
     {
         tree_clear(this);
@@ -167,12 +172,12 @@ public:
 
     key_compare key_comp() const
     {
-        return key_compare();
+        return comp;
     }
 
     value_compare value_comp() const
     {
-        return value_compare();
+        return value_compare(comp);
     }
 
     iterator find(const key_type &k)

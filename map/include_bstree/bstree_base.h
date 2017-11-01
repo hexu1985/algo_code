@@ -1,6 +1,7 @@
 #ifndef __bstree_base_h
 #define __bstree_base_h
 
+#include <utility>
 #include "bstree_node_base.h"
 
 // 二叉搜索树
@@ -133,6 +134,13 @@ inline
 int tree_size(const BSTree_base *tree)
 {
     return tree_size(tree->root);
+}
+
+// 交换两棵二叉树
+inline 
+void tree_swap(BSTree_base *tree1, BSTree_base *tree2)
+{
+    std::swap(tree1->root, tree2->root);
 }
 
 #endif
