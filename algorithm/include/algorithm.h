@@ -8,6 +8,10 @@ namespace hex {
 #include "adjacent_find.h"
 #include "all_of.h"
 #include "any_of.h"
+#include "copy.h"
+#include "copy_backward.h"
+#include "copy_if.h"
+#include "copy_n.h"
 #include "count.h"
 #include "count_if.h"
 #include "equal.h"
@@ -45,12 +49,17 @@ namespace hex {
 #include "search_n_if.h"
 #include "sort.h"
 #include "sort_heap.h"
+#include "transform.h"
 
 }   // namespace hex
 
 #define adjacent_find hex::adjacent_find
 #define all_of hex::all_of
 #define any_of hex::any_of
+#define copy hex::copy
+#define copy_backward hex::copy_backward
+#define copy_if hex::copy_if
+#define copy_n hex::copy_n
 #define count hex::count
 #define count_if hex::count_if
 #define equal hex::equal
@@ -88,4 +97,5 @@ namespace hex {
 #define search_n_if hex::search_n_if
 #define sort hex::sort 
 #define sort_heap hex::sort_heap
+#define transform hex::transform
 
