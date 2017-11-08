@@ -34,11 +34,74 @@ bool tree_is_empty(const RBTree_base *tree)
 	return (tree->root == &tree.nil);
 }
 
+// 获取红黑树的NIL结点
 inline
 RBTree_link tree_nil(RBTree_base *tree)
 {
     return &tree->nil;
 }
+
+/**
+ * 在结点x上做左旋
+ *
+ *        |                     |
+ *        x                     y
+ *       / \       =====>      / \
+ *      a   y                 x   c
+ *         / \               / \
+ *        b   c             a   b
+ */
+inline
+void tree_left_rotate(RBTree_base *tree, RBTree_link x)
+{
+    auto y = x->right;
+    x->right = y->left;
+    if (y->left != tree_nil(tree)) {
+        y->left->parent = x;
+    }
+    y->parent = x->parent;
+    if (x->parent == tree_nil(tree)) {
+        tree->root = y;
+    } else if (x == x->parent->left) {
+        x->parent->left = y;
+    } else {
+        x->parent->right = y;
+    }
+    y->left = x;
+    x->parent = y;
+}
+    
+/**
+ * 在结点x上做右旋
+ *
+ *          |                 |
+ *          x                 y 
+ *         / \               / \
+ *        y   c    =====>   a   x
+ *       / \                   / \
+ *      a   b                 b   c
+ */
+inline
+void tree_right_rotate(RBTree_base *tree, RBTree_link x)
+{
+    auto y = x->left;
+    x->left = y->right;
+    if (y->right != tree_nil(tree)) {
+        y->right->parent = x;
+    }
+    y->parent = x->parent;
+    if (x->parent == tree_nil(tree)) {
+        tree->root = y;
+    } else if (x == x->parent->left) {
+        x->parent->left = y
+    } else {
+        x->parent->right = y
+    }
+    y->right = x;
+    x->parent = y;
+}
+
+
 
 /**
  * 用另一棵子树替换一棵子树并成为其父结点的孩子结点:
@@ -134,6 +197,7 @@ void tree_transplant(RBTree_base *tree, RBTree_link u, RBTree_link v)
 inline
 void tree_delete_fixup(RBTree_base *tree, RBTree_link x)
 {
+    auto w = tree_nil(tree);
     while (x != tree->root && x->color == RBTree_color::BLACK) {
         if (x == x->parent->left) {
             w = x->parent->right;
