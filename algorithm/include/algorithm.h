@@ -15,6 +15,8 @@ namespace hex {
 #include "count.h"
 #include "count_if.h"
 #include "equal.h"
+#include "fill.h"
+#include "fill_n.h"
 #include "find.h"
 #include "find_end.h"
 #include "find_first_of.h"
@@ -49,6 +51,7 @@ namespace hex {
 #include "search_n_if.h"
 #include "sort.h"
 #include "sort_heap.h"
+#include "swap_ranges.h"
 #include "transform.h"
 
 }   // namespace hex
@@ -63,6 +66,8 @@ namespace hex {
 #define count hex::count
 #define count_if hex::count_if
 #define equal hex::equal
+#define fill hex::fill
+#define fill_n hex::fill_n
 #define find hex::find
 #define find_end hex::find_end
 #define find_first_of hex::find_first_of
@@ -97,5 +102,6 @@ namespace hex {
 #define search_n_if hex::search_n_if
 #define sort hex::sort 
 #define sort_heap hex::sort_heap
+#define swap_ranges hex::swap_ranges
 #define transform hex::transform
 
