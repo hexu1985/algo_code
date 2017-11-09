@@ -1,6 +1,7 @@
 #ifndef __prev_permutation_h
 #define __prev_permutation_h
 
+#include "iter_swap.h"
 #include "reverse.h"
 
 template <typename BidirectionalIterator>
@@ -25,7 +26,7 @@ bool prev_permutation(BidirectionalIterator first, BidirectionalIterator last)
             do {
                 --j;
             } while (!(*j < *i));
-            std::iter_swap(i, j);
+            _iter_swap(i, j);
             reverse(ii, last);
             return true;
         }
@@ -58,7 +59,7 @@ bool prev_permutation(BidirectionalIterator first, BidirectionalIterator last, C
             do {
                 --j;
             } while (!comp(*j, *i));
-            std::iter_swap(i, j);
+            _iter_swap(i, j);
             reverse(ii, last);
             return true;
         }

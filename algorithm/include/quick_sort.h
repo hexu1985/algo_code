@@ -1,6 +1,8 @@
 #ifndef __quick_sort_h
 #define __quick_sort_h
 
+#include "iter_swap.h"
+
 template <typename RandomAccessIterator>
 RandomAccessIterator _partition(RandomAccessIterator first, RandomAccessIterator last)
 {
@@ -15,9 +17,9 @@ RandomAccessIterator _partition(RandomAccessIterator first, RandomAccessIterator
         } while (*pivot < *last);
 
         if (first < last)
-            std::iter_swap(first, last);
+            _iter_swap(first, last);
         else {
-            std::iter_swap(pivot, last);
+            _iter_swap(pivot, last);
             return last;
         }
     }
@@ -47,9 +49,9 @@ RandomAccessIterator _partition(RandomAccessIterator first, RandomAccessIterator
         } while (comp(*pivot, *last));
 
         if (first < last)
-            std::iter_swap(first, last);
+            _iter_swap(first, last);
         else {
-            std::iter_swap(pivot, last);
+            _iter_swap(pivot, last);
             return last;
         }
     }

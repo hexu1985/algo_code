@@ -2,13 +2,14 @@
 #define __push_heap_h
 
 #include "heap_common.h"
+#include "iter_swap.h"
 
 template <typename RandomAccessIterator>
 void push_heap(RandomAccessIterator first, RandomAccessIterator last)
 {
     auto i = (last - first) - 1;
     while (i > 0 && first[_heap_parent(i)] < first[i]) {
-        std::iter_swap(first+_heap_parent(i), first+i);
+        _iter_swap(first+_heap_parent(i), first+i);
         i = _heap_parent(i);
     }
 }
@@ -18,7 +19,7 @@ void push_heap(RandomAccessIterator first, RandomAccessIterator last, Compare co
 {
     auto i = (last - first) - 1;
     while (i > 0 && comp(first[_heap_parent(i)], first[i])) {
-        std::iter_swap(first+_heap_parent(i), first+i);
+        _iter_swap(first+_heap_parent(i), first+i);
         i = _heap_parent(i);
     }
 }

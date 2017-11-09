@@ -1,6 +1,8 @@
 #ifndef __heap_common_h
 #define __heap_common_h
 
+#include "iter_swap.h"
+
 /** 
  * 最大二叉堆:
  *
@@ -55,7 +57,7 @@ void _heap_heapify(RandomAccessIterator first, Distance i, Distance heap_size)
         largest = r;
     }
     if (largest != i) {
-        std::iter_swap(first+i, first+largest);
+        _iter_swap(first+i, first+largest);
         _heap_heapify(first, largest, heap_size);
     }
 }
@@ -73,7 +75,7 @@ void _heap_heapify(RandomAccessIterator first, Distance i, Distance heap_size, C
         largest = r;
     }
     if (largest != i) {
-        std::iter_swap(first+i, first+largest);
+        _iter_swap(first+i, first+largest);
         _heap_heapify(first, largest, heap_size, comp);
     }
 }

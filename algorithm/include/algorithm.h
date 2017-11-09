@@ -30,6 +30,7 @@ namespace hex {
 #include "is_permutation.h"
 #include "is_sorted.h"
 #include "is_sorted_until.h"
+#include "iter_swap.h"
 #include "lexicographical_compare.h"
 #include "make_heap.h"
 #include "max_element.h"
@@ -81,6 +82,7 @@ namespace hex {
 #define is_permutation hex::is_permutation
 #define is_sorted hex::is_sorted
 #define is_sorted_until hex::is_sorted_until
+#define iter_swap hex::iter_swap
 #define lexicographical_compare hex::lexicographical_compare
 #define make_heap hex::make_heap
 #define max_element hex::max_element

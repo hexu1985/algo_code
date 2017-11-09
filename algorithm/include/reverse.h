@@ -1,18 +1,20 @@
 #ifndef __reverse_h
 #define __reverse_h
 
+#include "iter_swap.h"
+
 template <typename RandomAccessIterator>
 void _reverse(RandomAccessIterator first, RandomAccessIterator last, std::random_access_iterator_tag)
 {
     while (first < last)
-        std::iter_swap(first++, --last);
+        _iter_swap(first++, --last);
 }
 
 template <typename BidirectionalIterator>
 void _reverse(BidirectionalIterator first, BidirectionalIterator last, std::bidirectional_iterator_tag)
 {
     while ((first != last) && (first != --last)) {
-        std::iter_swap(first, last);
+        _iter_swap(first, last);
         ++first;
     }
 }
