@@ -70,6 +70,19 @@ public:
         list_destroy(this);
     }
 
+    forward_list &operator =(const forward_list &fwdlst)
+    {
+        if (this != &fwdlst) {
+            assign(fwdlst.begin(), fwdlst.end());
+        }
+        return *this;
+    }
+
+    forward_list &operator =(std::initializer_list<value_type> il)
+    {
+        assign(il);
+    }
+
     template <typename InputIterator, typename = typename
         std::enable_if<!std::is_integral<InputIterator>::value>::type>
     void assign(InputIterator first, InputIterator last)
@@ -128,7 +141,7 @@ public:
 
     iterator insert_after(iterator pos, size_type n, const value_type &val)
     {
-        auto x = pos.get_node();
+        SCList_link x = pos.get_node();
         for (size_type i = 0; i < n; i++) {
             x = list_insert_next(x, new SCList_node<T>(val));
         }
@@ -139,7 +152,7 @@ public:
         std::enable_if<!std::is_integral<InputIterator>::value>::type>
     iterator insert_after(iterator pos, InputIterator first, InputIterator last)
     {
-        auto x = pos.get_node();
+        SCList_link x = pos.get_node();
         while (first != last) {
             x = list_insert_next(x, new SCList_node<T>(*first++));
         }
@@ -148,7 +161,7 @@ public:
 
     iterator insert_after(iterator pos, std::initializer_list<value_type> il)
     {
-        auto x = pos.get_node();
+        SCList_link x = pos.get_node();
         for (auto &e : il) {
             x = list_insert_next(x, new SCList_node<T>(e));
         }
