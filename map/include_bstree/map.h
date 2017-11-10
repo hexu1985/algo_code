@@ -66,6 +66,35 @@ public:
         }
     }
 
+    map(const map &x): comp(x.comp)
+    {
+        tree_init(this);
+        tree_clone(this, const_cast<map *>(&x));
+    }
+
+    map &operator = (const map &x)
+    {
+        if (this != &x) {
+            tree_clear(this);
+            tree_clone(this, const_cast<map *>(&x));
+        }
+
+        return *this;
+    }
+
+    map &operator = (std::initializer_list<value_type> il)
+    {
+        tree_clear(this);
+        for (auto &e : il) {
+            tree_insert(this, new BSTree_map_node<Key,T>(e), comp);
+        }
+    }
+
+    ~map()
+    {
+        tree_destroy(this);
+    }
+
     iterator begin() const
     {
         return tree_begin(const_cast<map *>(this));
