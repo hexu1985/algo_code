@@ -101,7 +101,85 @@ void tree_right_rotate(RBTree_base *tree, RBTree_link x)
     x->parent = y;
 }
 
-
+/**
+ * 插入结点后恢复搜索树的红黑性质
+ * ()  -> 红色结点
+ * []  -> 黑色结点
+ * 
+ * 1) z的叔结点y是红色的
+ *            |                              |          
+ *           [C]                      new z (C) 
+ *        __/   \__                      __/   \__      
+ *       /         \       =======>     /         \
+ *     (A)         (D) y              [A]         [D]
+ *    /   \       /   \              /   \       /   \
+ *   a    (B) z  d     e            a    (B)    d     e 
+ *       /   \                          /   \
+ *      b     c                        b     c          
+ *
+ * 2) z的叔结点y是黑色的且z是一个右孩子
+ *            |                                |
+ *           [C]                              [C]
+ *        __/   \__                        __/   \__
+ *       /         \       =======>       /         \
+ *     (A)          d y                 (B)          d y
+ *    /   \                            /   \
+ *   a    (B) z                    z (A)    c
+ *       /   \                      /   \
+ *      b     c                    a     b
+ *
+ * 3) z的叔结点y是黑色的且z是一个左孩子
+ *               |                             |
+ *              [C]                           [B]
+ *           __/   \__                     __/   \__
+ *          /         \     =======>      /         \
+ *        (B)          d y            z (A)         (C)
+ *       /   \                         /   \       /   \
+ *   z (A)    c                       a     b     c     d
+ *    /   \
+ *   a     b
+ */
+inline
+void tree_insert_fixup(RBTree_base *tree, RBTree_link z) 
+{
+    auto y = tree_nil(tree);
+    while (z->parent->color == RBTree_color::RED) {
+        if (z->parent == z->parent->parent->left) {     // z的父结点为左子数
+            y = z->parent->parent->right;
+            if (y->color == RBTree_color::RED) {
+                z->parent->color = RBTree_color::BLACK;         // Case 1
+                y->color = RBTree_color::BLACK;                 // Case 1
+                z->parent->parent->color = RBTree_color::RED;   // Case 1
+                z = z->parent->parent;                          // Case 1
+            } else{
+                if (z == z->parent->right) {
+                    z = z->parent;                              // Case 2
+                    tree_left_rotate(tree, z);                  // Case 2
+                }
+                z->parent->color = RBTree_color::BLACK;         // Case 3
+                z->parent->parent->color = RBTree_color::RED;   // Case 3
+                tree_right_rotate(tree, z->parent->parent);     // Case 3
+            }
+        } else {                                        // z的父结点为右子数
+            y = z->parent->parent->left;
+            if (y->color == RBTree_color::RED) {
+                z->parent->color = RBTree_color::BLACK;         // Case 1
+                y->color = RBTree_color::BLACK;                 // Case 1
+                z->parent->parent->color = RBTree_color::RED;   // Case 1
+                z = z->parent->parent;                          // Case 1
+            } else {
+                if (z == z->parent->left) {
+                    z = z->parent;                              // Case 2
+                    tree_right_rotate(tree, z);                 // Case 2
+                }
+                z->parent->color = RBTree_color::BLACK;         // Case 3
+                z->parent->parent->color = RBTree_color::RED;   // Case 3
+                tree_left_rotate(tree, z->parent->parent);      // Case 3
+            }
+        }
+    }
+    tree->root->color = RBTree_color::BLACK;
+}
 
 /**
  * 用另一棵子树替换一棵子树并成为其父结点的孩子结点:
