@@ -158,7 +158,9 @@ template <typename K, typename V, typename Cloner = default_clone_rbtree_map_nod
 RBTree_map_node<K,V> *tree_clone(RBTree_map_node<K,V> *x, RBTree_link nil,
         RBTree_link new_nil, Cloner cloner = Cloner())
 {
+    assert (x != nil);
     auto y = cloner(x);
+    y->color = x->color;
     if (x->left != nil) {
         y->left = tree_clone(tree_map_node<K,V>(x->left), nil, new_nil, cloner);
         y->left->parent = y;
