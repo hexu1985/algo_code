@@ -101,9 +101,9 @@ BSTree_map_node<K,V> *tree_search(BSTree_map_node<K,V> *x, const K &k, Compare c
         return x;
 
     if (comp(k, *tree_key(x)))      // k < x.key
-        return tree_search(tree_left(x), k);
+        return tree_search(tree_left(x), k, comp);
     else if (comp(*tree_key(x), k)) // x.key < k
-        return tree_search(tree_right(x), k);
+        return tree_search(tree_right(x), k, comp);
     else                            // x.key == k
         return x;
 }
