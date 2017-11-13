@@ -31,14 +31,14 @@ void tree_init(RBTree_base *tree)
 inline
 bool tree_is_empty(const RBTree_base *tree)
 {
-	return (tree->root == &tree.nil);
+	return (tree->root == &tree->nil);
 }
 
 // 获取红黑树的NIL结点
 inline
-RBTree_link tree_nil(RBTree_base *tree)
+RBTree_link tree_nil(const RBTree_base *tree)
 {
-    return &tree->nil;
+    return (RBTree_link) &tree->nil;
 }
 
 /**
@@ -93,9 +93,9 @@ void tree_right_rotate(RBTree_base *tree, RBTree_link x)
     if (x->parent == tree_nil(tree)) {
         tree->root = y;
     } else if (x == x->parent->left) {
-        x->parent->left = y
+        x->parent->left = y;
     } else {
-        x->parent->right = y
+        x->parent->right = y;
     }
     y->right = x;
     x->parent = y;
@@ -413,7 +413,7 @@ void tree_delete(RBTree_base *tree, RBTree_link z)
 		y->left->parent = y;                    // c)
         y->color = z->color;                    // c)
 	}
-    if (y_original_color = RBTree_color::BLACK)
+    if (y_original_color == RBTree_color::BLACK)
         tree_delete_fixup(tree, x);
 }
 
@@ -421,7 +421,7 @@ void tree_delete(RBTree_base *tree, RBTree_link z)
 inline
 int tree_size(const RBTree_base *tree)
 {
-    return tree_size(tree->root);
+    return tree_size(tree->root, tree_nil(tree));
 }
 
 // 交换两棵红黑树

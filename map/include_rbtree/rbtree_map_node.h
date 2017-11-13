@@ -58,7 +58,7 @@ RBTree_map_node<K,V> *tree_parent(RBTree_map_node<K,V> *x)
 template <typename K, typename V>
 RBTree_map_node<K,V> *tree_successor(RBTree_map_node<K,V> *x, RBTree_link nil)
 {
-    return tree_map_node<K,V>(tree_successor((RBTree_link)x), nil);
+    return tree_map_node<K,V>(tree_successor((RBTree_link)x, nil));
 }
 
 // 返回以结点x的前驱结点

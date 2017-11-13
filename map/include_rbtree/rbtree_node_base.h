@@ -18,7 +18,7 @@ struct RBTree_node_base {
 	RBTree_link left;
 	RBTree_link right;
     RBTree_color color;
-} RBTree_node_base;
+};
 
 // 返回以结点x为根的子树的最小元素的指针,
 inline

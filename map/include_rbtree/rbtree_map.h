@@ -37,8 +37,8 @@ RBTree_map_node<K,V> *tree_iterative_search(RBTree_map<K,V> *tree, const K &k, C
 template <typename K, typename V, typename Compare = std::less<K>>
 void tree_insert(RBTree_map<K,V> *tree, RBTree_map_node<K,V> *z, Compare comp = Compare()) 
 {
-    auto y = tree_nil(tree);        // y为要插入位置的父结点
-    auto x = tree_root(tree);       // x遍历树
+    RBTree_map_node<K,V> *y = NULL;        // y为要插入位置的父结点
+    RBTree_map_node<K,V> *x = tree_map_node<K,V>(tree_root(tree));       // x遍历树
     while (x != tree_nil(tree)) {
         y = x;
         if (comp(*tree_key(z), *tree_key(x)))   // z.key < x.key
@@ -66,7 +66,7 @@ void tree_insert(RBTree_map<K,V> *tree, RBTree_map_node<K,V> *z, Compare comp = 
 template <typename K, typename V>
 RBTree_map_node<K,V> *tree_minimum(RBTree_map<K,V> *tree)
 {
-    return tree_map_node<K,V>(tree_minimum(tree->root), tree_nil(tree));
+    return tree_map_node<K,V>(tree_minimum(tree->root, tree_nil(tree)));
 }
 
 // 返回二叉搜索树的最小元素的指针,
@@ -98,7 +98,7 @@ template <typename K, typename V, typename Compare = std::less<K>, typename Dele
 int tree_remove(RBTree_map<K,V> *tree, const K &k, Compare comp = Compare(), Deleter del = Deleter())
 {
     int i = 0;
-    RBTree_map_node<K,V> *x = tree_nil(tree);
+    RBTree_map_node<K,V> *x = tree_map_node<K,V>(tree_nil(tree));
     while (true) {
         x = tree_search(tree, k, comp);
         if (x == tree_nil(tree))

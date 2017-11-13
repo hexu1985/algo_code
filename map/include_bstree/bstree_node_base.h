@@ -12,7 +12,7 @@ struct BSTree_node_base {
 	BSTree_link parent;
 	BSTree_link left;
 	BSTree_link right;
-} BSTree_node_base;
+};
 
 // 返回以结点x为根的子树的最小元素的指针,
 inline

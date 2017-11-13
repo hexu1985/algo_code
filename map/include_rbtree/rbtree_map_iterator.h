@@ -51,7 +51,7 @@ struct RBTree_map_iterator {
         if (node)
             node = tree_map_node<K,V>(tree_predecessor(node, tree_nil(tree)));
         else        // reach end
-            node = tree_map_node<K,V>(tree_maximum(tree, tree_nil(tree)));
+            node = tree_map_node<K,V>(tree_maximum(tree));
         return *this;
     }
 
@@ -61,7 +61,7 @@ struct RBTree_map_iterator {
         if (node)
             node = tree_map_node<K,V>(tree_predecessor(node, tree_nil(tree)));
         else        // reach end
-            node = tree_map_node<K,V>(tree_maximum(tree, tree_nil(tree)));
+            node = tree_map_node<K,V>(tree_maximum(tree));
         return tmp;
     }
 
@@ -88,7 +88,7 @@ RBTree_map_iterator<K,V> tree_begin(RBTree_map<K,V> *tree)
     if (tree_is_empty(tree))
         return RBTree_map_iterator<K,V>(tree, tree_nil(tree));
 
-    return RBTree_map_iterator<K,V>(tree, tree_minimum(tree, tree_nil(tree)));
+    return RBTree_map_iterator<K,V>(tree, tree_minimum(tree));
 }
 
 template <typename K, typename V>
