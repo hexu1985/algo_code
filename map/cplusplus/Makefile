@@ -2,7 +2,7 @@
 RM = rm -rf
 CXX = g++
 CXXFLAGS = -Wall -g -std=c++14
-INCLUDES = -I../include_bstree
+INCLUDES = -I../include_rbtree
 LDFLAGS =
 LDPATH =
 

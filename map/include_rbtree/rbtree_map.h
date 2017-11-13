@@ -73,7 +73,7 @@ RBTree_map_node<K,V> *tree_minimum(RBTree_map<K,V> *tree)
 template <typename K, typename V>
 RBTree_map_node<K,V> *tree_maximum(RBTree_map<K,V> *tree)
 {
-    return tree_map_node<K,V>(tree_maximum(tree->root), tree_nil(tree));
+    return tree_map_node<K,V>(tree_maximum(tree->root, tree_nil(tree)));
 }
 
 // 遍历二叉搜索树的所有结点, Function处理data, data类型为std::pair<K,V>
