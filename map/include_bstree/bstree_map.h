@@ -122,4 +122,16 @@ void tree_clear(BSTree_map<K,V> *tree, Deleter del = Deleter())
     tree_init(tree);
 }
 
+// 复制tree
+template <typename K, typename V, typename Cloner = default_clone_bstree_map_node<K,V>>
+void tree_clone(BSTree_map<K,V> *to, BSTree_map<K,V> *from, Cloner cloner = Cloner())
+{
+    assert(tree_is_empty(to));
+
+    if (!tree_is_empty(from)) {
+        to->root = tree_clone(tree_root(from), cloner);
+        to->root->parent = NULL;
+    }
+}
+
 #endif

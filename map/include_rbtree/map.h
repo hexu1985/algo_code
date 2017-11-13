@@ -8,11 +8,11 @@
 #include <initializer_list>
 #include <limits>
 
-#include "bstree_map.h"
-#include "bstree_map_iterator.h"
+#include "rbtree_map.h"
+#include "rbtree_map_iterator.h"
 
 template <typename Key, typename T, typename Compare = std::less<Key>>
-class map: public BSTree_map<Key,T> {
+class map: public RBTree_map<Key,T> {
 private:
     Compare comp;
 
@@ -41,7 +41,7 @@ public:
     typedef value_type *pointer;
     typedef ptrdiff_t difference_type;
     typedef size_t size_type;
-    typedef BSTree_map_iterator<Key,T> iterator;
+    typedef RBTree_map_iterator<Key,T> iterator;
 
     map(const key_compare &comp = key_compare()): comp(comp)
     {
@@ -53,7 +53,7 @@ public:
     {
         tree_init(this);
         while (first != last) {
-            tree_insert(this, new BSTree_map_node<Key,T>(*first), comp);
+            tree_insert(this, new RBTree_map_node<Key,T>(*first), comp);
             ++first;
         }
     }
@@ -62,7 +62,7 @@ public:
     {
         tree_init(this);
         for (auto &e : il) {
-            tree_insert(this, new BSTree_map_node<Key,T>(e), comp);
+            tree_insert(this, new RBTree_map_node<Key,T>(e), comp);
         }
     }
 
@@ -86,7 +86,7 @@ public:
     {
         tree_clear(this);
         for (auto &e : il) {
-            tree_insert(this, new BSTree_map_node<Key,T>(e), comp);
+            tree_insert(this, new RBTree_map_node<Key,T>(e), comp);
         }
     }
 
@@ -123,8 +123,8 @@ public:
     mapped_type &operator [](const key_type &k)
     {
         auto x = tree_iterative_search(this, k, comp);
-        if (x == NULL) {
-            x = new BSTree_map_node<Key,T>(k, mapped_type());
+        if (x == tree_nil(this)) {
+            x = new RBTree_map_node<Key,T>(k, mapped_type());
             tree_insert(this, x, comp);
         }
         return *tree_value(x);
@@ -133,7 +133,7 @@ public:
     mapped_type &at(const key_type &k)
     {
         auto x = tree_iterative_search(this, k, comp);
-        if (x == NULL)
+        if (x == tree_nil(this))
             throw std::out_of_range(__func__);
         return *tree_value(x);
     }
@@ -143,9 +143,9 @@ public:
         const auto &k = val.first;
         bool ret = false;
         auto x = tree_iterative_search(this, k, comp);
-        if (x == NULL) {
+        if (x == tree_nil(this)) {
             ret = true;
-            x = new BSTree_map_node<Key,T>(val);
+            x = new RBTree_map_node<Key,T>(val);
             tree_insert(this, x, comp);
         }
         return std::make_pair(iterator(this, x), ret);
@@ -212,7 +212,7 @@ public:
     iterator find(const key_type &k)
     {
         auto x = tree_iterative_search(this, k, comp);
-        if (x == NULL)
+        if (x == tree_nil(this))
             return end();
         return iterator(this, x);
     }
@@ -220,7 +220,7 @@ public:
     size_type count(const key_type &k) const
     {
         auto x = tree_iterative_search(const_cast<map *>(this), k, comp);
-        if (x == NULL)
+        if (x == tree_nil(this))
             return 0;
         auto it = iterator(const_cast<map *>(this), x);
         ++it;

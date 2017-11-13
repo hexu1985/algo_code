@@ -22,6 +22,11 @@ struct BSTree_map_node : public BSTree_node_base {
 	{
         this->data = data;
 	}
+
+    BSTree_map_node(const BSTree_map_node &x)
+    {
+        this->data = x.data;
+    }
 };
 
 // 将BSTree_link强转成BSTree_map_node<K, V> *
@@ -96,9 +101,9 @@ BSTree_map_node<K,V> *tree_search(BSTree_map_node<K,V> *x, const K &k, Compare c
         return x;
 
     if (comp(k, *tree_key(x)))      // k < x.key
-        return tree_search(tree_left(x), k);
+        return tree_search(tree_left(x), k, comp);
     else if (comp(*tree_key(x), k)) // x.key < k
-        return tree_search(tree_right(x), k);
+        return tree_search(tree_right(x), k, comp);
     else                            // x.key == k
         return x;
 }
@@ -134,6 +139,36 @@ void tree_destroy(BSTree_map_node<K,V> *x, Deleter del = Deleter())
     tree_destroy(tree_left(x), del);
     tree_destroy(tree_right(x), del);
     del(x);
+}
+
+// 默认clone结点方法
+template <typename K, typename V>
+struct default_clone_bstree_map_node {
+    BSTree_map_node<K,V> *operator ()(BSTree_map_node<K,V> *x)
+    {
+        assert(x != NULL);
+        return new BSTree_map_node<K,V>(*x);
+    }
+};
+
+// 复制以x结点为根结点的子树
+template <typename K, typename V, typename Cloner = default_clone_bstree_map_node<K,V>>
+BSTree_map_node<K,V> *tree_clone(BSTree_map_node<K,V> *x, Cloner cloner = Cloner())
+{
+    auto y = cloner(x);
+    if (x->left != NULL) {
+        y->left = tree_clone(tree_map_node<K,V>(x->left), cloner);
+        y->left->parent = y;
+    } else {
+        y->left = NULL;
+    }
+    if (x->right != NULL) {
+        y->right = tree_clone(tree_map_node<K,V>(x->right), cloner);
+        y->right->parent = y;
+    } else {
+        y->right = NULL;
+    }
+    return y;
 }
 
 #endif
