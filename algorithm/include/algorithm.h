@@ -46,6 +46,10 @@ namespace hex {
 #include "prev_permutation.h"
 #include "push_heap.h"
 #include "quick_sort.h"
+#include "replace.h"
+#include "replace_copy.h"
+#include "replace_copy_if.h"
+#include "replace_if.h"
 #include "remove.h"
 #include "remove_copy.h"
 #include "reverse.h"
@@ -100,6 +104,10 @@ namespace hex {
 #define prev_permutation hex::prev_permutation
 #define push_heap hex::push_heap
 #define quick_sort hex::quick_sort 
+#define replace hex::replace
+#define replace_copy hex::replace_copy
+#define replace_copy_if hex::replace_copy_if
+#define replace_if hex::replace_if
 #define remove hex::remove
 #define remove_copy hex::remove_copy
 #define reverse hex::reverse
