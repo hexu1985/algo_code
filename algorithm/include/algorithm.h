@@ -52,6 +52,8 @@ namespace hex {
 #include "replace_if.h"
 #include "remove.h"
 #include "remove_copy.h"
+#include "remove_copy_if.h"
+#include "remove_if.h"
 #include "reverse.h"
 #include "search.h"
 #include "search_n.h"
@@ -110,6 +112,8 @@ namespace hex {
 #define replace_if hex::replace_if
 #define remove hex::remove
 #define remove_copy hex::remove_copy
+#define remove_copy_if hex::remove_copy_if
+#define remove_if hex::remove_if
 #define reverse hex::reverse
 #define search hex::search
 #define search_n hex::search_n
