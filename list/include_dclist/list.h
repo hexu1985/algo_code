@@ -66,6 +66,19 @@ public:
         list_destroy(this);
     }
 
+    list &operator =(const list &x)
+    {
+        if (this != &x) {
+            assign(x.begin(), x.end());
+        }
+        return *this;
+    }
+
+    list &operator =(std::initializer_list<value_type> il)
+    {
+        assign(il);
+    }
+
     template <typename InputIterator, typename = typename
         std::enable_if<!std::is_integral<InputIterator>::value>::type>
     void assign(InputIterator first, InputIterator last)
