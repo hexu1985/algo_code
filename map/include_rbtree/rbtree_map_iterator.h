@@ -48,7 +48,7 @@ struct RBTree_map_iterator {
 
     this_type &operator --()
     {
-        if (node)
+        if (node != tree_nil(tree))
             node = tree_map_node<K,V>(tree_predecessor(node, tree_nil(tree)));
         else        // reach end
             node = tree_map_node<K,V>(tree_maximum(tree));
@@ -58,7 +58,7 @@ struct RBTree_map_iterator {
     this_type operator --(int)
     {
         this_type tmp(*this);
-        if (node)
+        if (node != tree_nil(tree))
             node = tree_map_node<K,V>(tree_predecessor(node, tree_nil(tree)));
         else        // reach end
             node = tree_map_node<K,V>(tree_maximum(tree));
