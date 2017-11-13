@@ -37,7 +37,7 @@ RBTree_map_node<K,V> *tree_iterative_search(RBTree_map<K,V> *tree, const K &k, C
 template <typename K, typename V, typename Compare = std::less<K>>
 void tree_insert(RBTree_map<K,V> *tree, RBTree_map_node<K,V> *z, Compare comp = Compare()) 
 {
-    RBTree_map_node<K,V> *y = NULL;        // y为要插入位置的父结点
+    RBTree_map_node<K,V> *y = tree_map_node<K,V>(tree_nil(tree));        // y为要插入位置的父结点
     RBTree_map_node<K,V> *x = tree_map_node<K,V>(tree_root(tree));       // x遍历树
     while (x != tree_nil(tree)) {
         y = x;

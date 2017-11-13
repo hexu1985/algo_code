@@ -46,7 +46,7 @@ template <typename K, typename V, typename Compare = std::less<K>>
 void tree_insert_or_assign(RBTree_map<K,V> *tree, const K &k, const V &v, Compare comp = Compare()) 
 {
     auto x = tree_iterative_search(tree, k, comp);
-    if (x != NULL) {
+    if (x != tree_nil(tree)) {
         *tree_value(x) = v;
     } else {
         tree_insert(tree, new RBTree_map_node<K,V>(k, v), comp);
@@ -58,7 +58,7 @@ std::pair<RBTree_map_node<K,V> *, bool> tree_insert_unique(RBTree_map<K,V> *tree
 {
     auto x = tree_iterative_search(tree, k, comp);
     bool ret = false;
-    if (x == NULL) {
+    if (x == tree_nil(tree)) {
         ret = true;
         x = new RBTree_map_node<K,V>(k, v);
         tree_insert(tree, x, comp);
