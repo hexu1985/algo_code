@@ -62,6 +62,8 @@ namespace hex {
 #include "sort_heap.h"
 #include "swap_ranges.h"
 #include "transform.h"
+#include "unique.h"
+#include "unique_copy.h"
 
 }   // namespace hex
 
@@ -122,4 +124,6 @@ namespace hex {
 #define sort_heap hex::sort_heap
 #define swap_ranges hex::swap_ranges
 #define transform hex::transform
+#define unique hex::unique
+#define unique_copy hex::unique_copy
 
