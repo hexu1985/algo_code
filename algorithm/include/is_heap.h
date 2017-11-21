@@ -7,7 +7,7 @@ template <typename RandomAccessIterator>
 bool is_heap(RandomAccessIterator first, RandomAccessIterator last)
 {
     auto n = last - first;
-    for (auto i = 0; i <= _heap_parent(n-1); i++) {
+    for (auto i = 0; i <= _heap_parent(n-1); ++i) {
         auto l = _heap_left(i);
         if (l < n && first[i] < first[l]) {
             return false;
@@ -25,7 +25,7 @@ bool is_heap(RandomAccessIterator first, RandomAccessIterator last,
         Compare comp)
 {
     auto n = last - first;
-    for (auto i = 0; i <= _heap_parent(n-1); i++) {
+    for (auto i = 0; i <= _heap_parent(n-1); ++i) {
         auto l = _heap_left(i);
         if (l < n && comp(first[i], first[l])) {
             return false;
