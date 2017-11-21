@@ -1,17 +1,17 @@
 #ifndef __stack_h
 #define __stack_h
 
-#include "stack_view.h"
+#include "array_stack.h"
 #include <stddef.h>
 #include <assert.h>
 
 // 栈结构: LIFO, 后进先出
 template <typename T, typename C = void>    // typename C 是为了适配std::stack接口
-class stack: public Stack_view<T> {
+class stack: public Stack<T> {
 protected:
     enum { DEFAULT_SIZE = 64, EXTAND_FACTOR = 2 };
 
-    typedef Stack_view<T> base;
+    typedef Stack<T> base;
 
     void extend()
     {

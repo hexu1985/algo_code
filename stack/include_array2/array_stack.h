@@ -1,5 +1,5 @@
-#ifndef	__stack_view_h
-#define	__stack_view_h
+#ifndef	__array_stack_h
+#define	__array_stack_h
 
 #include <assert.h>
 
@@ -8,37 +8,37 @@
 // array: [x][x][x]...[   x    ]
 //               ^top
 template <typename T>
-class Stack_view {
+class Stack {
 private:
 	int stack_top = -1;	    // 栈顶下标
 	int stack_capacity = 0;	// 栈容量
-	T  *stack_data = 0;     // 栈实际空间
+	T *array = 0;           // 栈实际空间
     
 public:
     // 默认构造
-    Stack_view()
+    Stack()
     {
     }
 
     // 初始化栈
-    Stack_view(T *array, int length, int num_elem = 0)
+    Stack(T *data, int length, int num_elem = 0)
     {
-        assign(array, length, num_elem);
+        assign(data, length, num_elem);
     }
 
     // 赋值
-    void assign(T *array, int length, int num_elem = 0)
+    void assign(T *data, int length, int num_elem = 0)
     {
         assert(length > 0 && num_elem <= length);
         stack_top = num_elem-1;
         stack_capacity = length;
-        stack_data = array;
+        array = data;
     }
 
     // 获取存放数据的数组
     T *data() const
     {
-        return stack_data;
+        return array;
     }
 
     // 返回当前栈中元素个数
@@ -71,7 +71,7 @@ public:
         assert(!full() && "overflow");
 
         stack_top += 1;
-        stack_data[stack_top] = x;
+        array[stack_top] = x;
     }
 
     // 查看栈顶元素
@@ -79,7 +79,7 @@ public:
     {
         assert(!empty() && "stack empty");
 
-        return stack_data[stack_top];
+        return array[stack_top];
     }
 
     // 出栈
@@ -88,13 +88,13 @@ public:
         assert(!empty() && "underflow");
 
         stack_top -= 1;
-        return stack_data[stack_top+1];
+        return array[stack_top+1];
     }
 
     // 交换
-    void swap(Stack_view &x)
+    void swap(Stack &x)
     {
-        Stack_view tmp = *this;
+        Stack tmp = *this;
         *this = x;
         x = tmp;
     }
