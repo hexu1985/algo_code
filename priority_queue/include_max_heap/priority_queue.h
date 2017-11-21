@@ -7,7 +7,7 @@
 template <typename T, typename C = void, typename Compare = std::less<T>>    // typename C 是为了适配std::priority_queue接口
 class priority_queue {
 private:
-    Heap<T> self;
+    Max_heap<T> self;
     int capacity;
     Compare comp;
 
