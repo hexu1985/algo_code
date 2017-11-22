@@ -1,10 +1,10 @@
 // queue::back
 #include <iostream>       // std::cout
-#include <queue>          // std::queue
+#include "queue.h"          // queue
 
 int main ()
 {
-  std::queue<int> myqueue;
+  queue<int> myqueue;
 
   myqueue.push(12);
   myqueue.push(75);   // this is now the back

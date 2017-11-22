@@ -1,10 +1,10 @@
 // queue::size
 #include <iostream>       // std::cout
-#include <queue>          // std::queue
+#include "queue.h"          // queue
 
 int main ()
 {
-  std::queue<int> myints;
+  queue<int> myints;
   std::cout << "0. size: " << myints.size() << '\n';
 
   for (int i=0; i<5; i++) myints.push(i);

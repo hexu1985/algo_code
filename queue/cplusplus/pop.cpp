@@ -1,10 +1,10 @@
 // queue::push/pop
 #include <iostream>       // std::cin, std::cout
-#include <queue>          // std::queue
+#include "queue.h"          // queue
 
 int main ()
 {
-  std::queue<int> myqueue;
+  queue<int> myqueue;
   int myint;
 
   std::cout << "Please enter some integers (enter 0 to end):\n";

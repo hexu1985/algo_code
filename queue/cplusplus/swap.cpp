@@ -1,10 +1,10 @@
 // queue::swap
 #include <iostream>       // std::cout
-#include <queue>          // std::queue
+#include "queue.h"          // queue
 
 int main ()
 {
-  std::queue<int> foo,bar;
+  queue<int> foo,bar;
   foo.push (10); foo.push(20); foo.push(30);
   bar.push (111); bar.push(222);
 

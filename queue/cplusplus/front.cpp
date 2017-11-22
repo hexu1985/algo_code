@@ -1,10 +1,10 @@
 // queue::front
 #include <iostream>       // std::cout
-#include <queue>          // std::queue
+#include "queue.h"          // queue
 
 int main ()
 {
-  std::queue<int> myqueue;
+  queue<int> myqueue;
 
   myqueue.push(77);
   myqueue.push(16);
