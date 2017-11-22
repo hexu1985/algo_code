@@ -99,7 +99,7 @@ public:
     priority_queue(const priority_queue &x)
     {
         capacity = (x.size()+1) * EXTAND_FACTOR;
-        T *array = new T[array];
+        T *array = new T[capacity];
 
         for (int i = 1; i <= x.size(); i++) {
             array[i] = x.data()[i];
