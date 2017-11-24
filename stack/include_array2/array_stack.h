@@ -11,7 +11,7 @@ template <typename T>
 class Stack {
 private:
 	int stack_top = -1;	    // 栈顶下标
-	int stack_capacity = 0;	// 栈容量
+	int stack_length = 0;	// 栈容量
 	T *array = 0;           // 栈实际空间
     
 public:
@@ -31,7 +31,7 @@ public:
     {
         assert(length > 0 && num_elem <= length);
         stack_top = num_elem-1;
-        stack_capacity = length;
+        stack_length = length;
         array = data;
     }
 
@@ -50,7 +50,7 @@ public:
     // 返回栈中最大存放元素个数
     int capacity() const
     {
-        return stack_capacity;
+        return stack_length;
     }
 
     // 判断栈是否为空
@@ -62,7 +62,7 @@ public:
     // 判断栈是否已满
     bool full() const
     {
-        return stack_top == stack_capacity-1;
+        return stack_top == stack_length-1;
     }
 
     // 入栈
