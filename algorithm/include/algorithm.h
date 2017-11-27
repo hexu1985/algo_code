@@ -65,6 +65,7 @@ namespace hex {
 #include "search_n_if.h"
 #include "sort.h"
 #include "sort_heap.h"
+#include "stable_partition.h"
 #include "stable_sort.h"
 #include "swap_ranges.h"
 #include "transform.h"
@@ -133,6 +134,7 @@ namespace hex {
 #define search_n_if hex::search_n_if
 #define sort hex::sort 
 #define sort_heap hex::sort_heap
+#define stable_partition hex::stable_partition
 #define stable_sort hex::stable_sort
 #define swap_ranges hex::swap_ranges
 #define transform hex::transform
