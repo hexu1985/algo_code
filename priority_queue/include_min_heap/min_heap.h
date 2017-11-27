@@ -22,7 +22,7 @@
  *  | 1| 2| 3|16|14| 9|10| 8| 4| 7|
  */
 template <typename T>
-struct Heap {
+struct Min_heap {
 	int size;	// 堆中元素个数
 	T  *array;	// 堆实际空间
 };
@@ -50,7 +50,7 @@ int heap_right(int i)
 
 // 维护最小堆性质
 template <typename T, typename Compare = std::less<T>>
-void heap_heapify(Heap<T> &heap, int i, const Compare &comp = Compare())
+void heap_heapify(Min_heap<T> &heap, int i, const Compare &comp = Compare())
 {
     using std::swap;
     auto l = heap_left(i);
@@ -70,7 +70,7 @@ void heap_heapify(Heap<T> &heap, int i, const Compare &comp = Compare())
 
 // 创建最小堆
 template <typename T, typename Compare = std::less<T>>
-void heap_init(Heap<T> &heap, T *array, int n = 0, const Compare &comp = Compare())
+void heap_init(Min_heap<T> &heap, T *array, int n = 0, const Compare &comp = Compare())
 {
     heap.array = array;
     heap.size = n;
@@ -98,7 +98,7 @@ bool is_heap(T *array, int n, const Compare &comp = Compare())
 
 // 将一个已堆化的内存赋值给当前堆
 template <typename T, typename Compare = std::less<T>>
-void heap_assign(Heap<T> &heap, T *array, int n, const Compare &comp = Compare())
+void heap_assign(Min_heap<T> &heap, T *array, int n, const Compare &comp = Compare())
 {
     assert(is_heap(array, n, comp));
 
@@ -108,35 +108,35 @@ void heap_assign(Heap<T> &heap, T *array, int n, const Compare &comp = Compare()
 
 // 返回堆中最小元素
 template <typename T>
-const T &heap_top(const Heap<T> &heap)
+const T &heap_top(const Min_heap<T> &heap)
 {
     return heap.array[1];
 }
 
 // 堆是否为空
 template <typename T>
-bool heap_is_empty(const Heap<T> &heap)
+bool heap_is_empty(const Min_heap<T> &heap)
 {
     return heap.size == 0;
 }
 
 // 返回堆中元素个数
 template <typename T>
-int heap_size(const Heap<T> &heap)
+int heap_size(const Min_heap<T> &heap)
 {
     return heap.size;
 }
 
 // 返回堆中数据实际存储空间
 template <typename T>
-T *heap_data(Heap<T> &heap)
+T *heap_data(Min_heap<T> &heap)
 {
     return heap.array;
 }
 
 // 返回并删除堆中最小元素
 template <typename T, typename Compare = std::less<T>>
-T heap_extract(Heap<T> &heap, const Compare &comp = Compare())
+T heap_extract(Min_heap<T> &heap, const Compare &comp = Compare())
 {
     assert(!heap_is_empty(heap) && "heap underflow");
     auto min = heap.array[1];
@@ -147,7 +147,7 @@ T heap_extract(Heap<T> &heap, const Compare &comp = Compare())
 }
 
 template <typename T, typename Compare = std::less<T>>
-void heap_decrease_key(Heap<T> &heap, int i, const T &key, const Compare &comp = Compare())
+void heap_decrease_key(Min_heap<T> &heap, int i, const T &key, const Compare &comp = Compare())
 {
     using std::swap;
 
@@ -162,7 +162,7 @@ void heap_decrease_key(Heap<T> &heap, int i, const T &key, const Compare &comp =
 
 // 向堆中插入一个元素
 template <typename T, typename Compare = std::less<T>>
-void heap_insert(Heap<T> &heap, const T &key, const Compare &comp = Compare())
+void heap_insert(Min_heap<T> &heap, const T &key, const Compare &comp = Compare())
 {
     using std::swap;
 

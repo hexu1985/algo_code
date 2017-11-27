@@ -7,7 +7,7 @@
 template <typename T, typename C = void, typename Compare = std::less<T>>    // typename C 是为了适配std::priority_queue接口
 class priority_queue {
 private:
-    Heap<T> self;
+    Max_heap<T> self;
     int capacity;
     Compare comp;
 
@@ -99,7 +99,7 @@ public:
     priority_queue(const priority_queue &x)
     {
         capacity = (x.size()+1) * EXTAND_FACTOR;
-        T *array = new T[array];
+        T *array = new T[capacity];
 
         for (int i = 1; i <= x.size(); i++) {
             array[i] = x.data()[i];

@@ -1,27 +1,25 @@
-#ifndef __stack_h
-#define __stack_h
+#ifndef __queue_h
+#define __queue_h
 
-#include "array_stack.h"
+#include "array_queue.h"
 #include <stddef.h>
 #include <assert.h>
 
 // 栈结构: LIFO, 后进先出
-template <typename T, typename C = void>    // typename C 是为了适配std::stack接口
-class stack: public Stack<T> {
+template <typename T, typename C = void>    // typename C 是为了适配std::queue接口
+class queue: public Queue<T> {
 protected:
     enum { DEFAULT_SIZE = 64, EXTAND_FACTOR = 2 };
 
-    typedef Stack<T> base;
+    typedef Queue<T> base;
 
     void extend()
     {
         auto size = this->size();
         auto length = size * EXTAND_FACTOR;
         T *array = new T[length];
+        this->copy_to(array, length);
         T *data = this->data();
-        for (int i = 0; i < size; i++) {    // copy
-            array[i] = data[i];
-        }
         this->assign(array, length, size);
         delete [] data;
     }
@@ -33,9 +31,9 @@ public:
     typedef T &reference;
     typedef const T &const_reference;
 
-    // 适配std::stack的从容器构造函数
+    // 适配std::queue的从容器构造函数
 	template <typename Container>
-    explicit stack(const Container &cont)
+    explicit queue(const Container &cont)
     {
         auto size = cont.size();
         auto length = size * EXTAND_FACTOR;
@@ -47,29 +45,26 @@ public:
         this->assign(array, length, size);
     }
 
-    // 构造一个空的stack对象
-    stack(): base(new T[DEFAULT_SIZE], DEFAULT_SIZE) {}
+    // 构造一个空的queue对象
+    queue(): base(new T[DEFAULT_SIZE], DEFAULT_SIZE) {}
 
-    // 复制stack
-    stack(const stack &x)
+    // 复制queue
+    queue(const queue &x)
     {
         auto size = x.size();
         auto length = size * EXTAND_FACTOR;
         T *array = new T[length];
-        T *data = x.data();
-        for (int i = 0; i < size; i++) {
-            array[i] = data[i];
-        }
-        this->assign(array, length, size);
+        x.copy_to(array, length);
+        this->assign(array, length);
     }
 
-    // 销毁stack对象
-    ~stack()
+    // 销毁queue对象
+    ~queue()
     {
         delete [] this->data();
     }
 
-    // 往stack中push一个元素
+    // 往queue中push一个元素
     void push(const T& elem) 
     {
         if (this->full()) {
