@@ -26,7 +26,7 @@ void stack_init(Stack<C> &stack, C &cont, int length, int num_elem = 0)
 
 // 获取存放数据的容器
 template <typename C>
-C *stack_data(Stack<C> &stack)
+C *stack_cont(Stack<C> &stack)
 {
     return stack.cont;
 }
