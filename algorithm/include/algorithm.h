@@ -40,6 +40,7 @@ namespace hex {
 #include "minmax_element.h"
 #include "next_permutation.h"
 #include "none_of.h"
+#include "nth_element.h"
 #include "partial_sort.h"
 #include "partial_sort_copy.h"
 #include "partition.h"
@@ -110,6 +111,7 @@ namespace hex {
 #define minmax_element hex::minmax_element
 #define next_permutation hex::next_permutation
 #define none_of hex::none_of
+#define nth_element hex::nth_element
 #define partial_sort hex::partial_sort
 #define partial_sort_copy hex::partial_sort_copy
 #define partition hex::partition 
