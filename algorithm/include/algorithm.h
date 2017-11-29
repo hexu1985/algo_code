@@ -8,6 +8,7 @@ namespace hex {
 #include "adjacent_find.h"
 #include "all_of.h"
 #include "any_of.h"
+#include "binary_search.h"
 #include "copy.h"
 #include "copy_backward.h"
 #include "copy_if.h"
@@ -34,6 +35,7 @@ namespace hex {
 #include "is_sorted_until.h"
 #include "iter_swap.h"
 #include "lexicographical_compare.h"
+#include "lower_bound.h"
 #include "make_heap.h"
 #include "max_element.h"
 #include "min_element.h"
@@ -73,12 +75,14 @@ namespace hex {
 #include "transform.h"
 #include "unique.h"
 #include "unique_copy.h"
+#include "upper_bound.h"
 
 }   // namespace hex
 
 #define adjacent_find hex::adjacent_find
 #define all_of hex::all_of
 #define any_of hex::any_of
+#define binary_search hex::binary_search
 #define copy hex::copy
 #define copy_backward hex::copy_backward
 #define copy_if hex::copy_if
@@ -105,6 +109,7 @@ namespace hex {
 #define is_sorted_until hex::is_sorted_until
 #define iter_swap hex::iter_swap
 #define lexicographical_compare hex::lexicographical_compare
+#define lower_bound hex::lower_bound
 #define make_heap hex::make_heap
 #define max_element hex::max_element
 #define min_element hex::min_element
@@ -144,4 +149,4 @@ namespace hex {
 #define transform hex::transform
 #define unique hex::unique
 #define unique_copy hex::unique_copy
-
+#define upper_bound hex::upper_bound

@@ -2,10 +2,10 @@
 #define __fill_n_h
 
 template <typename OutputIterator, typename Size, typename T>
-OutputIterator fill_n(OutputIterator first, Size n, const T &val)
+OutputIterator fill_n(OutputIterator first, Size n, const T &value)
 {
     for ( ; n > 0; --n, ++first)
-        *first = val;
+        *first = value;
     return first;
 }
 

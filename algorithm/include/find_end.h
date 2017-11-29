@@ -4,7 +4,7 @@
 #include "search.h"
 
 template <typename ForwardIterator1, typename ForwardIterator2>
-ForwardIterator1 __find_end(ForwardIterator1 first1, ForwardIterator1 last1, 
+ForwardIterator1 _find_end(ForwardIterator1 first1, ForwardIterator1 last1, 
         ForwardIterator2 first2, ForwardIterator2 last2,
         std::forward_iterator_tag, std::forward_iterator_tag)
 {
@@ -26,7 +26,7 @@ ForwardIterator1 __find_end(ForwardIterator1 first1, ForwardIterator1 last1,
 }
 
 template <typename BidirectionalIterator1, typename BidirectionalIterator2>
-BidirectionalIterator1 __find_end(BidirectionalIterator1 first1, BidirectionalIterator1 last1, 
+BidirectionalIterator1 _find_end(BidirectionalIterator1 first1, BidirectionalIterator1 last1, 
         BidirectionalIterator2 first2, BidirectionalIterator2 last2,
         std::bidirectional_iterator_tag, std::bidirectional_iterator_tag)
 {
@@ -54,11 +54,11 @@ ForwardIterator1 find_end(ForwardIterator1 first1, ForwardIterator1 last1,
     typedef typename std::iterator_traits<ForwardIterator1>::iterator_category category1;
     typedef typename std::iterator_traits<ForwardIterator2>::iterator_category category2;
 
-    return __find_end(first1, last1, first2, last2, category1(), category2());
+    return _find_end(first1, last1, first2, last2, category1(), category2());
 }
 
 template <typename ForwardIterator1, typename ForwardIterator2, typename BinaryPredicate>
-ForwardIterator1 __find_end(ForwardIterator1 first1, ForwardIterator1 last1, 
+ForwardIterator1 _find_end(ForwardIterator1 first1, ForwardIterator1 last1, 
         ForwardIterator2 first2, ForwardIterator2 last2, BinaryPredicate pred,
         std::forward_iterator_tag, std::forward_iterator_tag)
 {
@@ -80,7 +80,7 @@ ForwardIterator1 __find_end(ForwardIterator1 first1, ForwardIterator1 last1,
 }
 
 template <typename BidirectionalIterator1, typename BidirectionalIterator2, typename BinaryPredicate>
-BidirectionalIterator1 __find_end(BidirectionalIterator1 first1, BidirectionalIterator1 last1, 
+BidirectionalIterator1 _find_end(BidirectionalIterator1 first1, BidirectionalIterator1 last1, 
         BidirectionalIterator2 first2, BidirectionalIterator2 last2, BinaryPredicate pred,
         std::bidirectional_iterator_tag, std::bidirectional_iterator_tag)
 {
@@ -108,7 +108,7 @@ ForwardIterator1 find_end(ForwardIterator1 first1, ForwardIterator1 last1,
     typedef typename std::iterator_traits<ForwardIterator1>::iterator_category category1;
     typedef typename std::iterator_traits<ForwardIterator2>::iterator_category category2;
 
-    return __find_end(first1, last1, first2, last2, pred, category1(), category2());
+    return _find_end(first1, last1, first2, last2, pred, category1(), category2());
 }
 
 #endif

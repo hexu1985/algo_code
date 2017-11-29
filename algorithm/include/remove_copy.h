@@ -3,10 +3,10 @@
 
 template <typename ForwardIterator, typename OutputIterator, typename T>
 OutputIterator remove_copy(ForwardIterator first, ForwardIterator last, 
-        OutputIterator result, const T &val)
+        OutputIterator result, const T &value)
 {
     for ( ; first != last; ++first) {
-        if (*first != val) {
+        if (*first != value) {
             *result = *first;
             ++result;
         }
