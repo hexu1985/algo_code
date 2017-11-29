@@ -29,9 +29,9 @@ template <typename RandomAccessIterator>
 void quick_sort(RandomAccessIterator first, RandomAccessIterator last)
 {
     if (first < last - 1) {
-        auto iter = _partition(first, last);
-        quick_sort(first, iter);
-        quick_sort(iter+1, last);
+        auto cut = _partition(first, last);
+        quick_sort(first, cut);
+        quick_sort(cut+1, last);
     }
 }
 
@@ -61,9 +61,9 @@ template <typename RandomAccessIterator, typename Compare>
 void quick_sort(RandomAccessIterator first, RandomAccessIterator last, Compare comp)
 {
     if (first < last - 1) {
-        auto iter = _partition(first, last, comp);
-        quick_sort(first, iter, comp);
-        quick_sort(iter+1, last, comp);
+        auto cut = _partition(first, last, comp);
+        quick_sort(first, cut, comp);
+        quick_sort(cut+1, last, comp);
     }
 }
 
