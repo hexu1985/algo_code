@@ -6,7 +6,7 @@
 #include "make_heap.h"
 #include "sort_heap.h"
 
-template <class RandomAccessIterator>
+template <typename RandomAccessIterator>
 void partial_sort(RandomAccessIterator first, RandomAccessIterator middle, RandomAccessIterator last)
 {
     typedef typename std::iterator_traits<RandomAccessIterator>::difference_type Distance;
@@ -20,7 +20,7 @@ void partial_sort(RandomAccessIterator first, RandomAccessIterator middle, Rando
     sort_heap(first, middle);
 }
 
-template <class RandomAccessIterator, class Compare>
+template <typename RandomAccessIterator, typename Compare>
 void partial_sort(RandomAccessIterator first, RandomAccessIterator middle, 
         RandomAccessIterator last, Compare comp)
 {

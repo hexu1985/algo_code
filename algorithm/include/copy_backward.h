@@ -1,7 +1,7 @@
 #ifndef __copy_backward_h
 #define __copy_backward_h
 
-template <class BidirectionalIterator1, class BidirectionalIterator2>
+template <typename BidirectionalIterator1, typename BidirectionalIterator2>
 BidirectionalIterator2 copy_backward(BidirectionalIterator1 first, BidirectionalIterator1 last, 
         BidirectionalIterator2 result)
 {

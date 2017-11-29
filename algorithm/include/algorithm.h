@@ -41,6 +41,7 @@ namespace hex {
 #include "next_permutation.h"
 #include "none_of.h"
 #include "partial_sort.h"
+#include "partial_sort_copy.h"
 #include "partition.h"
 #include "partition_point.h"
 #include "pop_heap.h"
@@ -110,6 +111,7 @@ namespace hex {
 #define next_permutation hex::next_permutation
 #define none_of hex::none_of
 #define partial_sort hex::partial_sort
+#define partial_sort_copy hex::partial_sort_copy
 #define partition hex::partition 
 #define partition_point hex::partition_point
 #define pop_heap hex::pop_heap
