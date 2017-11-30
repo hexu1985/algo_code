@@ -40,6 +40,7 @@ namespace hex {
 #include "lower_bound.h"
 #include "make_heap.h"
 #include "max_element.h"
+#include "merge.h"
 #include "min_element.h"
 #include "minmax_element.h"
 #include "next_permutation.h"
@@ -116,6 +117,7 @@ namespace hex {
 #define lower_bound hex::lower_bound
 #define make_heap hex::make_heap
 #define max_element hex::max_element
+#define merge hex::merge
 #define min_element hex::min_element
 #define minmax_element hex::minmax_element
 #define next_permutation hex::next_permutation
