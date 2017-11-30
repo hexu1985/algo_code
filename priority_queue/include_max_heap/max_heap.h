@@ -56,10 +56,10 @@ void heap_heapify(Max_heap<T> &heap, int i, const Compare &comp = Compare())
     auto l = heap_left(i);
     auto r = heap_right(i);
     auto largest = i;
-    if (l <= heap.size && comp(heap.array[i], heap.array[l])) {
+    if (l <= heap.size && comp(heap.array[largest], heap.array[l])) {
         largest = l;
     }
-    if (r <= heap.size && comp(heap.array[i], heap.array[r])) {
+    if (r <= heap.size && comp(heap.array[largest], heap.array[r])) {
         largest = r;
     }
     if (largest != i) {
