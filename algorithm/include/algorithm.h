@@ -70,6 +70,10 @@ namespace hex {
 #include "search.h"
 #include "search_n.h"
 #include "search_n_if.h"
+#include "set_difference.h"
+#include "set_intersection.h"
+#include "set_symmetric_difference.h"
+#include "set_union.h"
 #include "sort.h"
 #include "sort_heap.h"
 #include "stable_partition.h"
@@ -147,6 +151,10 @@ namespace hex {
 #define search hex::search
 #define search_n hex::search_n
 #define search_n_if hex::search_n_if
+#define set_difference hex::set_difference
+#define set_intersection hex::set_intersection
+#define set_symmetric_difference hex::set_symmetric_difference
+#define set_union hex::set_union
 #define sort hex::sort 
 #define sort_heap hex::sort_heap
 #define stable_partition hex::stable_partition
