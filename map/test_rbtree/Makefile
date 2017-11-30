@@ -1,9 +1,9 @@
 
 RM = rm -rf
 CXX = g++
-CXXFLAGS = -Wall -g -std=c++11
-INCLUDES = -I../include_max_heap2
-LDFLAGS = 
+CXXFLAGS = -Wall -g -std=c++14
+INCLUDES = -I../include_rbtree
+LDFLAGS =
 LDPATH =
 
 SOURCES = $(shell ls *.cpp)
