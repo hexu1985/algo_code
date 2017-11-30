@@ -16,6 +16,7 @@ namespace hex {
 #include "count.h"
 #include "count_if.h"
 #include "equal.h"
+#include "equal_range.h"
 #include "fill.h"
 #include "fill_n.h"
 #include "find.h"
@@ -91,6 +92,7 @@ namespace hex {
 #define count hex::count
 #define count_if hex::count_if
 #define equal hex::equal
+#define equal_range hex::equal_range
 #define fill hex::fill
 #define fill_n hex::fill_n
 #define find hex::find
