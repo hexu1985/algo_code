@@ -26,6 +26,7 @@ namespace hex {
 #include "for_each.h"
 #include "generate.h"
 #include "generate_n.h"
+#include "includes.h"
 #include "insertion_sort.h"
 #include "is_heap.h"
 #include "is_heap_until.h"
@@ -100,6 +101,7 @@ namespace hex {
 #define for_each hex::for_each
 #define generate hex::generate
 #define generate_n hex::generate_n
+#define includes hex::includes
 #define insertion_sort hex::insertion_sort 
 #define is_heap hex::is_heap
 #define is_heap_until hex::is_heap_until
