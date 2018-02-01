@@ -7,7 +7,7 @@ INCLUDE =
 LDFLAGS = -pthread
 LDPATH = 
 
-PROGS =	task_queue thread_test
+PROGS =	task_queue thread_test thread_move
 
 .PHONY: all
 all: $(PROGS)
@@ -24,5 +24,8 @@ task_queue: task_queue.o
 	$(CXX) -o $@ $^ $(LDFLAGS) $(LDPATH)
 
 thread_test: thread_test.o thread.o
+	$(CXX) -o $@ $^ $(LDFLAGS) $(LDPATH)
+
+thread_move: thread_move.o thread.o
 	$(CXX) -o $@ $^ $(LDFLAGS) $(LDPATH)
 

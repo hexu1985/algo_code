@@ -1,4 +1,5 @@
 #include <iostream>
+#include <future>
 #include "thread.h"
 
 void print_int(int i)
@@ -21,12 +22,6 @@ public:
 		std::cout << "Foo::" << __func__ << "(" << n_++ << ")" << std::endl;
 	}
 };
-
-void process_exit()
-{
-	std::cout << "task to stop process thread" << std::endl;
-	pthread_exit(NULL);
-}
 
 class Base {
 public:
@@ -75,6 +70,14 @@ int main()
     task_queue->push_task(make_task(&Base::print, p1));
     task_queue->push_task(make_task(&Base::print, p2));
     task_queue->push_task(make_task(&Base::print, p3));
+
+    std::packaged_task<int ()> tsk([] { std::cout << "bye!\n" << std::endl; return 0; });
+    std::future<int> ret = tsk.get_future();
+
+    task_queue->push_task(make_task(std::move(tsk)));
+
+    int value = ret.get();
+    std::cout << "value: " << value << std::endl;
 
     mythread.stop();
 	return 0;

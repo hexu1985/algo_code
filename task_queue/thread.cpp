@@ -3,16 +3,6 @@
 
 #include "thread.h"
 
-namespace {
-
-void this_thread_exit(void *)
-{
-    std::cout << "task to stop process thread" << std::endl;
-    pthread_exit(NULL);
-}
-
-}
-
 Thread::Thread(const std::string &name): name_(name) {
 }
 
@@ -29,7 +19,7 @@ void Thread::start() {
 }
 
 void Thread::stop() {
-    task_queue_->push_task(make_task(&this_thread_exit, (void *) 0));
+    task_queue_->request_cancel();
     thread_->join();
     thread_.reset();
     task_queue_.reset();
@@ -45,6 +35,11 @@ void Thread::task_process()
             working_queue.pop_front();
             task->run();
         }
-        incoming_queue.swap_task_queue(working_queue);
+
+        bool has_cancel_request = false;
+        incoming_queue.swap_task_queue(working_queue, has_cancel_request);
+        if (has_cancel_request) {
+            return;
+        }
     }
 }
