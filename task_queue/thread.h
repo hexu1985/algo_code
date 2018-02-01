@@ -26,7 +26,7 @@ struct Task: public Task_base {
     Fn f_;
 };
 
-struct Task_null: public Task_base {
+struct NullTask: public Task_base {
     virtual void run() {}
 };
 
@@ -59,7 +59,7 @@ class Task_queue: public std::deque<std::shared_ptr<Task_base>> {
 
         void request_cancel() {
             cancel_flag_ = true;
-            push_task(std::make_shared<Task_null>());
+            push_task(std::make_shared<NullTask>());
         }
 
         friend class Thread;
