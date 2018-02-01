@@ -7,8 +7,8 @@ namespace {
 
 void this_thread_exit(void *)
 {
-	std::cout << "task to stop process thread" << std::endl;
-	pthread_exit(NULL);
+    std::cout << "task to stop process thread" << std::endl;
+    pthread_exit(NULL);
 }
 
 }
@@ -38,13 +38,13 @@ void Thread::stop() {
 void Thread::task_process()
 {
     Task_queue &incoming_queue = *task_queue_;
-	std::deque<std::shared_ptr<Task_base>> working_queue;
-	while (true) {
-		while (!working_queue.empty()) {
-			std::shared_ptr<Task_base> task = working_queue.front();
-			working_queue.pop_front();
-			task->run();
-		}
-		incoming_queue.swap_task_queue(working_queue);
-	}
+    std::deque<std::shared_ptr<Task_base>> working_queue;
+    while (true) {
+        while (!working_queue.empty()) {
+            std::shared_ptr<Task_base> task = working_queue.front();
+            working_queue.pop_front();
+            task->run();
+        }
+        incoming_queue.swap_task_queue(working_queue);
+    }
 }
