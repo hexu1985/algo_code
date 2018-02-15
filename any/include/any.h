@@ -51,6 +51,11 @@ public: // queries
         return !content;
     }
 
+    bool has_value() const
+    {
+        return content;
+    }
+
     void clear() noexcept
     {
         any().swap(*this);
