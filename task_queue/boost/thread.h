@@ -4,12 +4,14 @@
 #include <utility>
 #include <functional>
 #include <deque>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/condition_variable.hpp>
-#include <boost/thread/thread.hpp>
-#include <boost/shared_ptr.hpp>
 #include <memory>
 #include <string>
+
+#include "boost/thread/mutex.hpp"
+#include "boost/thread/condition_variable.hpp"
+#include "boost/thread/thread.hpp"
+#include "boost/shared_ptr.hpp"
+#include "boost/utility.hpp"
 
 struct Task_base {
 	virtual ~Task_base() {}
@@ -57,7 +59,7 @@ private:
 	}
 };
 
-class Thread {
+class Thread: public boost::noncopyable {
 public:
     Thread(const std::string &name);
     ~Thread();
@@ -73,9 +75,6 @@ public:
     boost::shared_ptr<Task_queue> get_task_queue() {
         return task_queue_;
     }
-
-    Thread(const Thread &) = delete;
-    void operator =(const Thread &) = delete;
 
 private:
     void task_process();
