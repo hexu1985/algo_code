@@ -100,6 +100,7 @@ void process_exit()
 int main()
 {
 	Foo foo(1);
+    std::shared_ptr<Foo> pfoo(new Foo(2));
 
 	Task_queue task_queue;
 	std::thread proc_thread(processor, std::ref(task_queue));
@@ -109,6 +110,7 @@ int main()
 		task_queue.post_task(make_task(print_string, std::string("hello")));
 		task_queue.post_task(make_task(print_string_ref, std::ref(str)));
 		task_queue.post_task(make_task(&Foo::print, &foo));
+		task_queue.post_task(make_task(&Foo::print, pfoo));
 	}
 	task_queue.post_task(make_task(process_exit));
 	proc_thread.join();

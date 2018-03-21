@@ -5,10 +5,13 @@
 
 namespace {
 
+struct ThreadInterrupt {
+};
+
 void this_thread_exit(void *)
 {
 	std::cout << "task to stop process thread" << std::endl;
-	pthread_exit(NULL);
+    throw ThreadInterrupt();
 }
 
 }
@@ -43,7 +46,11 @@ void Thread::task_process()
 		while (!working_queue.empty()) {
 			std::shared_ptr<Task_base> task = working_queue.front();
 			working_queue.pop_front();
-			task->run();
+            try {
+                task->run();
+            } catch (ThreadInterrupt) {
+                return;
+            }
 		}
 		incoming_queue.swap_task_queue(working_queue);
 	}
