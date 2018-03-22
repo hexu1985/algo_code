@@ -1,28 +1,19 @@
-# Makefile
 
 RM = rm -f
 CXX = g++
-CXXFLAGS = -Wall -O3 -std=c++11 -I../include
-INCLUDE = 
-LDFLAGS = 
-LDPATH = 
+CXXFLAGS = -Wall -g -std=c++11 -I../include #-std=c++17 -I../include_std 
+INCLUDES = 
+LDFLAGS =
+LDPATH =
 
-PROGS =	any any2
+SOURCES = $(shell ls *.cpp)
+PROGS = $(SOURCES:%.cpp=%)
 
-.PHONY: all
 all: $(PROGS)
-	@echo "build OK!"
+	@echo "PROGS = $(PROGS)" 
 
 clean:
-	@$(RM) $(PROGS) *.o
-	@echo "clean OK!"
+	$(RM) $(PROGS)
 
-%.o:%.cpp
-	$(CXX) -o $@ -c $< $(CXXFLAGS) $(INCLUDE)
-
-any: any.o
-	$(CXX) -o $@ $^ $(LDFLAGS) $(LDPATH)
-
-any2: any2.o
-	$(CXX) -o $@ $^ $(LDFLAGS) $(LDPATH)
-
+%: %.cpp
+	$(CXX) -o $@ $(CXXFLAGS) $(INCLUDES) $^ $(LDFLAGS) $(LDPATH)

@@ -53,7 +53,7 @@ int main(int argc, char const *argv[])
     PRINT(a.type().name());
     //检测any中是否保存了对象
     std::cout << std::boolalpha;
-    PRINT(a.empty());
+    PRINT(a.has_value());
     puts("");
 /**************************************************************************/
 /*二，智能指针。 不能用any保存堆上的原始的指针，会造成内存泄露,应使用智能指针*/
