@@ -46,18 +46,16 @@ public:
 
 void processor(Task_queue &incoming_queue)
 {
-	std::deque<Task_base *> work_queue;
 	while (true) {
+        std::deque<Task_base *> work_queue;
+		incoming_queue.swap_task(work_queue);
 		while (!work_queue.empty()) {
 			Task_base *task = work_queue.front();
 			work_queue.pop_front();
 			task->run();
 			delete task;
 		} 
-		incoming_queue.swap_task(work_queue);
-        if (work_queue.empty()) {
-            boost::this_thread::interruption_point();
-        }
+        boost::this_thread::interruption_point();
 	}
 }
 

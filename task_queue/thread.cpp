@@ -41,8 +41,9 @@ void Thread::stop() {
 void Thread::task_process()
 {
     Task_queue &incoming_queue = *task_queue_;
-	std::deque<std::shared_ptr<Task_base>> working_queue;
 	while (true) {
+        std::deque<std::shared_ptr<Task_base>> working_queue;
+		incoming_queue.swap_task_queue(working_queue);
 		while (!working_queue.empty()) {
 			std::shared_ptr<Task_base> task = working_queue.front();
 			working_queue.pop_front();
@@ -52,6 +53,5 @@ void Thread::task_process()
                 return;
             }
 		}
-		incoming_queue.swap_task_queue(working_queue);
 	}
 }

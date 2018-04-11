@@ -52,15 +52,15 @@ public:
 
 void processor(Task_queue &incoming_queue)
 {
-	std::queue<Task_base *> work_queue;
 	while (true) {
+        std::queue<Task_base *> work_queue;
+		incoming_queue.swap_task(work_queue);
 		while (!work_queue.empty()) {
 			Task_base *task = work_queue.front();
 			work_queue.pop();
 			task->run();
 			delete task;
 		}
-		incoming_queue.swap_task(work_queue);
 	}
 }
 
