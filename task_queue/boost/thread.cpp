@@ -1,7 +1,17 @@
+#include "thread.h"
 #include <assert.h>
 #include <iostream>
+#include "boost/bind.hpp"
 
-#include "thread.h"
+namespace {
+
+void thread_exit(boost::shared_ptr<boost::thread> this_thread)
+{
+    this_thread->interrupt();
+    boost::this_thread::interruption_point();
+}
+
+}   // namespace
 
 Thread::Thread(const std::string &name): name_(name) {
 }
@@ -19,7 +29,7 @@ void Thread::start() {
 }
 
 void Thread::stop() {
-    thread_->interrupt();
+    task_queue_->push_task(make_task(boost::bind(&thread_exit, thread_)));
     thread_->join();
     thread_.reset();
     task_queue_.reset();

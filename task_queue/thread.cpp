@@ -8,13 +8,12 @@ namespace {
 struct ThreadInterrupt {
 };
 
-void this_thread_exit(void *)
+void this_thread_exit()
 {
-	std::cout << "task to stop process thread" << std::endl;
     throw ThreadInterrupt();
 }
 
-}
+}   // namespace
 
 Thread::Thread(const std::string &name): name_(name) {
 }
@@ -32,7 +31,7 @@ void Thread::start() {
 }
 
 void Thread::stop() {
-    task_queue_->push_task(make_task(&this_thread_exit, (void *) 0));
+    task_queue_->push_task(make_task(&this_thread_exit));
     thread_->join();
     thread_.reset();
     task_queue_.reset();

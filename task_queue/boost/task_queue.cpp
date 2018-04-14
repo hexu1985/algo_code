@@ -3,6 +3,7 @@
 #include <deque>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/thread.hpp>
+#include <boost/chrono.hpp>
 #include <memory>
 #include <iostream>
 #include <string>
@@ -55,24 +56,26 @@ void processor(Task_queue &incoming_queue)
 			task->run();
 			delete task;
 		} 
-        boost::this_thread::interruption_point();
 	}
 }
 
 void print_int(int i)
 {
 	std::cout << __func__ << "(" << i << ")" << std::endl;
+    boost::this_thread::sleep_for(boost::chrono::milliseconds(50));
 }
 
 void print_string(std::string str)
 {
 	std::cout << __func__ << "(" << str << ")" << std::endl;
+    boost::this_thread::sleep_for(boost::chrono::milliseconds(50));
 }
 
 void print_string_ref(std::string &str)
 {
     std::cout << __func__ << "(" << str << ")" << std::endl;
     str += ".";
+    boost::this_thread::sleep_for(boost::chrono::milliseconds(50));
 }
 
 class Foo {
@@ -86,10 +89,11 @@ public:
 	}
 };
 
-void process_exit()
+void process_exit(boost::thread *proc_thread)
 {
-	std::cout << "task to stop process thread" << std::endl;
-	pthread_exit(NULL);
+    std::cout << "task to stop process thread" << std::endl;
+    proc_thread->interrupt();
+    boost::this_thread::interruption_point();
 }
 
 int main()
@@ -105,8 +109,7 @@ int main()
 		task_queue.post_task(make_task(boost::bind(print_string_ref, boost::ref(str))));
 		task_queue.post_task(make_task(boost::bind(&Foo::print, &foo)));
 	}
-//	task_queue.post_task(make_task(boost::bind(process_exit)));
-    proc_thread.interrupt();
+    task_queue.post_task(make_task(boost::bind(process_exit, &proc_thread)));
 	proc_thread.join();
 	return 0;
 }

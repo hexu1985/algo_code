@@ -1,14 +1,18 @@
 #include <iostream>
+#include <boost/thread/thread.hpp>
+#include <boost/chrono.hpp>
 #include "thread.h"
 
 void print_int(int i)
 {
 	std::cout << __func__ << "(" << i << ")" << std::endl;
+    boost::this_thread::sleep_for(boost::chrono::milliseconds(50));
 }
 
 void print_string(std::string str)
 {
 	std::cout << __func__ << "(" << str << ")" << std::endl;
+    boost::this_thread::sleep_for(boost::chrono::milliseconds(50));
 }
 
 class Foo {
@@ -19,20 +23,16 @@ public:
 	void print()
 	{
 		std::cout << "Foo::" << __func__ << "(" << n_++ << ")" << std::endl;
+        boost::this_thread::sleep_for(boost::chrono::milliseconds(50));
 	}
 };
-
-void process_exit()
-{
-	std::cout << "task to stop process thread" << std::endl;
-	pthread_exit(NULL);
-}
 
 class Base {
 public:
     virtual void print() 
     {
         std::cout << "Base::print" << std::endl;
+        boost::this_thread::sleep_for(boost::chrono::milliseconds(50));
     }
 };
 
@@ -41,6 +41,7 @@ public:
     virtual void print() 
     {
         std::cout << "Derived_A::print" << std::endl;
+        boost::this_thread::sleep_for(boost::chrono::milliseconds(50));
     }
 };
 
@@ -49,6 +50,7 @@ public:
     virtual void print() 
     {
         std::cout << "Derived_B::print" << std::endl;
+        boost::this_thread::sleep_for(boost::chrono::milliseconds(50));
     }
 };
 

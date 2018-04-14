@@ -6,6 +6,7 @@
 #include <memory>
 #include <iostream>
 #include <string>
+#include <chrono>
 
 struct Task_base {
 	virtual ~Task_base() {}
@@ -67,17 +68,20 @@ void processor(Task_queue &incoming_queue)
 void print_int(int i)
 {
 	std::cout << __func__ << "(" << i << ")" << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
 }
 
 void print_string(std::string str)
 {
 	std::cout << __func__ << "(" << str << ")" << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
 }
 
 void print_string_ref(std::string &str)
 {
     std::cout << __func__ << "(" << str << ")" << std::endl;
     str += ".";
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
 }
 
 class Foo {
@@ -88,6 +92,7 @@ public:
 	void print()
 	{
 		std::cout << "Foo::" << __func__ << "(" << n_++ << ")" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}
 };
 

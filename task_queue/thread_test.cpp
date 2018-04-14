@@ -1,14 +1,17 @@
 #include <iostream>
+#include <chrono>
 #include "thread.h"
 
 void print_int(int i)
 {
 	std::cout << __func__ << "(" << i << ")" << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
 }
 
 void print_string(std::string str)
 {
 	std::cout << __func__ << "(" << str << ")" << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
 }
 
 class Foo {
@@ -19,20 +22,16 @@ public:
 	void print()
 	{
 		std::cout << "Foo::" << __func__ << "(" << n_++ << ")" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}
 };
-
-void process_exit()
-{
-	std::cout << "task to stop process thread" << std::endl;
-	pthread_exit(NULL);
-}
 
 class Base {
 public:
     virtual void print() 
     {
         std::cout << "Base::print" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
 };
 
@@ -41,6 +40,7 @@ public:
     virtual void print() 
     {
         std::cout << "Derived_A::print" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
 };
 
@@ -49,6 +49,7 @@ public:
     virtual void print() 
     {
         std::cout << "Derived_B::print" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
 };
 
