@@ -17,9 +17,6 @@ public:
     }
 
 private:
-    Singleton(const Singleton &) = delete;
-    Singleton &operator =(const Singleton &) = delete;
-
     static void newInstance()
     {
         instance_ = new T;

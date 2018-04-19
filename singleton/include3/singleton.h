@@ -11,10 +11,6 @@ public:
         static T instance;
         return instance;
     }
-
-private:
-    Singleton(const Singleton &) = delete;
-    Singleton &operator =(const Singleton &) = delete;
 };
 
 #endif

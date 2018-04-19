@@ -1,6 +1,7 @@
 #ifndef __trace_h
 #define __trace_h
 
+#include "singleton.h"
 #include <iostream>
 
 class Trace {
@@ -26,6 +27,10 @@ public:
 
     void step_3() {
         std::cerr << "step_3\n";
+    }
+    
+    static Trace &getInstance() {
+        return Singleton<Trace>::getInstance();
     }
 };
 

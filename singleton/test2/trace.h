@@ -1,9 +1,10 @@
 #ifndef __trace_h
 #define __trace_h
 
+#include "singleton.h"
 #include <iostream>
 
-class Trace {
+class Trace: public Singleton<Trace> {
 private:
     Trace() {
         std::cerr << "Trace()\n"; 

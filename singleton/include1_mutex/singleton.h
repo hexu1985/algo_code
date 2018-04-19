@@ -19,10 +19,6 @@ public:
         }
         return *instance_;
     }
-
-private:
-    Singleton(const Singleton &) = delete;
-    Singleton &operator =(const Singleton &) = delete;
 };
 
 template <typename T>

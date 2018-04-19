@@ -4,14 +4,11 @@
 #include <iostream>
 
 class Trace {
-private:
+public:
     Trace() {
         std::cerr << "Trace()\n"; 
     }
 
-    friend class Singleton<Trace>;
-
-public:
     ~Trace() {
         std::cerr << "~Trace()\n"; 
     }
