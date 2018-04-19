@@ -28,6 +28,7 @@ private:
 
 template <typename T>
 T *Singleton<T>::instance_ = nullptr;
+
 template <typename T>
 std::once_flag Singleton<T>::once_;
 
