@@ -6,7 +6,7 @@ ByteMemoryPool::MemoryChunk::MemoryChunk(MemoryChunk *nextChunk, size_t chunkSiz
                 chunkSize : DEFAULT_CHUNK_SIZE;
     next_ = nextChunk;
     bytesAlreadyAllocated_ = 0;
-    data_ = new char [chunkSize];
+    data_ = new char [chunkSize_];
 }
 
 ByteMemoryPool::MemoryChunk::~MemoryChunk() { delete [] data_; }
