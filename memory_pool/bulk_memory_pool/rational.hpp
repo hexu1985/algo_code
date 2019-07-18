@@ -1,7 +1,7 @@
 #ifndef RATIONAL_INC
 #define RATIONAL_INC
 
-#include "fix_memory_pool.hpp"
+#include "bulk_memory_pool.hpp"
 
 class Rational {
 public:
@@ -12,6 +12,9 @@ public:
 
 	static void newMemPool();
 	static void deleteMemPool();
+
+private:
+	static BulkMemoryPool *memPool;
 
 private:
 	int n;	// 分子
