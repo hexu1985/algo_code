@@ -1,9 +1,8 @@
 #include "byte_memory_pool.hpp"
 
-ByteMemoryPool::MemoryChunk::MemoryChunk(MemoryChunk *nextChunk, size_t chunkSize)
+ByteMemoryPool::MemoryChunk::MemoryChunk(MemoryChunk *nextChunk, size_t reqSize)
 {
-    chunkSize_ = (chunkSize > DEFAULT_CHUNK_SIZE) ?
-                chunkSize : DEFAULT_CHUNK_SIZE;
+    chunkSize_ = (reqSize > DEFAULT_CHUNK_SIZE) ? reqSize : DEFAULT_CHUNK_SIZE;
     next_ = nextChunk;
     bytesAlreadyAllocated_ = 0;
     data_ = new char [chunkSize_];
